@@ -81,8 +81,8 @@
   },
   "primaryTokenAttribute": "resources.ferimentos",
   "secondaryTokenAttribute": "resources.estresse",
-  "url": "https://github.com/SEU-USUARIO/etmos-foundry-vtt",
-  "manifest": "https://github.com/SEU-USUARIO/etmos-foundry-vtt/releases/latest/download/system.json",
-  "download": "https://github.com/SEU-USUARIO/etmos-foundry-vtt/releases/latest/download/system.zip",
+  "url": "https://github.com/jmchervinski/etmos",
+  "manifest": "https://github.com/jmchervinski/etmos/releases/latest/download/system.json",
+  "download": "https://github.com/jmchervinski/etmos/releases/latest/download/system.zip",
   "license": "LICENSE"
 }

@@ -55,14 +55,14 @@ Itens (Pontos de Preparo); Segmentos de Jogo; Teste Contestado assistido.
 1. Encontre a pasta de dados do Foundry (`Data/systems`).
 2. Clone este repositório lá dentro com o nome `etmos`:
    ```bash
-   git clone https://github.com/SEU-USUARIO/etmos-foundry-vtt.git etmos
+   git clone https://github.com/jmchervinski/etmos.git etmos
    ```
 3. Reinicie o Foundry e crie um mundo com o sistema **Etmos (Não-Oficial)**.
 
 ## Instalação via manifesto (após publicar release)
 
 ```
-https://github.com/SEU-USUARIO/etmos-foundry-vtt/releases/latest/download/system.json
+https://github.com/jmchervinski/etmos/releases/latest/download/system.json
 ```
 
 ## Estrutura (conforme o guia oficial do Foundry)
