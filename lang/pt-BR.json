@@ -1,0 +1,14 @@
+{
+  "ETMOS.ActorTypeCharacter": "Personagem",
+  "ETMOS.ActorTypeNpc": "NPC / Criatura",
+  "ETMOS.ItemTypeParticula": "Partícula",
+  "ETMOS.ItemTypeHabilidade": "Habilidade",
+  "ETMOS.ItemTypeOrigem": "Origem",
+  "ETMOS.ItemTypeEquipamento": "Equipamento",
+  "ETMOS.ItemTypeAptidao": "Aptidão",
+  "ETMOS.AttributeCorpo": "Corpo",
+  "ETMOS.AttributeMente": "Mente",
+  "ETMOS.AttributeAlma": "Alma",
+  "ETMOS.ResourceFerimentos": "Ferimentos",
+  "ETMOS.ResourceEstresse": "Estresse"
+}

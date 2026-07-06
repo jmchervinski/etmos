@@ -1,0 +1,477 @@
+/*
+ * ETMOS para Foundry VTT (não-oficial)
+ * Paleta baseada na identidade visual do livro de ETMOS
+ * (Editora Balde Galáctico): roxo profundo, lavanda, lilás e dourado.
+ */
+:root {
+  --etmos-roxo-profundo: #3a1c47;  /* fundo das páginas do livro */
+  --etmos-roxo: #532b66;           /* violeta médio */
+  --etmos-lavanda: #ddd8e8;        /* papel/miolo claro */
+  --etmos-lilas: #b57edc;          /* destaque rosado dos títulos "rasgados" */
+  --etmos-dourado: #c9a84c;        /* hotstamping da capa */
+  --etmos-tinta: #2a1533;          /* texto escuro sobre lavanda */
+}
+
+.etmos-sheet {
+  font-family: "Signika", "Georgia", serif;
+  background: var(--etmos-lavanda);
+  color: var(--etmos-tinta);
+}
+
+.etmos-sheet .window-content {
+  background: var(--etmos-lavanda);
+}
+
+.etmos-sheet input,
+.etmos-sheet select {
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid var(--etmos-roxo);
+  color: var(--etmos-tinta);
+}
+
+.etmos-sheet button {
+  background: var(--etmos-roxo-profundo);
+  color: var(--etmos-lavanda);
+  border: 1px solid var(--etmos-dourado);
+  border-radius: 3px;
+  cursor: pointer;
+}
+.etmos-sheet button:hover {
+  background: var(--etmos-roxo);
+  box-shadow: 0 0 6px var(--etmos-lilas);
+}
+
+.etmos-sheet .sheet-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--etmos-roxo-profundo);
+  color: var(--etmos-lavanda);
+  padding: 0.5rem;
+  border-bottom: 3px solid var(--etmos-dourado);
+}
+
+.etmos-sheet .profile-img {
+  width: 76px;
+  height: 76px;
+  border: 2px solid var(--etmos-dourado);
+  object-fit: cover;
+}
+
+.etmos-sheet .nome-personagem {
+  font-size: 1.5rem;
+  background: transparent;
+  border: none;
+  border-bottom: 1px dashed var(--etmos-lilas);
+  color: var(--etmos-lavanda);
+}
+
+.etmos-sheet .header-detalhes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  font-size: 0.85rem;
+}
+.etmos-sheet .header-detalhes input,
+.etmos-sheet .header-detalhes select {
+  width: auto;
+  max-width: 90px;
+}
+
+.etmos-sheet .sheet-tabs {
+  border-bottom: 2px solid var(--etmos-roxo);
+  background: rgba(83, 43, 102, 0.12);
+}
+.etmos-sheet .sheet-tabs .item { color: var(--etmos-roxo-profundo); }
+.etmos-sheet .sheet-tabs .item.active {
+  color: var(--etmos-roxo-profundo);
+  text-shadow: none;
+  border-bottom: 3px solid var(--etmos-lilas);
+  font-weight: bold;
+}
+
+.atributos-grid,
+.recursos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.atributo-box,
+.recurso-box {
+  border: 1px solid var(--etmos-roxo);
+  border-radius: 4px;
+  padding: 0.45rem;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.35);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.atributo-box label,
+.recurso-box label {
+  font-weight: bold;
+  color: var(--etmos-roxo-profundo);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+.atributo-box input { text-align: center; font-size: 1.3rem; }
+
+.recurso-track { display: flex; align-items: center; justify-content: center; gap: 0.3rem; }
+.recurso-track input { width: 60px; text-align: center; }
+
+.estado-tag {
+  font-size: 0.75rem;
+  border-radius: 8px;
+  padding: 0 0.5rem;
+  align-self: center;
+  background: var(--etmos-roxo);
+  color: var(--etmos-lavanda);
+}
+.estado-Cansado { background: #8a6d1d; }
+.estado-Exausto { background: #a04b12; }
+.estado-Esgotado, .estado-Inconsciente { background: #7c1023; }
+.estado-Morto { background: #000; color: #fff; }
+
+.complexidade-valor {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--etmos-roxo-profundo);
+}
+
+.conjuracao-box,
+.descanso-box {
+  border: 1px solid var(--etmos-dourado);
+  border-radius: 4px;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  background: rgba(181, 126, 220, 0.08);
+}
+.conjuracao-box legend,
+.descanso-box legend {
+  font-weight: bold;
+  color: var(--etmos-roxo-profundo);
+  padding: 0 0.3rem;
+}
+.conjuracao-linha {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.4rem;
+}
+.conjuracao-linha input[name="fraseMagica"] { flex: 1; }
+.conjuracao-linha input[name="rankTotem"] { width: 50px; }
+
+.dica {
+  font-size: 0.75rem;
+  font-style: italic;
+  color: var(--etmos-roxo);
+  margin: 0.2rem 0;
+}
+
+.marcos-grid, .limites-manuais {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.marcos-grid input, .limites-manuais input { width: 55px; text-align: center; }
+
+.itens-secao { margin-bottom: 1rem; }
+.itens-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--etmos-roxo);
+}
+.itens-header h3 { color: var(--etmos-roxo-profundo); margin: 0; }
+
+.item-list { list-style: none; margin: 0; padding: 0; }
+.item-list .item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0;
+  border-bottom: 1px dotted var(--etmos-lilas);
+}
+.item-list .item-nome { flex: 1; font-weight: 600; color: var(--etmos-roxo-profundo); }
+.item-list .item-categoria { font-size: 0.8rem; color: var(--etmos-roxo); }
+.item-controls a { margin-left: 0.4rem; color: var(--etmos-roxo-profundo); }
+
+.etmos-credito {
+  font-size: 0.7rem;
+  text-align: center;
+  color: var(--etmos-roxo);
+  border-top: 1px solid var(--etmos-lilas);
+  margin-top: 0.5rem;
+  padding-top: 0.25rem;
+}
+.etmos-credito a { color: var(--etmos-roxo-profundo); }
+
+/* ==========================================================
+ * Ficha no estilo do modelo oficial de ETMOS
+ * ========================================================== */
+
+.etmos-ficha-oficial {
+  background:
+    radial-gradient(ellipse at top left, rgba(181, 126, 220, 0.10), transparent 60%),
+    var(--etmos-lavanda);
+}
+
+.ficha-titulo {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.4rem 0.6rem 0.2rem;
+  border-bottom: none;
+}
+.ficha-titulo h1 {
+  font-size: 1.35rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--etmos-roxo-profundo);
+  border: none;
+  margin: 0;
+}
+.ficha-titulo.secundario h1 { font-size: 1.15rem; }
+.etmos-logo {
+  font-weight: bold;
+  letter-spacing: 0.25em;
+  color: var(--etmos-roxo-profundo);
+}
+.etmos-logo small { letter-spacing: 0.35em; font-size: 0.6em; }
+
+.ficha-identificacao {
+  padding: 0.3rem 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-variant: small-caps;
+}
+.ficha-identificacao label { display: flex; align-items: center; gap: 0.4rem; }
+.ficha-identificacao input[type="text"],
+.ficha-identificacao input[type="number"] {
+  background: rgba(255, 255, 255, 0.6);
+  border: none;
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 1px rgba(83, 43, 102, 0.25);
+}
+.ficha-identificacao .nome-personagem {
+  flex: 1;
+  color: var(--etmos-tinta);
+  font-size: 1.05rem;
+  border-bottom: 1px solid var(--etmos-roxo);
+}
+.linha-dados {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.linha-dados input[type="number"], .linha-dados input[type="text"] { width: 60px; text-align: center; }
+.linha-dados .profile-img {
+  width: 56px; height: 56px;
+  margin-left: auto;
+  border: 2px solid var(--etmos-dourado);
+}
+
+/* --- Blocos com contorno arredondado como na ficha --- */
+.bloco-oficial {
+  border: 1.5px solid var(--etmos-roxo-profundo);
+  border-radius: 8px;
+  padding: 0.5rem 0.6rem;
+  margin: 0.4rem 0;
+  background: rgba(255, 255, 255, 0.25);
+}
+.bloco-oficial legend {
+  font-variant: small-caps;
+  letter-spacing: 0.08em;
+  font-weight: bold;
+  color: var(--etmos-roxo-profundo);
+  padding: 0 0.35rem;
+}
+.bloco-oficial textarea {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.55);
+  border: none;
+  box-shadow: inset 0 0 0 1px rgba(83, 43, 102, 0.2);
+  border-radius: 3px;
+  color: var(--etmos-tinta);
+  resize: vertical;
+}
+
+.ficha-colunas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  align-items: start;
+}
+
+/* --- Quadradinhos (pips) --- */
+.pip-track { display: flex; gap: 4px; align-items: center; }
+.pip {
+  width: 16px; height: 16px;
+  border: 1.5px solid var(--etmos-roxo);
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.7);
+  display: inline-block;
+  cursor: default;
+}
+.pip.pip-clicavel { cursor: pointer; }
+.pip.pip-clicavel:hover { box-shadow: 0 0 4px var(--etmos-lilas); }
+.pip.filled { background: var(--etmos-roxo-profundo); border-color: var(--etmos-roxo-profundo); }
+
+.atributo-linha {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0.35rem 0;
+}
+.atributo-linha label {
+  width: 55px;
+  font-weight: bold;
+  color: var(--etmos-roxo-profundo);
+}
+.mini-btn {
+  padding: 0 0.35rem;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+/* --- Trilha de Fadiga --- */
+.fadiga-track {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0.3rem 0;
+}
+.fadiga-marco {
+  font-weight: bold;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--etmos-roxo-profundo);
+  min-width: 30px;
+}
+.fadiga-marco.ativo { color: var(--etmos-lilas); text-shadow: 0 0 4px var(--etmos-lilas); }
+.fadiga-pip.zona-cansado { border-color: #8a6d1d; }
+.fadiga-pip.zona-exausto { border-color: #a04b12; }
+.fadiga-pip.zona-esgotado { border-color: #7c1023; }
+.fadiga-pip.zona-cansado.filled { background: #8a6d1d; }
+.fadiga-pip.zona-exausto.filled { background: #a04b12; }
+.fadiga-pip.zona-esgotado.filled { background: #7c1023; }
+.fadiga-legenda {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.65rem;
+  color: var(--etmos-roxo);
+  margin-bottom: 0.3rem;
+}
+.fadiga-legenda .zona-cansado { color: #8a6d1d; }
+.fadiga-legenda .zona-exausto { color: #a04b12; }
+.fadiga-legenda .zona-esgotado { color: #7c1023; }
+
+/* --- Limites (valor | limite) --- */
+.limite-linha {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin: 0.3rem 0;
+}
+.limite-linha label { font-variant: small-caps; font-weight: bold; color: var(--etmos-roxo-profundo); flex-basis: 100%; }
+.limite-linha input { width: 55px; text-align: center; font-size: 1.1rem; }
+.limite-linha .divisor { font-size: 1.3rem; color: var(--etmos-roxo); }
+.limite-valor {
+  width: 55px;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+  background: rgba(83, 43, 102, 0.12);
+  border-radius: 3px;
+  color: var(--etmos-roxo-profundo);
+}
+.limite-linha small { flex-basis: 100%; color: var(--etmos-roxo); font-size: 0.65rem; }
+
+/* --- Complexidade Máxima --- */
+.complex-track {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.4rem 0.2rem;
+}
+.complex-stop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  font-size: 0.7rem;
+  color: var(--etmos-roxo);
+}
+.complex-stop.atual label { font-weight: bold; color: var(--etmos-roxo-profundo); text-decoration: underline; }
+
+/* --- Marcos --- */
+.marcos-linhas { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+.marco-grupo label { font-weight: bold; color: var(--etmos-roxo-profundo); display: block; margin-bottom: 2px; }
+
+/* --- Quadros de Origens/Habilidades/Inventário --- */
+.quadro-oficial {
+  background: rgba(255, 255, 255, 0.45);
+  border-radius: 6px;
+  padding: 0.4rem 0.5rem;
+  box-shadow: inset 0 0 0 1px rgba(83, 43, 102, 0.15);
+  margin: 0.3rem 0;
+}
+
+/* --- Conceito: eixos de valores --- */
+.valores-oficial .eixo-linha {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0.4rem 0;
+}
+.valores-oficial input[type="text"] { width: 110px; text-align: center; }
+.valores-oficial input[type="range"] { flex: 1; accent-color: var(--etmos-roxo-profundo); }
+.valores-oficial .seta { color: var(--etmos-roxo-profundo); font-weight: bold; }
+
+/* --- Grimório checklist --- */
+.grimorio-colunas {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr 1.6fr;
+  gap: 0.6rem;
+}
+.grimorio-coluna h3 {
+  font-variant: small-caps;
+  letter-spacing: 0.06em;
+  color: var(--etmos-roxo-profundo);
+  border-bottom: 1.5px solid var(--etmos-roxo-profundo);
+  font-size: 0.9rem;
+}
+.particula-check {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--etmos-tinta);
+}
+.particula-check input[type="checkbox"] {
+  width: 13px; height: 13px;
+  accent-color: var(--etmos-roxo-profundo);
+  margin: 0;
+}
+.caracteristicas-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 0.5rem;
+}
+.complementos-niveis {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+.nivel-grupo h4 { margin: 0 0 0.2rem; color: var(--etmos-roxo-profundo); font-size: 0.8rem; }
+
+@media (max-width: 700px) {
+  .ficha-colunas, .grimorio-colunas, .complementos-niveis { grid-template-columns: 1fr; }
+}

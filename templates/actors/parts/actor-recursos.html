@@ -1,0 +1,23 @@
+<div class="recursos-grid">
+  <div class="recurso-box">
+    <label>Ferimentos Acumulados</label>
+    <div class="recurso-track">
+      <input type="number" name="system.resources.ferimentos.value" value="{{system.resources.ferimentos.value}}" min="0" />
+      <span>/ {{system.resources.ferimentos.max}} (Limite)</span>
+    </div>
+    <span class="estado-tag estado-{{system.consciencia}}">{{system.consciencia}}</span>
+  </div>
+  <div class="recurso-box">
+    <label>Estresse Acumulado</label>
+    <div class="recurso-track">
+      <input type="number" name="system.resources.estresse.value" value="{{system.resources.estresse.value}}" min="0" />
+      <span>/ {{system.resources.estresse.max}} (Limite)</span>
+    </div>
+    <span class="estado-tag estado-{{system.fadiga}}">Fadiga: {{system.fadiga}}</span>
+  </div>
+  <div class="recurso-box">
+    <label>Complexidade Máxima</label>
+    <span class="complexidade-valor">{{system.complexidadeMaxima}}</span>
+    <span class="dica">(definida por Mente)</span>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+{
+  "name": "etmos-foundry-vtt",
+  "version": "0.1.0",
+  "description": "Sistema não-oficial de Etmos para Foundry VTT",
+  "private": true,
+  "scripts": {
+    "lint": "eslint module/**/*.mjs",
+    "format": "prettier --write \"**/*.{js,mjs,json,html,css}\""
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "prettier": "^3.3.0"
+  }
+}

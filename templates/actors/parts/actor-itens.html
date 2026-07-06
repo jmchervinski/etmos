@@ -1,0 +1,19 @@
+<div class="itens-secao">
+  <header class="itens-header">
+    <h3>{{titulo}}</h3>
+    <button type="button" class="item-create" data-type="{{tipo}}"><i class="fas fa-plus"></i> Adicionar</button>
+  </header>
+  <ol class="item-list">
+    {{#each itens as |item|}}
+    <li class="item" data-item-id="{{item.id}}">
+      <img class="item-img" src="{{item.img}}" width="24" height="24" />
+      <a class="item-chat item-nome" title="Enviar para o chat">{{item.name}}</a>
+      <span class="item-categoria">{{item.system.categoria}}{{#if item.system.abreviacao}} ({{item.system.abreviacao}}){{/if}}{{#if item.system.ehAtaque}} ⚔️{{/if}}</span>
+      <div class="item-controls">
+        <a class="item-edit" title="Editar"><i class="fas fa-edit"></i></a>
+        <a class="item-delete" title="Excluir"><i class="fas fa-trash"></i></a>
+      </div>
+    </li>
+    {{/each}}
+  </ol>
+</div>

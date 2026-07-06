@@ -1,6 +1,6 @@
-MIT License
+MIT License (aplica-se APENAS ao código deste repositório)
 
-Copyright (c) 2026 jmchervinski
+Copyright (c) 2026 JM
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,3 +19,14 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+--------------------------------------------------------------------------
+AVISO DE CONTEÚDO DE TERCEIROS:
+
+ETMOS é criação de Rafa Reis, publicado pela Editora Balde Galáctico
+(https://baldegalactico.com.br/jogo/etmos/). Este sistema é NÃO-OFICIAL e
+não é afiliado, endossado ou patrocinado pela editora. Regras implementadas
+com base no SRD ETMOS 1.1, distribuído gratuitamente pela editora. Textos,
+ilustrações, símbolos das Partículas e demais materiais do jogo permanecem
+propriedade de seus respectivos detentores e NÃO estão cobertos pela
+licença MIT acima.

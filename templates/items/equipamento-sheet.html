@@ -1,0 +1,18 @@
+<form class="{{cssClass}} etmos-sheet etmos-item" autocomplete="off">
+  <header class="sheet-header">
+    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+    <input class="nome-item" name="name" type="text" value="{{item.name}}" placeholder="Nome do Equipamento" />
+  </header>
+  <div class="sheet-body">
+    <label>Quantidade <input type="number" name="system.quantidade" value="{{system.quantidade}}" min="0" /></label>
+    <label class="checkbox">É um Totem?
+      <input type="checkbox" name="system.ehTotem" {{#if system.ehTotem}}checked{{/if}} />
+    </label>
+    <label>Rank do Totem (0–5)
+      <input type="number" name="system.rankTotem" value="{{system.rankTotem}}" min="0" max="5" />
+    </label>
+    <p class="dica">O Rank indica quantos pontos de Estresse extras são acumulados ao conjurar magias NÃO triviais por meio do Totem/Santuário (SRD).</p>
+    <label>Descrição</label>
+    {{editor content=system.description target="system.description" button=true engine="prosemirror" owner=owner}}
+  </div>
+</form>

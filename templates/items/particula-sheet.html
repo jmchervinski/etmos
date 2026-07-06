@@ -1,0 +1,19 @@
+<form class="{{cssClass}} etmos-sheet etmos-item" autocomplete="off">
+  <header class="sheet-header">
+    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+    <input class="nome-item" name="name" type="text" value="{{item.name}}" placeholder="Nome da Partícula" />
+  </header>
+  <div class="sheet-body">
+    <label>Categoria
+      <select name="system.categoria">
+        <option value="Função" {{#if (eq system.categoria "Função")}}selected{{/if}}>Função</option>
+        <option value="Objeto" {{#if (eq system.categoria "Objeto")}}selected{{/if}}>Objeto</option>
+        <option value="Característica" {{#if (eq system.categoria "Característica")}}selected{{/if}}>Característica</option>
+        <option value="Complemento" {{#if (eq system.categoria "Complemento")}}selected{{/if}}>Complemento</option>
+      </select>
+    </label>
+    <label>Abreviação <input type="text" name="system.abreviacao" value="{{system.abreviacao}}" /></label>
+    <label>Descrição</label>
+    {{editor content=system.description target="system.description" button=true engine="prosemirror" owner=owner}}
+  </div>
+</form>
