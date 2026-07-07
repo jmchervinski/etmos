@@ -25,17 +25,28 @@
     <div class="eixo-linha">
       <input type="text" name="system.conceito.eixo1esq" value="{{system.conceito.eixo1esq}}" placeholder="Aventura" />
       <span class="seta">⟵</span>
-      <input type="range" name="system.conceito.eixo1pos" value="{{system.conceito.eixo1pos}}" min="0" max="100" />
+      <span class="eixo-trilha">
+        <input type="range" name="system.conceito.eixo1pos" value="{{system.conceito.eixo1pos}}" min="0" max="100" list="etmos-eixo-marcas" />
+      </span>
       <span class="seta">⟶</span>
       <input type="text" name="system.conceito.eixo1dir" value="{{system.conceito.eixo1dir}}" placeholder="Segurança" />
     </div>
     <div class="eixo-linha">
       <input type="text" name="system.conceito.eixo2esq" value="{{system.conceito.eixo2esq}}" placeholder="Liberdade" />
       <span class="seta">⟵</span>
-      <input type="range" name="system.conceito.eixo2pos" value="{{system.conceito.eixo2pos}}" min="0" max="100" />
+      <span class="eixo-trilha">
+        <input type="range" name="system.conceito.eixo2pos" value="{{system.conceito.eixo2pos}}" min="0" max="100" list="etmos-eixo-marcas" />
+      </span>
       <span class="seta">⟶</span>
       <input type="text" name="system.conceito.eixo2dir" value="{{system.conceito.eixo2dir}}" placeholder="Família" />
     </div>
+    <datalist id="etmos-eixo-marcas">
+      <option value="0"></option>
+      <option value="25"></option>
+      <option value="50"></option>
+      <option value="75"></option>
+      <option value="100"></option>
+    </datalist>
   </fieldset>
   <fieldset class="bloco-oficial descanso-box">
     <legend>Descanso e Recuperação</legend>

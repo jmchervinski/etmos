@@ -64,7 +64,7 @@ export class EtmosBaseActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
     const key = target.dataset.attribute;
     const label = target.dataset.label ?? key;
     const bonus = this.actor.system.attributes?.[key]?.value ?? 0;
-    await this.actor.rollTest(label, bonus);
+    await this.actor.rollTestDialog(label, bonus);
   }
 
   static onItemEdit(event, target) {

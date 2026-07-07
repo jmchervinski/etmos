@@ -476,8 +476,32 @@
   margin: 0.4rem 0;
 }
 .valores-oficial input[type="text"] { width: 110px; text-align: center; }
-.valores-oficial input[type="range"] { flex: 1; accent-color: var(--etmos-roxo-profundo); }
+.valores-oficial input[type="range"] { width: 100%; accent-color: var(--etmos-roxo-profundo); }
 .valores-oficial .seta { color: var(--etmos-roxo-profundo); font-weight: bold; }
+
+/* Trilha do eixo com marcadores a cada 25% (0/25/50/75/100) */
+.valores-oficial .eixo-trilha {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+.valores-oficial .eixo-trilha::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, var(--etmos-roxo) 2px, transparent 2px),
+    linear-gradient(to left, var(--etmos-roxo) 2px, transparent 2px),
+    linear-gradient(to right, transparent calc(25% - 1px), var(--etmos-roxo) calc(25% - 1px), var(--etmos-roxo) calc(25% + 1px), transparent calc(25% + 1px)),
+    linear-gradient(to right, transparent calc(50% - 1px), var(--etmos-roxo) calc(50% - 1px), var(--etmos-roxo) calc(50% + 1px), transparent calc(50% + 1px)),
+    linear-gradient(to right, transparent calc(75% - 1px), var(--etmos-roxo) calc(75% - 1px), var(--etmos-roxo) calc(75% + 1px), transparent calc(75% + 1px));
+  background-size: 100% 10px;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.55;
+}
 
 /* --- Grimório checklist --- */
 .grimorio-colunas {

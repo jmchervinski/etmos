@@ -29,6 +29,99 @@ export class EtmosActor extends Actor {
     return roll;
   }
 
+  /**
+   * Abre o diálogo de configuração do teste (bônus situacional, Dificuldade e
+   * Dados de Empenho) e rola. Regra do SRD para Empenho: cada Dado gasto
+   * re-rola um d6 do teste já realizado, mantendo o melhor resultado.
+   */
+  async rollTestDialog(label, bonus = 0) {
+    const empenhoDisponivel = this.system.empenho?.dados ?? 0;
+    const campoEmpenho = empenhoDisponivel > 0
+      ? `<div class="form-group">
+           <label>Dados de Empenho (disponíveis: ${empenhoDisponivel})</label>
+           <input type="number" name="empenho" value="0" min="0" max="${empenhoDisponivel}" step="1" />
+         </div>`
+      : "";
+    const data = await foundry.applications.api.DialogV2.prompt({
+      window: { title: `${label} — ${this.name}` },
+      content: `
+        <div class="form-group">
+          <label>Bônus situacional</label>
+          <input type="number" name="situacional" value="0" step="1" autofocus />
+        </div>
+        ${campoEmpenho}
+        <div class="form-group">
+          <label>Dificuldade</label>
+          <input type="number" name="dificuldade" value="6" step="1" />
+        </div>
+        <p class="hint">Cada Dado de Empenho re-rola um d6 do teste, mantendo o melhor resultado (SRD).</p>`,
+      rejectClose: false,
+      ok: {
+        label: "Rolar",
+        icon: "fa-solid fa-dice",
+        callback: (event, button) => ({
+          situacional: Number(button.form.elements.situacional?.value ?? 0) || 0,
+          empenho: Number(button.form.elements.empenho?.value ?? 0) || 0,
+          dificuldade: Number(button.form.elements.dificuldade?.value ?? 6) || 6
+        })
+      }
+    });
+    if (!data) return null;
+
+    const bonusTotal = bonus + data.situacional;
+    const gastar = Math.min(Math.max(0, Math.floor(data.empenho)), empenhoDisponivel);
+    const rotuloBonus = data.situacional
+      ? ` (bônus ${bonus >= 0 ? "+" : ""}${bonus}, situacional ${data.situacional >= 0 ? "+" : ""}${data.situacional})`
+      : "";
+
+    const base = new Roll("2d6 + @bonus", { bonus: bonusTotal });
+    await base.evaluate();
+
+    // Sem Empenho: carta de rolagem padrão.
+    if (!gastar) {
+      const sucesso = base.total >= data.dificuldade;
+      await base.toMessage({
+        speaker: ChatMessage.getSpeaker({ actor: this }),
+        flavor: `<b>${label}</b>${rotuloBonus} — Dificuldade ${data.dificuldade}: ${sucesso ? "✅ Sucesso" : "❌ Falha"}`
+      });
+      return base;
+    }
+
+    // Com Empenho: cada dado gasto re-rola o menor d6 atual, mantendo o melhor.
+    const dados = base.dice[0].results.map(r => r.result);
+    const originais = [...dados];
+    const rerolls = [];
+    const linhas = [];
+    for (let i = 0; i < gastar; i++) {
+      const rr = new Roll("1d6");
+      await rr.evaluate();
+      rerolls.push(rr);
+      const menor = Math.min(...dados);
+      const idx = dados.indexOf(menor);
+      const manteve = Math.max(menor, rr.total);
+      linhas.push(`<b>Empenho ${i + 1}:</b> re-rolou o ${menor} → tirou ${rr.total} (mantém ${manteve})`);
+      dados[idx] = manteve;
+    }
+    const total = dados[0] + dados[1] + bonusTotal;
+    const sucesso = total >= data.dificuldade;
+
+    await this.update({ "system.empenho.dados": empenhoDisponivel - gastar });
+    await ChatMessage.create({
+      speaker: ChatMessage.getSpeaker({ actor: this }),
+      rolls: [base, ...rerolls],
+      sound: CONFIG.sounds?.dice,
+      flavor: `<b>${label}</b>${rotuloBonus} — Dificuldade ${data.dificuldade}: ${sucesso ? "✅ Sucesso" : "❌ Falha"}`,
+      content:
+        `<div class="dice-roll"><div class="dice-result">` +
+        `<div class="dice-formula">2d6 [${originais.join(", ")}] + ${bonusTotal}</div>` +
+        `<div>${linhas.join("<br>")}</div>` +
+        `<div class="dice-formula">Dados finais: [${dados.join(", ")}] — Dados de Empenho restantes: ${empenhoDisponivel - gastar}</div>` +
+        `<h4 class="dice-total">${total}</h4>` +
+        `</div></div>`
+    });
+    return total;
+  }
+
   /** Teste de Conjuração: 2d6 + Alma (SRD). */
   async rollConjuracaoSimples(dificuldade = 6) {
     const alma = this.system.attributes.alma.value;
