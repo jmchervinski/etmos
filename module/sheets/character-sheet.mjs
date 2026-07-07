@@ -9,7 +9,8 @@ export class EtmosCharacterSheet extends EtmosBaseActorSheet {
       descansoParcial: EtmosCharacterSheet.onDescansoParcial,
       descansoCompleto: EtmosCharacterSheet.onDescansoCompleto,
       rollProeza: EtmosCharacterSheet.onRollProeza,
-      conjurarViaFamiliar: EtmosCharacterSheet.onConjurarViaFamiliar
+      conjurarViaFamiliar: EtmosCharacterSheet.onConjurarViaFamiliar,
+      editarLimites: EtmosCharacterSheet.onEditarLimites
     }
   };
 
@@ -163,6 +164,43 @@ export class EtmosCharacterSheet extends EtmosBaseActorSheet {
 
   static async onDescansoCompleto(event, target) {
     await this.actor.descansar({ completo: true, ...EtmosCharacterSheet.#opcoesDescanso(target) });
+  }
+
+  /**
+   * Ajuste manual dos Limites de Ferimentos e Estresse (homebrews).
+   * O valor é somado à fórmula derivada do SRD junto com os ajustes de itens.
+   */
+  static async onEditarLimites() {
+    const sys = this.actor.system;
+    const data = await foundry.applications.api.DialogV2.prompt({
+      window: { title: `Ajustar Limites — ${this.actor.name}` },
+      content: `
+        <div class="form-group">
+          <label>Ajuste no Limite de Ferimentos (±)</label>
+          <input type="number" name="ajusteFerimentos" value="${sys.resources.ferimentos.ajuste ?? 0}" step="1" autofocus />
+        </div>
+        <div class="form-group">
+          <label>Ajuste no Limite de Estresse (±)</label>
+          <input type="number" name="ajusteEstresse" value="${sys.resources.estresse.ajuste ?? 0}" step="1" />
+        </div>
+        <p class="hint">Somado à fórmula do SRD (Ferimentos: 4 + Corpo/2 · Estresse: 4 + Alma).
+        Ajustes vindos de Origens/Habilidades (ex.: Atleta +1) já são aplicados automaticamente
+        e não precisam ser repetidos aqui.</p>`,
+      rejectClose: false,
+      ok: {
+        label: "Salvar",
+        icon: "fa-solid fa-check",
+        callback: (event, button) => ({
+          ajusteFerimentos: Number(button.form.elements.ajusteFerimentos?.value ?? 0) || 0,
+          ajusteEstresse: Number(button.form.elements.ajusteEstresse?.value ?? 0) || 0
+        })
+      }
+    });
+    if (!data) return;
+    await this.actor.update({
+      "system.resources.ferimentos.ajuste": data.ajusteFerimentos,
+      "system.resources.estresse.ajuste": data.ajusteEstresse
+    });
   }
 
   /** Módulo de Proezas: abre o diálogo do Teste de Proeza. */

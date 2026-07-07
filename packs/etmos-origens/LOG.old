@@ -1,0 +1,15 @@
+2026/07/07-15:55:51.137 2fd8 Recovering log #4
+2026/07/07-15:55:51.145 2fd8 Delete type=0 #4
+2026/07/07-15:55:51.147 2fd8 Delete type=3 #2
+2026/07/07-15:55:51.167 d9c Level-0 table #9: started
+2026/07/07-15:55:51.171 d9c Level-0 table #9: 1670 bytes OK
+2026/07/07-15:55:51.173 d9c Delete type=0 #7
+2026/07/07-15:55:51.174 d9c Manual compaction at level-0 from '!folders!etmosfolorifant0' @ 72057594037927935 : 1 .. '!items!etmosori00000005' @ 0 : 0; will stop at (end)
+2026/07/07-15:55:51.174 d9c Manual compaction at level-1 from '!folders!etmosfolorifant0' @ 72057594037927935 : 1 .. '!items!etmosori00000005' @ 0 : 0; will stop at '!items!etmosori00000005' @ 14 : 1
+2026/07/07-15:55:51.174 d9c Compacting 1@1 + 1@2 files
+2026/07/07-15:55:51.181 d9c Generated table #10@1: 7 keys, 1670 bytes
+2026/07/07-15:55:51.182 d9c Compacted 1@1 + 1@2 files => 1670 bytes
+2026/07/07-15:55:51.185 d9c compacted to: files[ 0 0 1 0 0 0 0 ]
+2026/07/07-15:55:51.186 d9c Delete type=2 #5
+2026/07/07-15:55:51.187 d9c Delete type=2 #9
+2026/07/07-15:55:51.189 d9c Manual compaction at level-1 from '!items!etmosori00000005' @ 14 : 1 .. '!items!etmosori00000005' @ 0 : 0; will stop at (end)

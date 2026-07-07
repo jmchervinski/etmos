@@ -54,6 +54,15 @@
     </label>
     {{/if}}
 
+    {{#unless (eq item.type "particula")}}
+    <fieldset class="ajustes-mecanicos">
+      <legend>Ajustes mecânicos no dono</legend>
+      <label>Limite de Ferimentos ± <input type="number" name="system.ajusteFerimentos" value="{{system.ajusteFerimentos}}" step="1" /></label>
+      <label>Limite de Estresse ± <input type="number" name="system.ajusteEstresse" value="{{system.ajusteEstresse}}" step="1" /></label>
+      <p class="dica">Somados automaticamente aos Limites do ator enquanto ele possuir este item (ex.: Origem "Atleta" = +1 Ferimentos).</p>
+    </fieldset>
+    {{/unless}}
+
     <label>Descrição</label>
     {{editor enrichedDescription target="system.description" button=true engine="prosemirror" editable=editable}}
   </div>

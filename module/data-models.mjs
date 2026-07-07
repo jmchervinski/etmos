@@ -21,7 +21,9 @@ const atributo = (initial = 1) =>
 const recurso = (max = 4) =>
   new SchemaField({
     value: new NumberField({ required: true, integer: true, min: 0, initial: 0 }),
-    max: new NumberField({ required: true, integer: true, min: 0, initial: max })
+    max: new NumberField({ required: true, integer: true, min: 0, initial: max }),
+    // Ajuste manual do Limite (homebrews), somado à fórmula derivada
+    ajuste: new NumberField({ required: true, integer: true, initial: 0 })
   });
 
 
@@ -100,6 +102,20 @@ class BaseActorModel extends foundry.abstract.TypeDataModel {
     return "Consciente";
   }
 
+  /**
+   * Soma os ajustes de Limite vindos dos itens do ator (ex.: Origem "Atleta"
+   * dá +1 Ferimento) e do ajuste manual da ficha (homebrews).
+   */
+  _ajustesDeLimite() {
+    let ferimentos = this.resources.ferimentos.ajuste ?? 0;
+    let estresse = this.resources.estresse.ajuste ?? 0;
+    for (const item of this.parent?.items ?? []) {
+      ferimentos += item.system?.ajusteFerimentos ?? 0;
+      estresse += item.system?.ajusteEstresse ?? 0;
+    }
+    return { ferimentos, estresse };
+  }
+
   prepareDerivedData() {
     super.prepareDerivedData();
     this.complexidadeMaxima = this._derivarComplexidade();
@@ -160,9 +176,11 @@ export class CharacterDataModel extends BaseActorModel {
     // Personagens (Oradores) usam as fórmulas do SRD:
     // Limite de Ferimentos = 4 + 1 a cada 2 pontos de Corpo
     // Limite de Estresse   = 4 + Alma (Módulo de Proezas: 6 + Alma)
-    this.resources.ferimentos.max = 4 + Math.floor(this.attributes.corpo.value / 2);
+    // + ajustes de itens (Origens/Habilidades) e ajuste manual (homebrew)
+    const ajustes = this._ajustesDeLimite();
+    this.resources.ferimentos.max = Math.max(0, 4 + Math.floor(this.attributes.corpo.value / 2) + ajustes.ferimentos);
     const baseEstresse = moduloAtivo("moduloProezas") ? 6 : 4;
-    this.resources.estresse.max = baseEstresse + this.attributes.alma.value;
+    this.resources.estresse.max = Math.max(0, baseEstresse + this.attributes.alma.value + ajustes.estresse);
     // Recalcula estados que dependem dos limites derivados
     this.fadiga = this._derivarFadiga();
     this.consciencia = this._derivarConsciencia();
@@ -191,8 +209,9 @@ export class NpcDataModel extends BaseActorModel {
   prepareDerivedData() {
     super.prepareDerivedData();
     if (this.details.limitesAutomaticos) {
-      this.resources.ferimentos.max = 4 + Math.floor(this.attributes.corpo.value / 2);
-      this.resources.estresse.max = 4 + this.attributes.alma.value;
+      const ajustes = this._ajustesDeLimite();
+      this.resources.ferimentos.max = Math.max(0, 4 + Math.floor(this.attributes.corpo.value / 2) + ajustes.ferimentos);
+      this.resources.estresse.max = Math.max(0, 4 + this.attributes.alma.value + ajustes.estresse);
       this.fadiga = this._derivarFadiga();
       this.consciencia = this._derivarConsciencia();
     }
@@ -231,7 +250,11 @@ export class FamiliarDataModel extends BaseActorModel {
 class BaseItemModel extends foundry.abstract.TypeDataModel {
   static defineSchema() {
     return {
-      description: new HTMLField({ required: true, blank: true })
+      description: new HTMLField({ required: true, blank: true }),
+      // Ajustes mecânicos aplicados ao dono do item enquanto ele o possuir
+      // (ex.: Origem "Atleta" = +1 Limite de Ferimentos). Somados na derivação.
+      ajusteFerimentos: new NumberField({ required: true, integer: true, initial: 0 }),
+      ajusteEstresse: new NumberField({ required: true, integer: true, initial: 0 })
     };
   }
 }
