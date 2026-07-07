@@ -247,14 +247,26 @@
 .item-list { list-style: none; margin: 0; padding: 0; }
 .item-list .item {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 0.4rem;
   padding: 0.25rem 0;
   border-bottom: 1px dotted var(--etmos-lilas);
 }
-.item-list .item-nome { flex: 1; font-weight: 600; color: var(--etmos-roxo-profundo); }
+.item-list .item-nome { flex: 1; font-weight: 600; color: var(--etmos-roxo-profundo); cursor: pointer; }
 .item-list .item-categoria { font-size: 0.8rem; color: var(--etmos-roxo); }
 .item-controls a { margin-left: 0.4rem; color: var(--etmos-roxo-profundo); }
+
+/* Descrição colapsável: clique no nome expande/oculta */
+.item-list .item-descricao {
+  display: none;
+  flex-basis: 100%;
+  font-size: 0.82rem;
+  padding: 0.15rem 0.4rem 0.3rem 1.9rem;
+  color: var(--etmos-tinta);
+}
+.item-list .item.expanded .item-descricao { display: block; }
+.item-list .item-descricao p { margin: 0.15rem 0; }
 
 .etmos-credito {
   font-size: 0.7rem;

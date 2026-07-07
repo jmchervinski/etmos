@@ -19,7 +19,8 @@ export class EtmosBaseActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
       itemEdit: EtmosBaseActorSheet.onItemEdit,
       itemDelete: EtmosBaseActorSheet.onItemDelete,
       itemCreate: EtmosBaseActorSheet.onItemCreate,
-      itemChat: EtmosBaseActorSheet.onItemChat
+      itemChat: EtmosBaseActorSheet.onItemChat,
+      itemExpand: EtmosBaseActorSheet.onItemExpand
     }
   };
 
@@ -93,6 +94,11 @@ export class EtmosBaseActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
   static onItemChat(event, target) {
     const li = target.closest(".item");
     this.actor.items.get(li?.dataset.itemId)?.roll();
+  }
+
+  /** Colapsa/expande a descrição do item na própria lista (clique no nome). */
+  static onItemExpand(event, target) {
+    target.closest(".item")?.classList.toggle("expanded");
   }
 
   static async onItemCreate(event, target) {

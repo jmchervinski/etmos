@@ -149,11 +149,13 @@
         <ol class="item-list">
           {{#each habilidadesPraticas as |item|}}
           <li class="item" data-item-id="{{item.id}}">
-            <a class="item-nome" data-action="itemChat">{{item.name}}</a>
+            <a class="item-nome" data-action="itemExpand" title="Mostrar/ocultar descrição">{{item.name}}</a>
             <div class="item-controls">
-              <a data-action="itemEdit"><i class="fas fa-edit"></i></a>
-              <a data-action="itemDelete"><i class="fas fa-trash"></i></a>
+              <a data-action="itemChat" title="Enviar para o chat"><i class="fas fa-comment"></i></a>
+              <a data-action="itemEdit" title="Editar"><i class="fas fa-edit"></i></a>
+              <a data-action="itemDelete" title="Excluir"><i class="fas fa-trash"></i></a>
             </div>
+            <div class="item-descricao">{{{item.system.description}}}</div>
           </li>
           {{/each}}
         </ol>
@@ -170,11 +172,13 @@
         <ol class="item-list">
           {{#each habilidadesTeoricas as |item|}}
           <li class="item" data-item-id="{{item.id}}">
-            <a class="item-nome" data-action="itemChat">{{item.name}}</a>
+            <a class="item-nome" data-action="itemExpand" title="Mostrar/ocultar descrição">{{item.name}}</a>
             <div class="item-controls">
-              <a data-action="itemEdit"><i class="fas fa-edit"></i></a>
-              <a data-action="itemDelete"><i class="fas fa-trash"></i></a>
+              <a data-action="itemChat" title="Enviar para o chat"><i class="fas fa-comment"></i></a>
+              <a data-action="itemEdit" title="Editar"><i class="fas fa-edit"></i></a>
+              <a data-action="itemDelete" title="Excluir"><i class="fas fa-trash"></i></a>
             </div>
+            <div class="item-descricao">{{{item.system.description}}}</div>
           </li>
           {{/each}}
         </ol>
