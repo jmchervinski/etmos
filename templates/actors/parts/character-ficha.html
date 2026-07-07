@@ -1,0 +1,146 @@
+<div class="tab ficha {{tab.cssClass}}" data-group="primary" data-tab="ficha">
+
+  <div class="ficha-colunas">
+    {{!-- Atributos com trilhas de 6 quadrados --}}
+    <fieldset class="bloco-oficial atributos-oficial">
+      <legend>Atributos</legend>
+      {{#each atributosView as |attr|}}
+      <div class="atributo-linha">
+        <label>{{attr.label}}</label>
+        <div class="pip-track">
+          {{#each attr.pips as |p|}}
+          <a class="pip pip-clicavel {{#if p.filled}}filled{{/if}}" data-action="pipClick"
+             data-path="system.attributes.{{attr.key}}.value" data-value="{{p.value}}"
+             title="{{attr.label}} {{p.value}}"></a>
+          {{/each}}
+          <button type="button" class="mini-btn" data-action="rollAttribute" data-attribute="{{attr.key}}"
+                  data-label="Teste de {{attr.label}}" title="Rolar 2d6 + {{attr.label}}">🎲</button>
+        </div>
+      </div>
+      {{/each}}
+    </fieldset>
+
+    {{!-- Estados de Fadiga --}}
+    <fieldset class="bloco-oficial fadiga-oficial">
+      <legend>Estados de Fadiga</legend>
+      <div class="fadiga-track">
+        <span class="fadiga-marco {{#if (eq system.fadiga "Normal")}}ativo{{/if}}">O<br><small>Normal</small></span>
+        {{#each fadigaView as |f|}}
+        <span class="pip fadiga-pip zona-{{f.zona}} {{#if f.filled}}filled{{/if}}" title="{{f.n}} acima do Limite"></span>
+        {{/each}}
+        <span class="fadiga-marco">+{{#if fadigaExtra}}{{fadigaExtra}}{{/if}}</span>
+      </div>
+      <div class="fadiga-legenda">
+        <span class="zona-cansado">Cansado (1–5): +1 Ferimento sofrido</span>
+        <span class="zona-exausto">Exausto (6–8): 2d6 &gt; Corpo+4 → magia falha</span>
+        <span class="zona-esgotado">Esgotado (9+): 2d6 &gt; Corpo+3 → morte</span>
+      </div>
+      <span class="estado-tag estado-{{system.fadiga}}">Estado atual: {{system.fadiga}}</span>
+    </fieldset>
+  </div>
+
+  <div class="ficha-colunas">
+    {{!-- Limites --}}
+    <fieldset class="bloco-oficial limites-oficial">
+      <legend>Ferimentos &amp; Estresse</legend>
+      <div class="limite-linha">
+        <label>Ferimentos Acumulados</label>
+        <input type="number" name="system.resources.ferimentos.value" value="{{system.resources.ferimentos.value}}" min="0" />
+        <span class="divisor">|</span>
+        <span class="limite-valor">{{system.resources.ferimentos.max}}</span>
+        <small>Limite: 4 + 1 para cada 2 pontos de Corpo</small>
+      </div>
+      <span class="estado-tag estado-{{system.consciencia}}">{{system.consciencia}}</span>
+      <div class="limite-linha">
+        <label>Estresse Acumulado</label>
+        <input type="number" name="system.resources.estresse.value" value="{{system.resources.estresse.value}}" min="0" />
+        <span class="divisor">|</span>
+        <span class="limite-valor">{{system.resources.estresse.max}}</span>
+        <small>Limite de Estresse = 4 + Alma</small>
+      </div>
+    </fieldset>
+
+    {{!-- Complexidade Máxima --}}
+    <fieldset class="bloco-oficial complexidade-oficial">
+      <legend>Complexidade Máxima de Magia</legend>
+      <div class="complex-track">
+        {{#each complexView as |c|}}
+        <div class="complex-stop {{#if c.atingida}}atingida{{/if}} {{#if c.atual}}atual{{/if}}">
+          <span class="pip {{#if c.atingida}}filled{{/if}}"></span>
+          <label>{{c.nome}}</label>
+        </div>
+        {{/each}}
+      </div>
+      <small class="dica">Definida por Mente: 2+ Difícil · 4+ Complexa · 6 Milagre</small>
+    </fieldset>
+  </div>
+
+  {{!-- Marcos de Crescimento --}}
+  <fieldset class="bloco-oficial marcos-oficial">
+    <legend>Marcos de Crescimento</legend>
+    <div class="marcos-linhas">
+      {{#each marcosView as |m|}}
+      <div class="marco-grupo">
+        <label>{{m.label}}</label>
+        <div class="pip-track">
+          {{#each m.pips as |p|}}
+          <a class="pip pip-clicavel {{#if p.filled}}filled{{/if}}" data-action="pipClick"
+             data-path="system.marcos.{{m.key}}" data-value="{{p.value}}"></a>
+          {{/each}}
+        </div>
+      </div>
+      {{/each}}
+    </div>
+    <small class="dica">5 Marcos do mesmo tipo = 1 Bônus de Progressão. Todas as categorias completas = sobe de nível.</small>
+  </fieldset>
+
+  {{!-- Origens / Habilidades / Inventário, como os 4 quadros da ficha --}}
+  <div class="ficha-colunas">
+    <div class="quadro-oficial">
+      {{> "systems/etmos/templates/actors/parts/actor-itens.html" titulo="Origens" tipo="origem" itens=itemsByType.origem}}
+    </div>
+    <div class="quadro-oficial">
+      <div class="itens-secao">
+        <header class="itens-header">
+          <h3>Habilidades Práticas</h3>
+          <button type="button" data-action="itemCreate" data-type="habilidade" data-categoria="Prática"><i class="fas fa-plus"></i></button>
+        </header>
+        <ol class="item-list">
+          {{#each habilidadesPraticas as |item|}}
+          <li class="item" data-item-id="{{item.id}}">
+            <a class="item-nome" data-action="itemChat">{{item.name}}</a>
+            <div class="item-controls">
+              <a data-action="itemEdit"><i class="fas fa-edit"></i></a>
+              <a data-action="itemDelete"><i class="fas fa-trash"></i></a>
+            </div>
+          </li>
+          {{/each}}
+        </ol>
+      </div>
+    </div>
+  </div>
+  <div class="ficha-colunas">
+    <div class="quadro-oficial">
+      <div class="itens-secao">
+        <header class="itens-header">
+          <h3>Habilidades Teóricas</h3>
+          <button type="button" data-action="itemCreate" data-type="habilidade" data-categoria="Teórica"><i class="fas fa-plus"></i></button>
+        </header>
+        <ol class="item-list">
+          {{#each habilidadesTeoricas as |item|}}
+          <li class="item" data-item-id="{{item.id}}">
+            <a class="item-nome" data-action="itemChat">{{item.name}}</a>
+            <div class="item-controls">
+              <a data-action="itemEdit"><i class="fas fa-edit"></i></a>
+              <a data-action="itemDelete"><i class="fas fa-trash"></i></a>
+            </div>
+          </li>
+          {{/each}}
+        </ol>
+      </div>
+    </div>
+    <div class="quadro-oficial">
+      {{> "systems/etmos/templates/actors/parts/actor-itens.html" titulo="Inventário" tipo="equipamento" itens=itemsByType.equipamento}}
+    </div>
+  </div>
+</div>

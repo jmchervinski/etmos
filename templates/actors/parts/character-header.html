@@ -1,0 +1,20 @@
+<header class="ficha-cabecalho">
+  <div class="ficha-titulo">
+    <h1>Ficha de Personagem</h1>
+    <span class="etmos-logo">ETM◆S <small>RPG</small></span>
+  </div>
+
+  <div class="ficha-identificacao">
+    <label>Nome do Jogador: <input type="text" name="system.jogador" value="{{system.jogador}}" /></label>
+    <label class="nome-linha">Nome do Personagem:
+      <input class="nome-personagem" name="name" type="text" value="{{actor.name}}" />
+    </label>
+    <div class="linha-dados">
+      <label>Ano Escolar: <input type="text" name="system.details.anoEscolar" value="{{system.details.anoEscolar}}" /></label>
+      <label>Idade: <input type="number" name="system.details.idade" value="{{system.details.idade}}" /></label>
+      <label>Nível: <input type="number" name="system.details.nivel" value="{{system.details.nivel}}" min="1" max="6" /></label>
+      <label>Dados de Empenho: <input type="number" name="system.empenho.dados" value="{{system.empenho.dados}}" min="0" /></label>
+      <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+    </div>
+  </div>
+</header>

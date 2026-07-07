@@ -1,0 +1,26 @@
+<div class="tab conjuracao {{tab.cssClass}}" data-group="primary" data-tab="conjuracao">
+  <fieldset class="bloco-oficial conjuracao-box">
+    <legend>Conjurar Frase Mágica</legend>
+    <div class="conjuracao-linha">
+      <input type="text" name="fraseMagica" placeholder="Ex: Eveli Quan (Invocar Elemento Água)" />
+    </div>
+    <div class="conjuracao-linha">
+      <label>Complexidade
+        <select name="complexidade">
+          {{#each complexidades as |c|}}<option value="{{c}}">{{c}}</option>{{/each}}
+        </select>
+      </label>
+      <label>Rank Totem/Santuário
+        <input type="number" name="rankTotem" value="0" min="0" max="5" />
+      </label>
+      <button type="button" data-action="conjurar">🗣️ Conjurar</button>
+      <button type="button" data-action="rollConjuracao">Teste de Conjuração (2d6+Alma)</button>
+    </div>
+    <p class="dica">Acumula Estresse automaticamente (Trivial 0 / Regular 1 / Difícil 2 / Complexa 4 / Milagre 7 + Rank) e aplica os testes de Exausto/Esgotado.</p>
+  </fieldset>
+  <fieldset class="bloco-oficial descanso-box">
+    <legend>Descanso e Recuperação</legend>
+    <button type="button" data-action="descansoParcial">Descanso Parcial (−1 Fer., −3 Estr.)</button>
+    <button type="button" data-action="descansoCompleto">Descanso Completo (−2 Fer., zera Estr.)</button>
+  </fieldset>
+</div>

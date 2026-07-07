@@ -5,7 +5,8 @@
  */
 import { EtmosActor } from "./documents/actor.mjs";
 import { EtmosItem } from "./documents/item.mjs";
-import { EtmosActorSheet } from "./sheets/actor-sheet.mjs";
+import { EtmosCharacterSheet } from "./sheets/character-sheet.mjs";
+import { EtmosNpcSheet } from "./sheets/npc-sheet.mjs";
 import { EtmosItemSheet } from "./sheets/item-sheet.mjs";
 import {
   CharacterDataModel,
@@ -57,11 +58,12 @@ Hooks.once("init", async function () {
     decimals: 0
   };
 
-  // Sheets
-  Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("etmos", EtmosActorSheet, { makeDefault: true });
-  Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet("etmos", EtmosItemSheet, { makeDefault: true });
+  // Sheets (ApplicationV2)
+  Actors.unregisterSheet("core", foundry.appv1.sheets.ActorSheet);
+  Actors.registerSheet("etmos", EtmosCharacterSheet, { types: ["character"], makeDefault: true, label: "ETMOS.SheetCharacter" });
+  Actors.registerSheet("etmos", EtmosNpcSheet, { types: ["npc"], makeDefault: true, label: "ETMOS.SheetNpc" });
+  Items.unregisterSheet("core", foundry.appv1.sheets.ItemSheet);
+  Items.registerSheet("etmos", EtmosItemSheet, { makeDefault: true, label: "ETMOS.SheetItem" });
 
   // Helpers do Handlebars
   Handlebars.registerHelper("eq", (a, b) => a === b);

@@ -1,0 +1,44 @@
+<div class="tab conceito {{tab.cssClass}}" data-group="primary" data-tab="conceito">
+  <header class="ficha-titulo secundario"><h1>Conceito</h1></header>
+  <div class="ficha-colunas">
+    <fieldset class="bloco-oficial">
+      <legend>Básico</legend>
+      <textarea name="system.conceito.basico" rows="3">{{system.conceito.basico}}</textarea>
+    </fieldset>
+    <fieldset class="bloco-oficial">
+      <legend>Pontos de Importância</legend>
+      <textarea name="system.conceito.pontosImportancia" rows="3">{{system.conceito.pontosImportancia}}</textarea>
+    </fieldset>
+  </div>
+  <div class="ficha-colunas">
+    <fieldset class="bloco-oficial">
+      <legend>Aparência</legend>
+      <textarea name="system.conceito.aparencia" rows="3">{{system.conceito.aparencia}}</textarea>
+    </fieldset>
+    <fieldset class="bloco-oficial">
+      <legend>Futuro</legend>
+      <textarea name="system.conceito.futuro" rows="3">{{system.conceito.futuro}}</textarea>
+    </fieldset>
+  </div>
+  <fieldset class="bloco-oficial valores-oficial">
+    <legend>Valores e Comportamento</legend>
+    <div class="eixo-linha">
+      <input type="text" name="system.conceito.eixo1esq" value="{{system.conceito.eixo1esq}}" placeholder="Aventura" />
+      <span class="seta">⟵</span>
+      <input type="range" name="system.conceito.eixo1pos" value="{{system.conceito.eixo1pos}}" min="0" max="100" />
+      <span class="seta">⟶</span>
+      <input type="text" name="system.conceito.eixo1dir" value="{{system.conceito.eixo1dir}}" placeholder="Segurança" />
+    </div>
+    <div class="eixo-linha">
+      <input type="text" name="system.conceito.eixo2esq" value="{{system.conceito.eixo2esq}}" placeholder="Liberdade" />
+      <span class="seta">⟵</span>
+      <input type="range" name="system.conceito.eixo2pos" value="{{system.conceito.eixo2pos}}" min="0" max="100" />
+      <span class="seta">⟶</span>
+      <input type="text" name="system.conceito.eixo2dir" value="{{system.conceito.eixo2dir}}" placeholder="Família" />
+    </div>
+  </fieldset>
+  <fieldset class="bloco-oficial">
+    <legend>Anotações</legend>
+    {{editor content=system.notes target="system.notes" button=true engine="prosemirror" editable=editable}}
+  </fieldset>
+</div>

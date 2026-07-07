@@ -69,17 +69,41 @@ https://github.com/jmchervinski/etmos/releases/latest/download/system.json
 
 ```
 etmos/
-├─ system.json            # manifesto (com documentTypes)
+├─ system.json            # manifesto (com documentTypes; compatível com v13/v14)
 ├─ module/
-│  ├─ etmos.mjs           # entry point: registra Data Models, docs e sheets
-│  ├─ data-models.mjs     # TypeDataModels (padrão recomendado, sem template.json)
-│  ├─ documents/          # EtmosActor (conjuração, fadiga, descanso) e EtmosItem
-│  └─ sheets/             # ActorSheet / ItemSheet
-├─ templates/             # Handlebars das fichas
+│  ├─ etmos.mjs                    # entry point: registra Data Models, docs e sheets
+│  ├─ data-models.mjs              # TypeDataModels (padrão recomendado, sem template.json)
+│  ├─ documents/                   # EtmosActor (conjuração, fadiga, descanso) e EtmosItem
+│  └─ sheets/
+│     ├─ base-actor-sheet.mjs      # ApplicationV2: ações comuns (itens, teste de atributo)
+│     ├─ character-sheet.mjs       # ApplicationV2: ficha de Personagem (abas Ficha/Conceito/Grimório/Conjuração)
+│     ├─ npc-sheet.mjs             # ApplicationV2: ficha de NPC (abas Principal/Aptidões/Descrição)
+│     └─ item-sheet.mjs            # ApplicationV2: ficha única de Item (campos variam por tipo)
+├─ templates/
+│  ├─ actors/parts/                # cada aba é um "part" independente (HandlebarsApplicationMixin)
+│  └─ items/item-sheet.html        # template único, com blocos condicionais por tipo de item
 ├─ styles/etmos.css       # paleta visual de ETMOS (roxo, lavanda, lilás, dourado)
-├─ lang/                  # pt-BR e en
-└─ packs/                 # compêndios (a popular)
+└─ lang/                  # pt-BR e en
 ```
+
+> Os compêndios (`packs/`) ainda não existem neste repositório. Quando forem gerados
+> de fato (via Foundry, criando as pastas LevelDB em `packs/`), declare-os em `system.json`.
+
+### Sobre a modernização para ApplicationV2 (v13/v14)
+
+As fichas foram reescritas para a API `ApplicationV2` + `HandlebarsApplicationMixin`
+(o padrão atual do Foundry, usado por sistemas como o **dnd5e**), substituindo a API
+legada `ActorSheet`/`ItemSheet` (v1). Principais mudanças:
+
+- Cada aba da ficha agora é um **"part"** (arquivo de template) independente, carregado
+  via `static PARTS`, em vez de um único arquivo monolítico com `<div class="tab">`.
+- Cliques (editar/excluir/criar item, rolar teste, conjurar, descansar) usam o sistema
+  de **`actions`** (`data-action="..."` no HTML + método estático correspondente),
+  substituindo `activateListeners`/jQuery.
+- `getData()` virou `_prepareContext()` (agora assíncrono).
+- A navegação por abas usa o template genérico `templates/generic/tab-navigation.hbs`
+  do próprio Foundry, com `static TABS` definindo os IDs e rótulos.
+- `system.json` agora declara `"compatibility": {"minimum": "13", "verified": "14"}`.
 
 ## Publicando uma release
 

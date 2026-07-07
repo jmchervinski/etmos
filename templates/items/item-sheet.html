@@ -1,0 +1,60 @@
+<div class="etmos-item-corpo">
+  <header class="sheet-header">
+    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+    <input class="nome-item" name="name" type="text" value="{{item.name}}" placeholder="Nome" />
+  </header>
+
+  <div class="sheet-body">
+    {{#if (eq item.type "particula")}}
+    <label>Categoria
+      <select name="system.categoria">
+        {{#each categorias as |c|}}<option value="{{c}}" {{#if (eq c ../system.categoria)}}selected{{/if}}>{{c}}</option>{{/each}}
+      </select>
+    </label>
+    <label>Abreviação <input type="text" name="system.abreviacao" value="{{system.abreviacao}}" /></label>
+    {{/if}}
+
+    {{#if (eq item.type "habilidade")}}
+    <label>Categoria
+      <select name="system.categoria">
+        {{#each categorias as |c|}}<option value="{{c}}" {{#if (eq c ../system.categoria)}}selected{{/if}}>{{c}}</option>{{/each}}
+      </select>
+    </label>
+    <label>Bônus <input type="number" name="system.bonus" value="{{system.bonus}}" /></label>
+    {{/if}}
+
+    {{#if (eq item.type "origem")}}
+    <label>Categoria
+      <select name="system.categoria">
+        {{#each categorias as |c|}}<option value="{{c}}" {{#if (eq c ../system.categoria)}}selected{{/if}}>{{c}}</option>{{/each}}
+      </select>
+    </label>
+    <label class="checkbox">Exclusiva
+      <input type="checkbox" name="system.exclusiva" {{#if system.exclusiva}}checked{{/if}} />
+    </label>
+    {{/if}}
+
+    {{#if (eq item.type "equipamento")}}
+    <label>Quantidade <input type="number" name="system.quantidade" value="{{system.quantidade}}" min="0" /></label>
+    <label class="checkbox">É um Totem?
+      <input type="checkbox" name="system.ehTotem" {{#if system.ehTotem}}checked{{/if}} />
+    </label>
+    <label>Rank do Totem (0–5)
+      <input type="number" name="system.rankTotem" value="{{system.rankTotem}}" min="0" max="5" />
+    </label>
+    <p class="dica">O Rank indica quantos pontos de Estresse extras são acumulados ao conjurar magias NÃO triviais por meio do Totem/Santuário (SRD).</p>
+    {{/if}}
+
+    {{#if (eq item.type "aptidao")}}
+    <label class="checkbox">É um Ataque?
+      <input type="checkbox" name="system.ehAtaque" {{#if system.ehAtaque}}checked{{/if}} />
+    </label>
+    <label>Ferimentos causados (ex: "2 numa Defesa Ineficaz")
+      <input type="text" name="system.ferimentos" value="{{system.ferimentos}}" />
+    </label>
+    {{/if}}
+
+    <label>Descrição</label>
+    {{editor content=system.description target="system.description" button=true engine="prosemirror" editable=editable}}
+  </div>
+</div>

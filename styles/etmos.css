@@ -82,8 +82,10 @@
   border-bottom: 2px solid var(--etmos-roxo);
   background: rgba(83, 43, 102, 0.12);
 }
-.etmos-sheet .sheet-tabs .item { color: var(--etmos-roxo-profundo); }
-.etmos-sheet .sheet-tabs .item.active {
+.etmos-sheet .sheet-tabs .item,
+.etmos-sheet .sheet-tabs [data-tab] { color: var(--etmos-roxo-profundo); }
+.etmos-sheet .sheet-tabs .item.active,
+.etmos-sheet .sheet-tabs [data-tab].active {
   color: var(--etmos-roxo-profundo);
   text-shadow: none;
   border-bottom: 3px solid var(--etmos-lilas);

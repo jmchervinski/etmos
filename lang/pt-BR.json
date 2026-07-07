@@ -10,5 +10,15 @@
   "ETMOS.AttributeMente": "Mente",
   "ETMOS.AttributeAlma": "Alma",
   "ETMOS.ResourceFerimentos": "Ferimentos",
-  "ETMOS.ResourceEstresse": "Estresse"
+  "ETMOS.ResourceEstresse": "Estresse",
+  "ETMOS.SheetCharacter": "Ficha de Personagem (Etmos)",
+  "ETMOS.SheetNpc": "Ficha de NPC (Etmos)",
+  "ETMOS.SheetItem": "Item (Etmos)",
+  "ETMOS.TabFicha": "Ficha",
+  "ETMOS.TabConceito": "Conceito",
+  "ETMOS.TabGrimorio": "Grimório",
+  "ETMOS.TabConjuracao": "Conjuração",
+  "ETMOS.TabPrincipal": "Principal",
+  "ETMOS.TabAptidoes": "Aptidões & Ataques",
+  "ETMOS.TabBiografia": "Descrição"
 }

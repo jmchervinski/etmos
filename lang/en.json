@@ -10,5 +10,15 @@
   "ETMOS.AttributeMente": "Mind",
   "ETMOS.AttributeAlma": "Soul",
   "ETMOS.ResourceFerimentos": "Wounds",
-  "ETMOS.ResourceEstresse": "Stress"
+  "ETMOS.ResourceEstresse": "Stress",
+  "ETMOS.SheetCharacter": "Character Sheet (Etmos)",
+  "ETMOS.SheetNpc": "NPC Sheet (Etmos)",
+  "ETMOS.SheetItem": "Item (Etmos)",
+  "ETMOS.TabFicha": "Sheet",
+  "ETMOS.TabConceito": "Concept",
+  "ETMOS.TabGrimorio": "Grimoire",
+  "ETMOS.TabConjuracao": "Spellcasting",
+  "ETMOS.TabPrincipal": "Main",
+  "ETMOS.TabAptidoes": "Aptitudes & Attacks",
+  "ETMOS.TabBiografia": "Description"
 }

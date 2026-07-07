@@ -1,0 +1,24 @@
+<header class="sheet-header">
+  <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+  <div class="header-fields">
+    <input class="nome-personagem" name="name" type="text" value="{{actor.name}}" placeholder="Nome" />
+    <div class="header-detalhes">
+      <label>Ficha Base
+        <select name="system.details.fichaBase">
+          <option value="Simples" {{#if (eq system.details.fichaBase "Simples")}}selected{{/if}}>Simples</option>
+          <option value="Intermediária" {{#if (eq system.details.fichaBase "Intermediária")}}selected{{/if}}>Intermediária</option>
+          <option value="Avançada" {{#if (eq system.details.fichaBase "Avançada")}}selected{{/if}}>Avançada</option>
+          <option value="Orador" {{#if (eq system.details.fichaBase "Orador")}}selected{{/if}}>Orador (usa regras de PJ)</option>
+        </select>
+      </label>
+      <label>Movimentação <input type="text" name="system.details.movimentacao" value="{{system.details.movimentacao}}" /></label>
+      <label class="checkbox">Comunica-se?
+        <input type="checkbox" name="system.details.comunicacao" {{#if system.details.comunicacao}}checked{{/if}} />
+      </label>
+      <label class="checkbox" title="Fichas Base definem Limites manualmente. Marque para derivar dos Atributos como um Orador.">
+        Limites automáticos
+        <input type="checkbox" name="system.details.limitesAutomaticos" {{#if system.details.limitesAutomaticos}}checked{{/if}} />
+      </label>
+    </div>
+  </div>
+</header>

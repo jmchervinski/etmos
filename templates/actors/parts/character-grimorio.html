@@ -1,0 +1,54 @@
+<div class="tab grimorio {{tab.cssClass}}" data-group="primary" data-tab="grimorio">
+  <header class="ficha-titulo secundario"><h1>Grimório</h1></header>
+  <p class="dica">Criação (SRD): marque 2 Funções, 3 Objetos e 4 Características.</p>
+  <div class="grimorio-colunas">
+    <div class="grimorio-coluna">
+      <h3>Funções</h3>
+      {{#each grimorio.funcoes as |p|}}
+      <label class="particula-check">
+        <input type="checkbox" name="system.grimorio.{{p.id}}" {{#if p.checked}}checked{{/if}} />
+        {{p.nome}} ({{p.abrev}})
+      </label>
+      {{/each}}
+    </div>
+    <div class="grimorio-coluna">
+      <h3>Objetos</h3>
+      {{#each grimorio.objetos as |p|}}
+      <label class="particula-check">
+        <input type="checkbox" name="system.grimorio.{{p.id}}" {{#if p.checked}}checked{{/if}} />
+        {{p.nome}} ({{p.abrev}})
+      </label>
+      {{/each}}
+    </div>
+    <div class="grimorio-coluna larga">
+      <h3>Características</h3>
+      <div class="caracteristicas-grid">
+        {{#each grimorio.caracteristicas as |p|}}
+        <label class="particula-check">
+          <input type="checkbox" name="system.grimorio.{{p.id}}" {{#if p.checked}}checked{{/if}} />
+          {{p.nome}} ({{p.abrev}})
+        </label>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+  <fieldset class="bloco-oficial complementos-oficial">
+    <legend>Complementos</legend>
+    <div class="complementos-niveis">
+      {{#each grimorio.complementosPorNivel as |grupo|}}
+      <div class="nivel-grupo">
+        <h4>{{grupo.nivel}}º Nível</h4>
+        {{#each grupo.itens as |p|}}
+        <label class="particula-check">
+          <input type="checkbox" name="system.grimorio.{{p.id}}" {{#if p.checked}}checked{{/if}} />
+          {{p.nome}} ({{p.abrev}})
+        </label>
+        {{/each}}
+      </div>
+      {{/each}}
+    </div>
+  </fieldset>
+  <div class="quadro-oficial">
+    {{> "systems/etmos/templates/actors/parts/actor-itens.html" titulo="Partículas personalizadas (Treinamento Mágico etc.)" tipo="particula" itens=itemsByType.particula}}
+  </div>
+</div>
