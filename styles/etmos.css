@@ -292,12 +292,15 @@
   margin: 0;
 }
 .ficha-titulo.secundario h1 { font-size: 1.15rem; }
-.etmos-logo {
-  font-weight: bold;
-  letter-spacing: 0.25em;
-  color: var(--etmos-roxo-profundo);
+/* Logo oficial de ETMOS (PNG com alfa usado como máscara, recolorido na paleta) */
+.etmos-logo-img {
+  width: 121px;
+  height: 45px; /* proporção do arquivo: 374x139 */
+  flex-shrink: 0;
+  background-color: var(--etmos-roxo-profundo);
+  -webkit-mask: url("../assets/etmos-logo.png") no-repeat center / contain;
+  mask: url("../assets/etmos-logo.png") no-repeat center / contain;
 }
-.etmos-logo small { letter-spacing: 0.35em; font-size: 0.6em; }
 
 .ficha-identificacao {
   padding: 0.3rem 0.6rem;
