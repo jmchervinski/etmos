@@ -7,10 +7,13 @@ import { EtmosActor } from "./documents/actor.mjs";
 import { EtmosItem } from "./documents/item.mjs";
 import { EtmosCharacterSheet } from "./sheets/character-sheet.mjs";
 import { EtmosNpcSheet } from "./sheets/npc-sheet.mjs";
+import { EtmosFamiliarSheet } from "./sheets/familiar-sheet.mjs";
 import { EtmosItemSheet } from "./sheets/item-sheet.mjs";
+import { ETMOS } from "./config.mjs";
 import {
   CharacterDataModel,
   NpcDataModel,
+  FamiliarDataModel,
   ParticulaDataModel,
   HabilidadeDataModel,
   OrigemDataModel,
@@ -30,7 +33,8 @@ Hooks.once("init", async function () {
   // Data Models (padrão recomendado pelo Foundry)
   CONFIG.Actor.dataModels = {
     character: CharacterDataModel,
-    npc: NpcDataModel
+    npc: NpcDataModel,
+    familiar: FamiliarDataModel
   };
   CONFIG.Item.dataModels = {
     particula: ParticulaDataModel,
@@ -49,8 +53,31 @@ Hooks.once("init", async function () {
     npc: {
       bar: ["resources.ferimentos", "resources.estresse"],
       value: []
+    },
+    familiar: {
+      bar: ["resources.ferimentos", "resources.estresse"],
+      value: ["details.forcaPacto"]
     }
   };
+
+  // Módulos opcionais (Familiares, Proezas): settings de mundo, também
+  // controláveis pelos toggles da aba Configurações da ficha.
+  for (const modulo of ETMOS.modulos) {
+    game.settings.register("etmos", modulo.id, {
+      name: modulo.nome,
+      hint: modulo.dica,
+      scope: "world",
+      config: true,
+      type: Boolean,
+      default: false,
+      onChange: () => {
+        // Re-renderiza as fichas abertas para mostrar/ocultar os blocos do módulo
+        for (const app of foundry.applications.instances.values()) {
+          if (app.actor) app.render();
+        }
+      }
+    });
+  }
 
   // Iniciativa é um Teste de Corpo (2d6 + Corpo), SRD.
   CONFIG.Combat.initiative = {
@@ -66,6 +93,9 @@ Hooks.once("init", async function () {
   });
   DocumentSheetConfig.registerSheet(Actor, "etmos", EtmosNpcSheet, {
     types: ["npc"], makeDefault: true, label: "ETMOS.SheetNpc"
+  });
+  DocumentSheetConfig.registerSheet(Actor, "etmos", EtmosFamiliarSheet, {
+    types: ["familiar"], makeDefault: true, label: "ETMOS.SheetFamiliar"
   });
   DocumentSheetConfig.registerSheet(Item, "etmos", EtmosItemSheet, {
     makeDefault: true, label: "ETMOS.SheetItem"

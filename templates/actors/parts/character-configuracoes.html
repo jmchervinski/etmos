@@ -1,3 +1,20 @@
 <div class="tab configuracoes {{tab.cssClass}}" data-group="primary" data-tab="configuracoes">
-  <p class="dica">Reservado para configurações futuras do sistema.</p>
+  <fieldset class="bloco-oficial modulos-box">
+    <legend>Módulos &amp; Homebrews</legend>
+    {{#unless isGM}}
+    <p class="dica">Apenas o Narrador (GM) pode ativar ou desativar módulos — valem para o mundo inteiro.</p>
+    {{/unless}}
+    <ul class="modulos-lista">
+      {{#each modulos as |m|}}
+      <li class="modulo-item">
+        <label class="checkbox">
+          <input type="checkbox" class="modulo-toggle" data-setting="{{m.id}}"
+                 {{#if m.ativo}}checked{{/if}} {{#unless @root.isGM}}disabled{{/unless}} />
+          <b>{{m.nome}}</b>
+        </label>
+        <p class="dica">{{m.dica}}</p>
+      </li>
+      {{/each}}
+    </ul>
+  </fieldset>
 </div>

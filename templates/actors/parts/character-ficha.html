@@ -94,6 +94,45 @@
     <small class="dica">5 Marcos do mesmo tipo = 1 Bônus de Progressão. Todas as categorias completas = sobe de nível.</small>
   </fieldset>
 
+  {{#if moduloFamiliares}}
+  <fieldset class="bloco-oficial familiar-box">
+    <legend>Familiar (Pacto)</legend>
+    <div class="conjuracao-linha">
+      <label>Familiar vinculado
+        <select name="system.familiar">
+          <option value="">—</option>
+          {{#each familiares as |f|}}
+          <option value="{{f.id}}" {{#if f.selected}}selected{{/if}}>{{f.name}}</option>
+          {{/each}}
+        </select>
+      </label>
+      <button type="button" data-action="conjurarViaFamiliar">🐦‍⬛ Conjurar através do Familiar (+1 Estresse)</button>
+    </div>
+    {{#unless familiares.length}}
+    <p class="dica">Nenhum ator do tipo Familiar existe ainda — crie um no Diretório de Atores.</p>
+    {{/unless}}
+  </fieldset>
+  {{/if}}
+
+  {{#if moduloProezas}}
+  <fieldset class="bloco-oficial proezas-box">
+    <legend>Proezas &amp; Rudimentos</legend>
+    <div class="rudimentos-grid">
+      {{#each rudimentosView as |r|}}
+      <label class="particula-check">
+        <input type="checkbox" name="system.rudimentos.{{r.id}}" {{#if r.checked}}checked{{/if}} />
+        {{r.nome}}
+      </label>
+      {{/each}}
+    </div>
+    <div class="conjuracao-linha">
+      <button type="button" data-action="rollProeza">🎲 Teste de Proeza</button>
+    </div>
+    <p class="dica">Física = Corpo · Mental = Mente · Mágica = Alma. Acumula Estresse pela Complexidade
+    (Composta +1). Com o módulo ativo, o Limite de Estresse é 6 + Alma.</p>
+  </fieldset>
+  {{/if}}
+
   {{!-- Origens / Habilidades / Inventário, como os 4 quadros da ficha --}}
   <div class="ficha-colunas">
     <div class="quadro-oficial">

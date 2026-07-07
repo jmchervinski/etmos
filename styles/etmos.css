@@ -194,6 +194,33 @@
   gap: 0.5rem;
 }
 
+/* --- Módulos & Homebrews (aba Configurações) --- */
+.modulos-lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.modulo-item .checkbox { display: flex; align-items: center; gap: 0.45rem; }
+.modulo-item .dica { margin-left: 1.6rem; }
+
+/* --- Módulo de Proezas: grade de Rudimentos --- */
+.rudimentos-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.2rem 0.6rem;
+  margin-bottom: 0.4rem;
+}
+@media (max-width: 700px) {
+  .rudimentos-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* --- Módulo de Familiares --- */
+.forca-pacto { display: flex; align-items: center; gap: 0.5rem; }
+.forca-pacto label { font-size: 0.85rem; }
+
 .dica {
   font-size: 0.75rem;
   font-style: italic;

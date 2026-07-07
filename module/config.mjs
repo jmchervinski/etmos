@@ -98,3 +98,54 @@ ETMOS.particulas = {
 
 /** Lista achatada de todos os ids de partícula (para gerar o schema do Grimório). */
 export const TODAS_PARTICULAS = Object.values(ETMOS.particulas).flat();
+
+/**
+ * Módulos oficiais opcionais (homebrews do Mestre Rafa Reis), ativáveis
+ * na aba Configurações da ficha. Cada id corresponde a um game setting
+ * de mundo registrado no init.
+ */
+ETMOS.modulos = [
+  {
+    id: "moduloFamiliares",
+    nome: "Módulo: Familiares",
+    dica: "Pactos com criaturas: ficha de Familiar, Força do Pacto e conjuração através do Familiar (+1 Estresse)."
+  },
+  {
+    id: "moduloProezas",
+    nome: "Módulo: Proezas",
+    dica: "Ações viram Proezas compostas por Rudimentos; Limite de Estresse passa a 6 + Alma."
+  }
+];
+
+/** Os 10 Rudimentos do Módulo de Proezas. */
+ETMOS.rudimentos = [
+  { id: "expressao", nome: "Expressão" },
+  { id: "furtividade", nome: "Furtividade" },
+  { id: "improviso", nome: "Improviso" },
+  { id: "instinto", nome: "Instinto" },
+  { id: "mobilidade", nome: "Mobilidade" },
+  { id: "potencia", nome: "Potência" },
+  { id: "precisao", nome: "Precisão" },
+  { id: "raciocinio", nome: "Raciocínio" },
+  { id: "tecnica", nome: "Técnica" },
+  { id: "vigor", nome: "Vigor" }
+];
+
+/** Tipos de Proeza e o atributo que cada uma usa (Módulo de Proezas). */
+ETMOS.tiposProeza = [
+  { id: "fisica", nome: "Física", atributo: "corpo" },
+  { id: "mental", nome: "Mental", atributo: "mente" },
+  { id: "magica", nome: "Mágica", atributo: "alma" }
+];
+
+/**
+ * Lê um setting de módulo com segurança: durante o init (antes do registro)
+ * ou em ambientes sem settings, responde false em vez de lançar erro.
+ */
+export function moduloAtivo(id) {
+  try {
+    return game.settings.get("etmos", id) === true;
+  } catch (err) {
+    return false;
+  }
+}

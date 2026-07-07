@@ -1,0 +1,26 @@
+<header class="sheet-header">
+  <img class="profile-img" src="{{actor.img}}" data-action="editImage" data-edit="img" title="{{actor.name}}" />
+  <div class="header-fields">
+    <input class="nome-personagem" name="name" type="text" value="{{actor.name}}" placeholder="Nome do Familiar" />
+    <div class="header-detalhes">
+      <label>Pactário
+        <select name="system.details.pactario">
+          <option value="">—</option>
+          {{#each pactarios as |p|}}
+          <option value="{{p.id}}" {{#if p.selected}}selected{{/if}}>{{p.name}}</option>
+          {{/each}}
+        </select>
+      </label>
+      <div class="forca-pacto">
+        <label>Força do Pacto</label>
+        <div class="pip-track">
+          {{#each forcaPactoPips as |p|}}
+          <a class="pip pip-clicavel {{#if p.filled}}filled{{/if}}" data-action="pipClick"
+             data-path="system.details.forcaPacto" data-value="{{p.value}}"
+             title="Força do Pacto {{p.value}}"></a>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

@@ -1,6 +1,7 @@
 {
   "ETMOS.ActorTypeCharacter": "Character",
   "ETMOS.ActorTypeNpc": "NPC / Creature",
+  "ETMOS.ActorTypeFamiliar": "Familiar",
   "ETMOS.ItemTypeParticula": "Particle",
   "ETMOS.ItemTypeHabilidade": "Skill",
   "ETMOS.ItemTypeOrigem": "Origin",
@@ -13,6 +14,7 @@
   "ETMOS.ResourceEstresse": "Stress",
   "ETMOS.SheetCharacter": "Character Sheet (Etmos)",
   "ETMOS.SheetNpc": "NPC Sheet (Etmos)",
+  "ETMOS.SheetFamiliar": "Familiar Sheet (Etmos)",
   "ETMOS.SheetItem": "Item (Etmos)",
   "ETMOS.TabFicha": "Sheet",
   "ETMOS.TabConceito": "Concept",

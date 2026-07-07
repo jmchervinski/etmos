@@ -5,7 +5,7 @@
  *
  * Regras baseadas no SRD ETMOS 1.1 (Editora Balde Galáctico / Rafa Reis).
  */
-import { TODAS_PARTICULAS } from "./config.mjs";
+import { TODAS_PARTICULAS, ETMOS, moduloAtivo } from "./config.mjs";
 
 const { HTMLField, NumberField, SchemaField, StringField, BooleanField } = foundry.data.fields;
 
@@ -30,6 +30,15 @@ const grimorioSchema = () => {
   const campos = {};
   for (const p of TODAS_PARTICULAS) {
     campos[p.id] = new BooleanField({ required: true, initial: false });
+  }
+  return new SchemaField(campos);
+};
+
+/** Checklist dos 10 Rudimentos do Módulo de Proezas. */
+const rudimentosSchema = () => {
+  const campos = {};
+  for (const r of ETMOS.rudimentos) {
+    campos[r.id] = new BooleanField({ required: true, initial: false });
   }
   return new SchemaField(campos);
 };
@@ -138,7 +147,11 @@ export class CharacterDataModel extends BaseActorModel {
         eixo2pos: new NumberField({ required: true, integer: true, min: 0, max: 100, initial: 50 })
       }),
       // Grimório como checklist de Partículas (igual à página 2 da ficha oficial)
-      grimorio: grimorioSchema()
+      grimorio: grimorioSchema(),
+      // Módulo de Proezas: Rudimentos treinados
+      rudimentos: rudimentosSchema(),
+      // Módulo de Familiares: id do ator Familiar vinculado pelo Pacto
+      familiar: new StringField({ required: true, blank: true })
     };
   }
 
@@ -146,9 +159,10 @@ export class CharacterDataModel extends BaseActorModel {
     super.prepareDerivedData();
     // Personagens (Oradores) usam as fórmulas do SRD:
     // Limite de Ferimentos = 4 + 1 a cada 2 pontos de Corpo
-    // Limite de Estresse   = 4 + Alma
+    // Limite de Estresse   = 4 + Alma (Módulo de Proezas: 6 + Alma)
     this.resources.ferimentos.max = 4 + Math.floor(this.attributes.corpo.value / 2);
-    this.resources.estresse.max = 4 + this.attributes.alma.value;
+    const baseEstresse = moduloAtivo("moduloProezas") ? 6 : 4;
+    this.resources.estresse.max = baseEstresse + this.attributes.alma.value;
     // Recalcula estados que dependem dos limites derivados
     this.fadiga = this._derivarFadiga();
     this.consciencia = this._derivarConsciencia();
@@ -182,6 +196,31 @@ export class NpcDataModel extends BaseActorModel {
       this.fadiga = this._derivarFadiga();
       this.consciencia = this._derivarConsciencia();
     }
+  }
+}
+
+/**
+ * Módulo de Familiares: criatura vinculada por Pacto a um Orador (Pactário).
+ * Base oficial do módulo: Corpo/Mente/Alma 1, Limite de Ferimentos 2 e
+ * Limite de Estresse 2 (limites manuais — Aptidões como Robustez os alteram),
+ * Complexidade Máxima Regular (derivada de Mente 1 pela regra base).
+ */
+export class FamiliarDataModel extends BaseActorModel {
+  static defineSchema() {
+    const schema = super.defineSchema();
+    schema.resources = new SchemaField({
+      ferimentos: recurso(2),
+      estresse: recurso(2)
+    });
+    return {
+      ...schema,
+      details: new SchemaField({
+        // id do ator Orador com quem o Pacto foi firmado
+        pactario: new StringField({ required: true, blank: true }),
+        // Força do Pacto 1-4: nº de Aptidões = 2 + Força
+        forcaPacto: new NumberField({ required: true, integer: true, min: 1, max: 4, initial: 1 })
+      })
+    };
   }
 }
 

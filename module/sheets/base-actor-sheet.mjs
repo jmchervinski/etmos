@@ -14,6 +14,7 @@ export class EtmosBaseActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
     form: { submitOnChange: true },
     actions: {
       editImage: EtmosBaseActorSheet.onEditImage,
+      pipClick: EtmosBaseActorSheet.onPipClick,
       rollAttribute: EtmosBaseActorSheet.onRollAttribute,
       itemEdit: EtmosBaseActorSheet.onItemEdit,
       itemDelete: EtmosBaseActorSheet.onItemDelete,
@@ -46,6 +47,18 @@ export class EtmosBaseActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
     context = await super._preparePartContext(partId, context);
     if (context.tabs?.[partId]) context.tab = context.tabs[partId];
     return context;
+  }
+
+  /**
+   * Trilhas de quadradinhos clicáveis (atributos, marcos, Força do Pacto).
+   * Clique define o valor; clicar no quadrado já preenchido de maior valor zera até ele - 1.
+   */
+  static async onPipClick(event, target) {
+    const path = target.dataset.path;
+    const value = Number(target.dataset.value);
+    const atual = foundry.utils.getProperty(this.actor, path);
+    const novo = atual === value ? value - 1 : value;
+    await this.actor.update({ [path]: novo });
   }
 
   /** Abre o FilePicker para trocar o retrato (padrão data-action="editImage" do dnd5e/core). */
