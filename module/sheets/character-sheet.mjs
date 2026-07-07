@@ -7,8 +7,6 @@ export class EtmosCharacterSheet extends EtmosBaseActorSheet {
     classes: ["etmos-sheet", "etmos-ficha-oficial"],
     actions: {
       pipClick: EtmosCharacterSheet.onPipClick,
-      rollConjuracao: EtmosCharacterSheet.onRollConjuracao,
-      conjurar: EtmosCharacterSheet.onConjurar,
       descansoParcial: EtmosCharacterSheet.onDescansoParcial,
       descansoCompleto: EtmosCharacterSheet.onDescansoCompleto
     }
@@ -20,7 +18,7 @@ export class EtmosCharacterSheet extends EtmosBaseActorSheet {
     ficha: { template: "systems/etmos/templates/actors/parts/character-ficha.html", scrollable: [""] },
     conceito: { template: "systems/etmos/templates/actors/parts/character-conceito.html", scrollable: [""] },
     grimorio: { template: "systems/etmos/templates/actors/parts/character-grimorio.html", scrollable: [""] },
-    conjuracao: { template: "systems/etmos/templates/actors/parts/character-conjuracao.html", scrollable: [""] },
+    configuracoes: { template: "systems/etmos/templates/actors/parts/character-configuracoes.html", scrollable: [""] },
     footer: { template: "systems/etmos/templates/actors/parts/actor-footer.html" }
   };
 
@@ -30,7 +28,7 @@ export class EtmosCharacterSheet extends EtmosBaseActorSheet {
         { id: "ficha", label: "ETMOS.TabFicha" },
         { id: "conceito", label: "ETMOS.TabConceito" },
         { id: "grimorio", label: "ETMOS.TabGrimorio" },
-        { id: "conjuracao", label: "ETMOS.TabConjuracao" }
+        { id: "configuracoes", label: "ETMOS.TabConfiguracoes" }
       ],
       initial: "ficha"
     }
@@ -42,7 +40,6 @@ export class EtmosCharacterSheet extends EtmosBaseActorSheet {
     const sys = this.actor.system;
 
     context.tabs = this._prepareTabs("primary");
-    context.complexidades = Object.keys(COMPLEXIDADES);
 
     // Atributos (ordem oficial: Corpo, Alma, Mente), 6 quadrados cada
     context.atributosView = ["corpo", "alma", "mente"].map(key => ({
@@ -121,23 +118,25 @@ export class EtmosCharacterSheet extends EtmosBaseActorSheet {
     await this.actor.update({ [path]: novo });
   }
 
-  static async onRollConjuracao() {
-    await this.actor.rollConjuracaoSimples();
+  /**
+   * Lê as características do descanso (SRD) marcadas na caixa:
+   * Com/Sem Tratamento Médico e descanso fora do mundo de origem.
+   * Os checkboxes não têm `name` de propósito, para não entrarem no
+   * submit automático do formulário da ficha.
+   */
+  static #opcoesDescanso(target) {
+    const box = target.closest(".descanso-box");
+    return {
+      tratamentoMedico: box?.querySelector(".descanso-tratamento")?.checked ?? false,
+      foraDoMundoDeOrigem: box?.querySelector(".descanso-fora")?.checked ?? false
+    };
   }
 
-  static async onConjurar(event, target) {
-    const box = target.closest(".conjuracao-box");
-    const complexidade = box.querySelector("[name=complexidade]")?.value ?? "Regular";
-    const fraseMagica = box.querySelector("[name=fraseMagica]")?.value ?? "";
-    const rankTotem = Number(box.querySelector("[name=rankTotem]")?.value ?? 0);
-    await this.actor.conjurarMagia({ complexidade, fraseMagica, rankTotem });
+  static async onDescansoParcial(event, target) {
+    await this.actor.descansar({ completo: false, ...EtmosCharacterSheet.#opcoesDescanso(target) });
   }
 
-  static async onDescansoParcial() {
-    await this.actor.descansar({ completo: false });
-  }
-
-  static async onDescansoCompleto() {
-    await this.actor.descansar({ completo: true });
+  static async onDescansoCompleto(event, target) {
+    await this.actor.descansar({ completo: true, ...EtmosCharacterSheet.#opcoesDescanso(target) });
   }
 }

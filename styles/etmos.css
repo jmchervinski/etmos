@@ -180,6 +180,20 @@
 .conjuracao-linha input[name="fraseMagica"] { flex: 1; }
 .conjuracao-linha input[name="rankTotem"] { width: 50px; }
 
+.descanso-opcoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1.2rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.85rem;
+}
+.descanso-opcoes .checkbox { display: flex; align-items: center; gap: 0.35rem; }
+.descanso-botoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
 .dica {
   font-size: 0.75rem;
   font-style: italic;

@@ -37,6 +37,26 @@
       <input type="text" name="system.conceito.eixo2dir" value="{{system.conceito.eixo2dir}}" placeholder="Família" />
     </div>
   </fieldset>
+  <fieldset class="bloco-oficial descanso-box">
+    <legend>Descanso e Recuperação</legend>
+    <div class="descanso-opcoes">
+      <label class="checkbox">
+        <input type="checkbox" class="descanso-tratamento" />
+        Com Tratamento Médico (−2 Ferimentos adicionais)
+      </label>
+      <label class="checkbox">
+        <input type="checkbox" class="descanso-fora" />
+        Fora do mundo de origem
+      </label>
+    </div>
+    <div class="descanso-botoes">
+      <button type="button" data-action="descansoParcial">Descanso Parcial (−1 Fer., −3 Estr.)</button>
+      <button type="button" data-action="descansoCompleto">Descanso Completo (−2 Fer., zera Estr.)</button>
+    </div>
+    <p class="dica">SRD: sem Tratamento Médico e no Limite de Ferimentos, o Completo vira Parcial e o Parcial
+    não surte efeito. Fora do mundo de origem, o mesmo se aplica.</p>
+  </fieldset>
+
   <fieldset class="bloco-oficial">
     <legend>Anotações</legend>
     {{editor enrichedNotes target="system.notes" button=true engine="prosemirror" editable=editable}}
