@@ -20,6 +20,19 @@
 
 .etmos-sheet .window-content {
   background: var(--etmos-lavanda);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* A aba ativa ocupa o espaço restante e ganha barra de rolagem vertical;
+   cabeçalho, navegação de abas e rodapé ficam fixos. Casa com o
+   scrollable: [""] declarado nos PARTS (preserva a posição ao re-renderizar). */
+.etmos-sheet .tab {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 0.25rem;
 }
 
 .etmos-sheet input,
@@ -468,15 +481,26 @@
 .particula-check {
   display: flex;
   align-items: center;
-  gap: 0.3rem;
+  gap: 0.35rem;
   font-size: 0.78rem;
   line-height: 1.5;
   color: var(--etmos-tinta);
 }
+/* O core v13/v14 desenha o checkbox como glifo dimensionado pelo font-size;
+   fixar width/height/font-size juntos mantém o quadradinho pequeno e alinhado. */
 .particula-check input[type="checkbox"] {
-  width: 13px; height: 13px;
-  accent-color: var(--etmos-roxo-profundo);
+  width: 14px;
+  height: 14px;
+  font-size: 14px;
+  line-height: 1;
+  flex: 0 0 auto;
   margin: 0;
+  background: none;
+  border: none;
+  box-shadow: none;
+  accent-color: var(--etmos-roxo-profundo);
+  --checkbox-size: 14px;
+  --checkbox-checked-color: var(--etmos-roxo-profundo);
 }
 .caracteristicas-grid {
   display: grid;
