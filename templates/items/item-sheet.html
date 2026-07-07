@@ -1,6 +1,6 @@
 <div class="etmos-item-corpo">
   <header class="sheet-header">
-    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+    <img class="profile-img" src="{{item.img}}" data-action="editImage" data-edit="img" title="{{item.name}}" />
     <input class="nome-item" name="name" type="text" value="{{item.name}}" placeholder="Nome" />
   </header>
 
@@ -55,6 +55,6 @@
     {{/if}}
 
     <label>Descrição</label>
-    {{editor content=system.description target="system.description" button=true engine="prosemirror" editable=editable}}
+    {{editor enrichedDescription target="system.description" button=true engine="prosemirror" editable=editable}}
   </div>
 </div>

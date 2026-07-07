@@ -31,4 +31,16 @@ export class EtmosNpcSheet extends EtmosBaseActorSheet {
     context.tabs = this._prepareTabs("primary");
     return context;
   }
+
+  /** @override */
+  async _preparePartContext(partId, context) {
+    context = await super._preparePartContext(partId, context);
+    if (partId === "biografia") {
+      context.enrichedBiography = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
+        this.actor.system.biography,
+        { secrets: this.document.isOwner, rollData: this.actor.getRollData(), relativeTo: this.actor }
+      );
+    }
+    return context;
+  }
 }

@@ -58,12 +58,18 @@ Hooks.once("init", async function () {
     decimals: 0
   };
 
-  // Sheets (ApplicationV2)
-  Actors.unregisterSheet("core", foundry.appv1.sheets.ActorSheet);
-  Actors.registerSheet("etmos", EtmosCharacterSheet, { types: ["character"], makeDefault: true, label: "ETMOS.SheetCharacter" });
-  Actors.registerSheet("etmos", EtmosNpcSheet, { types: ["npc"], makeDefault: true, label: "ETMOS.SheetNpc" });
-  Items.unregisterSheet("core", foundry.appv1.sheets.ItemSheet);
-  Items.registerSheet("etmos", EtmosItemSheet, { makeDefault: true, label: "ETMOS.SheetItem" });
+  // Sheets (ApplicationV2), registradas pelo caminho namespaced como o dnd5e faz.
+  // Evita os globais depreciados Actors/Items e as classes appv1, que mudam entre versões.
+  const { DocumentSheetConfig } = foundry.applications.apps;
+  DocumentSheetConfig.registerSheet(Actor, "etmos", EtmosCharacterSheet, {
+    types: ["character"], makeDefault: true, label: "ETMOS.SheetCharacter"
+  });
+  DocumentSheetConfig.registerSheet(Actor, "etmos", EtmosNpcSheet, {
+    types: ["npc"], makeDefault: true, label: "ETMOS.SheetNpc"
+  });
+  DocumentSheetConfig.registerSheet(Item, "etmos", EtmosItemSheet, {
+    makeDefault: true, label: "ETMOS.SheetItem"
+  });
 
   // Helpers do Handlebars
   Handlebars.registerHelper("eq", (a, b) => a === b);

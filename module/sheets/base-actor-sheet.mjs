@@ -13,6 +13,7 @@ export class EtmosBaseActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
     window: { resizable: true },
     form: { submitOnChange: true },
     actions: {
+      editImage: EtmosBaseActorSheet.onEditImage,
       rollAttribute: EtmosBaseActorSheet.onRollAttribute,
       itemEdit: EtmosBaseActorSheet.onItemEdit,
       itemDelete: EtmosBaseActorSheet.onItemDelete,
@@ -45,6 +46,18 @@ export class EtmosBaseActorSheet extends HandlebarsApplicationMixin(ActorSheetV2
     context = await super._preparePartContext(partId, context);
     if (context.tabs?.[partId]) context.tab = context.tabs[partId];
     return context;
+  }
+
+  /** Abre o FilePicker para trocar o retrato (padrão data-action="editImage" do dnd5e/core). */
+  static async onEditImage(event, target) {
+    const attr = target.dataset.edit ?? "img";
+    const current = foundry.utils.getProperty(this.document, attr);
+    const fp = new foundry.applications.apps.FilePicker.implementation({
+      type: "image",
+      current,
+      callback: path => this.document.update({ [attr]: path })
+    });
+    return fp.browse();
   }
 
   static async onRollAttribute(event, target) {

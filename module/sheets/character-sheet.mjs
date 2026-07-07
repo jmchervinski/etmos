@@ -97,6 +97,18 @@ export class EtmosCharacterSheet extends EtmosBaseActorSheet {
     return context;
   }
 
+  /** @override */
+  async _preparePartContext(partId, context) {
+    context = await super._preparePartContext(partId, context);
+    if (partId === "conceito") {
+      context.enrichedNotes = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
+        this.actor.system.notes,
+        { secrets: this.document.isOwner, rollData: this.actor.getRollData(), relativeTo: this.actor }
+      );
+    }
+    return context;
+  }
+
   /**
    * Trilhas de quadradinhos clicáveis (atributos e marcos), como na ficha oficial.
    * Clique define o valor; clicar no quadrado já preenchido de maior valor zera até ele - 1.
