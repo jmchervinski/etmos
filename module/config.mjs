@@ -139,6 +139,54 @@ ETMOS.tiposProeza = [
 ];
 
 /**
+ * Bônus de Progressão por transição de nível (SRD). Cada Bônus adquirido
+ * (a cada 5 Marcos do mesmo tipo) permite escolher UMA das 3 opções da
+ * transição atual — cada opção só pode ser escolhida 1 vez por nível.
+ */
+ETMOS.progressao = [
+  {
+    id: "n1", de: 1, para: 2,
+    opcoes: [
+      { id: "a", texto: "Ganha +1 Objeto e +1 Característica" },
+      { id: "b", texto: "+1 ponto de Atributo para distribuir onde quiser" },
+      { id: "c", texto: "Ganha +1 Habilidade Prática" }
+    ]
+  },
+  {
+    id: "n2", de: 2, para: 3,
+    opcoes: [
+      { id: "a", texto: "Ganha +1 Função" },
+      { id: "b", texto: "+1 ponto de Atributo para distribuir onde quiser" },
+      { id: "c", texto: "Ganha +1 Habilidade Teórica" }
+    ]
+  },
+  {
+    id: "n3", de: 3, para: 4,
+    opcoes: [
+      { id: "a", texto: "Ganha +1 Objeto e +1 Característica" },
+      { id: "b", texto: "+1 ponto de Atributo para distribuir onde quiser" },
+      { id: "c", texto: "Ganha +1 Habilidade Prática" }
+    ]
+  },
+  {
+    id: "n4", de: 4, para: 5,
+    opcoes: [
+      { id: "a", texto: "Ganha +1 Função" },
+      { id: "b", texto: "+1 ponto de Atributo para distribuir onde quiser" },
+      { id: "c", texto: "Ganha +1 Habilidade Teórica" }
+    ]
+  },
+  {
+    id: "n5", de: 5, para: 6,
+    opcoes: [
+      { id: "a", texto: "Ganha +1 Função, +1 Objeto e +1 Característica" },
+      { id: "b", texto: "+1 ponto de Atributo para distribuir onde quiser" },
+      { id: "c", texto: "Ganha +1 Habilidade Teórica e +1 Habilidade Prática" }
+    ]
+  }
+];
+
+/**
  * Lê um setting de módulo com segurança: durante o init (antes do registro)
  * ou em ambientes sem settings, responde false em vez de lançar erro.
  */

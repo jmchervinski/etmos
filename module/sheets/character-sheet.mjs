@@ -20,6 +20,7 @@ export class EtmosCharacterSheet extends EtmosBaseActorSheet {
     ficha: { template: "systems/etmos/templates/actors/parts/character-ficha.html", scrollable: [""] },
     conceito: { template: "systems/etmos/templates/actors/parts/character-conceito.html", scrollable: [""] },
     grimorio: { template: "systems/etmos/templates/actors/parts/character-grimorio.html", scrollable: [""] },
+    progressao: { template: "systems/etmos/templates/actors/parts/character-progressao.html", scrollable: [""] },
     configuracoes: { template: "systems/etmos/templates/actors/parts/character-configuracoes.html", scrollable: [""] },
     footer: { template: "systems/etmos/templates/actors/parts/actor-footer.html" }
   };
@@ -30,6 +31,7 @@ export class EtmosCharacterSheet extends EtmosBaseActorSheet {
         { id: "ficha", label: "ETMOS.TabFicha" },
         { id: "conceito", label: "ETMOS.TabConceito" },
         { id: "grimorio", label: "ETMOS.TabGrimorio" },
+        { id: "progressao", label: "ETMOS.TabProgressao" },
         { id: "configuracoes", label: "ETMOS.TabConfiguracoes" }
       ],
       initial: "ficha"
@@ -92,6 +94,24 @@ export class EtmosCharacterSheet extends EtmosBaseActorSheet {
         itens: marcar(ETMOS.particulas.complementos.filter(c => c.nivel === nivel))
       }))
     };
+
+    // Aba Progressão: opções de Bônus por transição de nível, com estado
+    // marcado e destaque para a transição do nível atual.
+    context.progressaoView = ETMOS.progressao.map(t => ({
+      ...t,
+      atual: sys.details.nivel === t.de,
+      opcoes: t.opcoes.map(o => ({
+        ...o,
+        campo: `${t.id}${o.id}`,
+        checked: sys.progressao?.[`${t.id}${o.id}`] === true
+      }))
+    }));
+
+    // Tabela de Referência de Crescimento (níveis 1-6; 3 Marcos por nível)
+    context.referenciaCrescimento = Array.fromRange(6).map(i => ({
+      nivel: i + 1,
+      marcos: i < 5 ? [1, 2, 3] : []
+    }));
 
     // Módulos e homebrews (aba Configurações; só o GM altera settings de mundo)
     context.isGM = game.user?.isGM ?? false;

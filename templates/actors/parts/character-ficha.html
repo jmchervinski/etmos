@@ -77,25 +77,6 @@
     </fieldset>
   </div>
 
-  {{!-- Marcos de Crescimento --}}
-  <fieldset class="bloco-oficial marcos-oficial">
-    <legend>Marcos de Crescimento</legend>
-    <div class="marcos-linhas">
-      {{#each marcosView as |m|}}
-      <div class="marco-grupo">
-        <label>{{m.label}}</label>
-        <div class="pip-track">
-          {{#each m.pips as |p|}}
-          <a class="pip pip-clicavel {{#if p.filled}}filled{{/if}}" data-action="pipClick"
-             data-path="system.marcos.{{m.key}}" data-value="{{p.value}}"></a>
-          {{/each}}
-        </div>
-      </div>
-      {{/each}}
-    </div>
-    <small class="dica">5 Marcos do mesmo tipo = 1 Bônus de Progressão. Todas as categorias completas = sobe de nível.</small>
-  </fieldset>
-
   {{#if moduloFamiliares}}
   <fieldset class="bloco-oficial familiar-box">
     <legend>Familiar (Pacto)</legend>

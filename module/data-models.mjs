@@ -45,6 +45,20 @@ const rudimentosSchema = () => {
   return new SchemaField(campos);
 };
 
+/**
+ * Rastreio das opções de Bônus de Progressão já escolhidas
+ * (uma flag por opção de cada transição de nível, ex.: n1a, n3b).
+ */
+const progressaoSchema = () => {
+  const campos = {};
+  for (const t of ETMOS.progressao) {
+    for (const o of t.opcoes) {
+      campos[`${t.id}${o.id}`] = new BooleanField({ required: true, initial: false });
+    }
+  }
+  return new SchemaField(campos);
+};
+
 /* -------------------------------------------- */
 /*  Actor Models                                */
 /* -------------------------------------------- */
@@ -166,6 +180,8 @@ export class CharacterDataModel extends BaseActorModel {
       grimorio: grimorioSchema(),
       // Módulo de Proezas: Rudimentos treinados
       rudimentos: rudimentosSchema(),
+      // Bônus de Progressão já escolhidos (aba Progressão)
+      progressao: progressaoSchema(),
       // Módulo de Familiares: id do ator Familiar vinculado pelo Pacto
       familiar: new StringField({ required: true, blank: true })
     };

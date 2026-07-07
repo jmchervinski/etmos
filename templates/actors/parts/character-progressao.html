@@ -1,0 +1,61 @@
+<div class="tab progressao {{tab.cssClass}}" data-group="primary" data-tab="progressao">
+  <header class="ficha-titulo secundario"><h1>Progressão &amp; Marcos</h1></header>
+
+  {{!-- Marcos de Crescimento --}}
+  <fieldset class="bloco-oficial marcos-oficial">
+    <legend>Marcos de Crescimento</legend>
+    <div class="marcos-linhas">
+      {{#each marcosView as |m|}}
+      <div class="marco-grupo">
+        <label>{{m.label}}</label>
+        <div class="pip-track">
+          {{#each m.pips as |p|}}
+          <a class="pip pip-clicavel {{#if p.filled}}filled{{/if}}" data-action="pipClick"
+             data-path="system.marcos.{{m.key}}" data-value="{{p.value}}"></a>
+          {{/each}}
+        </div>
+      </div>
+      {{/each}}
+    </div>
+    <small class="dica">Ao completar 5 Marcos do mesmo tipo, a Personagem ganha 1 Bônus de Progressão.
+    Todas as categorias completas = sobe de nível (as categorias se reiniciam).</small>
+  </fieldset>
+
+  <div class="ficha-colunas progressao-colunas">
+    {{!-- Bônus de Progressão por transição de nível --}}
+    <fieldset class="bloco-oficial bonus-progressao">
+      <legend>Bônus de Progressão</legend>
+      <p class="dica">Ao adquirir 1 Bônus de Progressão, escolha uma das 3 opções da transição atual —
+      cada opção só pode ser escolhida <b>uma vez por nível</b>. Marque as já usadas.</p>
+      {{#each progressaoView as |t|}}
+      <div class="transicao {{#if t.atual}}atual{{/if}}">
+        <h4>Do Nível {{t.de}} para o {{t.para}}{{#if t.atual}} <span class="tag-atual">nível atual</span>{{/if}}</h4>
+        {{#each t.opcoes as |o|}}
+        <label class="particula-check">
+          <input type="checkbox" name="system.progressao.{{o.campo}}" {{#if o.checked}}checked{{/if}} />
+          {{o.texto}}
+        </label>
+        {{/each}}
+      </div>
+      {{/each}}
+    </fieldset>
+
+    {{!-- Tabela de Referência de Crescimento --}}
+    <fieldset class="bloco-oficial referencia-crescimento">
+      <legend>Referência de Crescimento</legend>
+      <table class="tabela-crescimento">
+        <thead>
+          <tr><th>Níveis &amp; Marcos</th><th>Bônus</th></tr>
+        </thead>
+        <tbody>
+          {{#each referenciaCrescimento as |n|}}
+          <tr class="linha-nivel"><td>{{n.nivel}}º Nível</td><td>Nenhum</td></tr>
+          {{#each n.marcos as |m|}}
+          <tr><td>{{m}}º Marco</td><td>01 Bônus</td></tr>
+          {{/each}}
+          {{/each}}
+        </tbody>
+      </table>
+    </fieldset>
+  </div>
+</div>

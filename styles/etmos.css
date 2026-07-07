@@ -35,6 +35,21 @@
   padding-right: 0.25rem;
 }
 
+/* Ficha de item não tem abas: o corpo rola e o editor de descrição tem altura útil */
+.etmos-item .sheet-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 0.4rem;
+}
+.etmos-item .editor,
+.etmos-item prose-mirror {
+  min-height: 140px;
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid var(--etmos-roxo);
+  border-radius: 3px;
+}
+
 .etmos-sheet input,
 .etmos-sheet select {
   background: rgba(255, 255, 255, 0.55);
@@ -220,6 +235,53 @@
 /* --- Módulo de Familiares --- */
 .forca-pacto { display: flex; align-items: center; gap: 0.5rem; }
 .forca-pacto label { font-size: 0.85rem; }
+
+/* --- Aba Progressão --- */
+.progressao-colunas { align-items: start; }
+.bonus-progressao .transicao {
+  margin: 0.4rem 0;
+  padding: 0.3rem 0.4rem;
+  border-left: 3px solid var(--etmos-lilas);
+}
+.bonus-progressao .transicao.atual {
+  border-left-color: var(--etmos-dourado);
+  background: rgba(201, 168, 76, 0.10);
+}
+.bonus-progressao .transicao h4 {
+  margin: 0 0 0.2rem;
+  color: var(--etmos-roxo-profundo);
+  font-size: 0.85rem;
+}
+.bonus-progressao .tag-atual {
+  font-size: 0.7rem;
+  font-weight: normal;
+  color: var(--etmos-roxo-profundo);
+  background: var(--etmos-dourado);
+  border-radius: 3px;
+  padding: 0 0.3rem;
+  vertical-align: middle;
+}
+.tabela-crescimento {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+.tabela-crescimento th {
+  background: var(--etmos-roxo-profundo);
+  color: var(--etmos-lavanda);
+  padding: 0.25rem 0.5rem;
+  text-align: left;
+  font-variant: small-caps;
+}
+.tabela-crescimento td {
+  padding: 0.15rem 0.5rem;
+  border-bottom: 1px dotted var(--etmos-lilas);
+}
+.tabela-crescimento .linha-nivel td {
+  background: rgba(83, 43, 102, 0.14);
+  font-weight: bold;
+  color: var(--etmos-roxo-profundo);
+}
 
 .dica {
   font-size: 0.75rem;

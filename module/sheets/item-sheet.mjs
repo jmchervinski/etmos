@@ -10,7 +10,7 @@ const CATEGORIAS = {
 export class EtmosItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
   static DEFAULT_OPTIONS = {
     classes: ["etmos-sheet", "etmos-item"],
-    position: { width: 480, height: 420 },
+    position: { width: 480, height: 560 },
     window: { resizable: true },
     form: { submitOnChange: true },
     actions: {
