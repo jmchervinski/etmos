@@ -238,6 +238,18 @@
 
 /* --- Aba Progressão --- */
 .progressao-colunas { align-items: start; }
+.subir-nivel-btn {
+  display: block;
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.4rem;
+  font-weight: bold;
+  background: var(--etmos-dourado);
+  color: var(--etmos-roxo-profundo);
+  border: 1px solid var(--etmos-roxo-profundo);
+}
+.subir-nivel-btn:hover { background: var(--etmos-lilas); box-shadow: 0 0 8px var(--etmos-dourado); }
+.nivel-maximo { color: var(--etmos-dourado); font-weight: bold; }
 .bonus-progressao .transicao {
   margin: 0.4rem 0;
   padding: 0.3rem 0.4rem;

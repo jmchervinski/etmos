@@ -1,0 +1,7 @@
+2026/07/08-00:37:19.307 4acc Recovering log #5
+2026/07/08-00:37:19.315 4acc Delete type=0 #5
+2026/07/08-00:37:19.316 4acc Delete type=3 #4
+2026/07/08-00:37:19.331 4a2c Level-0 table #9: started
+2026/07/08-00:37:19.336 4a2c Level-0 table #9: 9263 bytes OK
+2026/07/08-00:37:19.337 4a2c Delete type=0 #7
+2026/07/08-00:37:19.339 4a2c Manual compaction at level-0 from '!cards!etmosdeckparticl' @ 72057594037927935 : 1 .. '!cards.cards!etmosdeckparticl.etmoscard0000080' @ 0 : 0; will stop at (end)

@@ -6,7 +6,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { compilePack } from "@foundryvtt/foundryvtt-cli";
-import { PACKS } from "./pack-data.mjs";
+import { PACKS, CARD_PACKS } from "./pack-data.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const SRC = path.join(ROOT, "packs-src");
@@ -59,6 +59,44 @@ for (const [packName, dados] of Object.entries(PACKS)) {
 
   await compilePack(dir, path.join(OUT, packName), { log: false });
   console.log(`OK ${packName}: ${dados.folders.length} pastas, ${dados.items.length} itens`);
+}
+
+/* -------- Card packs (baralhos) -------- */
+for (const [packName, dados] of Object.entries(CARD_PACKS ?? {})) {
+  const dir = path.join(SRC, packName);
+  fs.mkdirSync(dir, { recursive: true });
+  const ids = new Set();
+
+  for (const deck of dados.decks) {
+    if (!ID_RE.test(deck._id) || ids.has(deck._id)) throw new Error(`id de deck inválido/duplicado: ${deck._id}`);
+    ids.add(deck._id);
+    // Cada carta é armazenada como entrada própria: !cards.cards!<deck>.<card>
+    const cards = deck.cards.map(c => {
+      if (!ID_RE.test(c._id) || ids.has(c._id)) throw new Error(`id de carta inválido/duplicado: ${c._id}`);
+      ids.add(c._id);
+      return { ...c, _key: `!cards.cards!${deck._id}.${c._id}` };
+    });
+    const doc = {
+      _id: deck._id,
+      _key: `!cards!${deck._id}`,
+      name: deck.name,
+      type: deck.type ?? "deck",
+      description: deck.description ?? "",
+      img: deck.img ?? "icons/svg/card-joker.svg",
+      cards,
+      width: null,
+      height: null,
+      rotation: 0,
+      ownership: { default: 0 },
+      flags: {},
+      _stats: {}
+    };
+    fs.writeFileSync(path.join(dir, `cards-${deck._id}.json`), JSON.stringify(doc, null, 2));
+  }
+
+  await compilePack(dir, path.join(OUT, packName), { log: false });
+  const total = dados.decks.reduce((n, d) => n + d.cards.length, 0);
+  console.log(`OK ${packName}: ${dados.decks.length} deck(s), ${total} cartas`);
 }
 
 console.log("Compêndios gerados em packs/");

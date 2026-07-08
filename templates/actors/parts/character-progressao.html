@@ -19,6 +19,12 @@
     </div>
     <small class="dica">Ao completar 5 Marcos do mesmo tipo, a Personagem ganha 1 Bônus de Progressão.
     Todas as categorias completas = sobe de nível (as categorias se reiniciam).</small>
+    {{#if podeSubirNivel}}
+    <button type="button" class="subir-nivel-btn" data-action="subirNivel">⬆️ Subir de Nível (todas as categorias completas)</button>
+    {{/if}}
+    {{#if nivelMaximoCompleto}}
+    <p class="dica nivel-maximo">Nível máximo (6) atingido.</p>
+    {{/if}}
   </fieldset>
 
   <div class="ficha-colunas progressao-colunas">

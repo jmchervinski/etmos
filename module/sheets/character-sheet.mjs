@@ -11,7 +11,8 @@ export class EtmosCharacterSheet extends EtmosBaseActorSheet {
       rollProeza: EtmosCharacterSheet.onRollProeza,
       conjurarViaFamiliar: EtmosCharacterSheet.onConjurarViaFamiliar,
       editarLimites: EtmosCharacterSheet.onEditarLimites,
-      criarItemEncantado: EtmosCharacterSheet.onCriarItemEncantado
+      criarItemEncantado: EtmosCharacterSheet.onCriarItemEncantado,
+      subirNivel: EtmosCharacterSheet.onSubirNivel
     }
   };
 
@@ -85,6 +86,12 @@ export class EtmosCharacterSheet extends EtmosBaseActorSheet {
       ...m,
       pips: Array.fromRange(5).map(i => ({ value: i + 1, filled: sys.marcos[m.key] >= i + 1 }))
     }));
+
+    // Todas as 3 categorias completas (5 Marcos cada) = pode subir de nível (SRD).
+    context.marcosCompletos =
+      sys.marcos.fisicos >= 5 && sys.marcos.emocionais >= 5 && sys.marcos.mentais >= 5;
+    context.podeSubirNivel = context.marcosCompletos && sys.details.nivel < 6;
+    context.nivelMaximoCompleto = context.marcosCompletos && sys.details.nivel >= 6;
 
     // Grimório: checklist de Partículas com estado marcado
     const marcar = lista => lista.map(p => ({ ...p, checked: sys.grimorio?.[p.id] === true }));
@@ -287,6 +294,35 @@ export class EtmosCharacterSheet extends EtmosBaseActorSheet {
       }
     }]);
     ui.notifications.info(`"${nome}" criado no inventário (${pp}/${grau.pp} PP).`);
+  }
+
+  /**
+   * Sobe de nível quando as 3 categorias de Marcos estão completas (SRD):
+   * incrementa o Nível (máx. 6) e reinicia os Marcos, que voltam a zero.
+   */
+  static async onSubirNivel() {
+    const sys = this.actor.system;
+    const completos = sys.marcos.fisicos >= 5 && sys.marcos.emocionais >= 5 && sys.marcos.mentais >= 5;
+    if (!completos) return ui.notifications.warn("Complete os 5 Marcos das 3 categorias antes de subir de nível.");
+    if (sys.details.nivel >= 6) return ui.notifications.warn("Nível máximo (6) já atingido.");
+
+    const novoNivel = sys.details.nivel + 1;
+    const confirmado = await foundry.applications.api.DialogV2.confirm({
+      window: { title: `Subir para o Nível ${novoNivel}` },
+      content: `<p>Todas as categorias de Marcos estão completas. Subir <b>${this.actor.name}</b> para o
+        <b>Nível ${novoNivel}</b>? Os Marcos serão reiniciados (voltam a zero).</p>
+        <p class="hint">Não esqueça de escolher os Bônus de Progressão da transição na aba Progressão.</p>`,
+      rejectClose: false
+    });
+    if (!confirmado) return;
+
+    await this.actor.update({
+      "system.details.nivel": novoNivel,
+      "system.marcos.fisicos": 0,
+      "system.marcos.emocionais": 0,
+      "system.marcos.mentais": 0
+    });
+    ui.notifications.info(`${this.actor.name} subiu para o Nível ${novoNivel}! Marcos reiniciados.`);
   }
 
   /** Módulo de Proezas: abre o diálogo do Teste de Proeza. */

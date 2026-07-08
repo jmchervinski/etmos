@@ -9,6 +9,8 @@
  * gratuitamente pela editora.
  */
 
+import { ETMOS } from "../module/config.mjs";
+
 const p = txt => `<p>${txt}</p>`;
 
 /* ------------------------------------------------------------------ */
@@ -493,4 +495,76 @@ export const PACKS = {
   "etmos-habilidades": habilidades,
   "etmos-origens": origens,
   "etmos-aptidoes": aptidoes
+};
+
+/* ------------------------------------------------------------------ */
+/* Card Pack: etmos-particulas (baralho de Partículas do SRD)          */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Baralho de Partículas gerado a partir dos DADOS do SRD (nomes, abreviações
+ * e categorias — ETMOS.particulas). NÃO inclui a arte do baralho oficial
+ * (uso controlado pela editora): as cartas são textuais, com ícones neutros
+ * do core do Foundry. Para usar a arte oficial, aponte a face de cada carta
+ * para os arquivos na sua instalação local (não redistribua junto do sistema).
+ */
+const ICONE_CATEGORIA = {
+  "Função": "icons/svg/book.svg",
+  "Objeto": "icons/svg/item-bag.svg",
+  "Característica": "icons/svg/aura.svg",
+  "Complemento": "icons/svg/upgrade.svg"
+};
+const VERSO_CARTA = "icons/svg/card-joker.svg";
+
+function cartaParticula(part, categoria, idx, nivel) {
+  const num = String(idx + 1).padStart(7, "0");
+  const detalhe = nivel ? `${categoria} · ${nivel}º Nível` : categoria;
+  return {
+    _id: `etmoscard${num}`,
+    name: `${part.nome} (${part.abrev})`,
+    description: `<p><b>${categoria}</b>${nivel ? ` — ${nivel}º Nível` : ""} · Abreviação: <b>${part.abrev}</b></p>`,
+    type: "base",
+    suit: categoria,
+    value: nivel ?? idx + 1,
+    origin: null,
+    width: 1,
+    height: 1,
+    rotation: 0,
+    drawn: false,
+    sort: (idx + 1) * 1000,
+    faces: [{ name: part.nome, text: `<p>${detalhe}</p>`, img: ICONE_CATEGORIA[categoria] ?? null }],
+    back: { name: "Partícula", text: "", img: VERSO_CARTA },
+    flags: {}
+  };
+}
+
+function baralhoParticulas() {
+  const cartas = [];
+  let idx = 0;
+  const push = (lista, categoria) => {
+    for (const part of lista) cartas.push(cartaParticula(part, categoria, idx++, part.nivel));
+  };
+  push(ETMOS.particulas.funcoes, "Função");
+  push(ETMOS.particulas.objetos, "Objeto");
+  push(ETMOS.particulas.caracteristicas, "Característica");
+  push(ETMOS.particulas.complementos, "Complemento");
+  return cartas;
+}
+
+export const CARD_PACKS = {
+  "etmos-baralho-particulas": {
+    decks: [
+      {
+        _id: "etmosdeckparticl",
+        name: "Baralho de Partículas (SRD)",
+        type: "deck",
+        description:
+          "<p>Deck com as Partículas do SRD (Funções, Objetos, Características e Complementos), " +
+          "para sortear/combinar ao montar Frases Mágicas. Cartas geradas dos dados do SRD, " +
+          "sem a arte do baralho oficial.</p>",
+        img: VERSO_CARTA,
+        cards: baralhoParticulas()
+      }
+    ]
+  }
 };
