@@ -15,9 +15,6 @@
 > Conheça, baixe os materiais gratuitos (SRD, Baixe e Jogue, baralho de Partículas)
 > e **apoie o jogo oficial**: https://baldegalactico.com.br/jogo/etmos/
 
-Estrutura inspirada no sistema comunitário [morkborg-foundry-vtt](https://github.com/fvtt-fria-ligan/morkborg-foundry-vtt)
-e no [guia oficial de desenvolvimento de sistemas do Foundry](https://foundryvtt.com/article/system-development/).
-
 ## Mecânicas do SRD ETMOS 1.1 implementadas
 
 | Regra (SRD) | Implementação |
