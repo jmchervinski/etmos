@@ -502,16 +502,23 @@ export const PACKS = {
 /* ------------------------------------------------------------------ */
 
 /**
- * Baralho de Partículas usando a arte oficial das cartas (baralho "Etmos
- * Spells", distribuído gratuitamente pela editora). Cada carta usa a imagem
- * correspondente em assets/particulas/<id>.jpg (a face traz categoria, nome e
- * abreviação) e o verso comum _verso.jpg. Os dados vêm de ETMOS.particulas.
+ * Baralho de Partículas gerado a partir dos DADOS do SRD (nomes, abreviações
+ * e categorias — ETMOS.particulas). NÃO inclui a arte do baralho oficial
+ * (uso controlado pela editora): as cartas são textuais, com ícones neutros
+ * do core do Foundry. Para usar a arte oficial, aponte a face de cada carta
+ * para os arquivos na sua instalação local (não redistribua junto do sistema).
  */
-const FACE = id => `systems/etmos/assets/particulas/${id}.jpg`;
-const VERSO_CARTA = "systems/etmos/assets/particulas/_verso.jpg";
+const ICONE_CATEGORIA = {
+  "Função": "icons/svg/book.svg",
+  "Objeto": "icons/svg/item-bag.svg",
+  "Característica": "icons/svg/aura.svg",
+  "Complemento": "icons/svg/upgrade.svg"
+};
+const VERSO_CARTA = "icons/svg/card-joker.svg";
 
 function cartaParticula(part, categoria, idx, nivel) {
   const num = String(idx + 1).padStart(7, "0");
+  const detalhe = nivel ? `${categoria} · ${nivel}º Nível` : categoria;
   return {
     _id: `etmoscard${num}`,
     name: `${part.nome} - ${part.abrev}`,
@@ -525,7 +532,7 @@ function cartaParticula(part, categoria, idx, nivel) {
     rotation: 0,
     drawn: false,
     sort: (idx + 1) * 1000,
-    faces: [{ name: `${part.nome} - ${part.abrev}`, text: "", img: FACE(part.id) }],
+    faces: [{ name: `${part.nome} - ${part.abrev}`, text: `<p>${detalhe}</p>`, img: ICONE_CATEGORIA[categoria] ?? null }],
     back: { name: "Partícula", text: "", img: VERSO_CARTA },
     flags: {}
   };
@@ -553,8 +560,8 @@ export const CARD_PACKS = {
         type: "deck",
         description:
           "<p>Deck com as 80 Partículas (Funções, Objetos, Características e Complementos), " +
-          "para sortear/combinar ao montar Frases Mágicas. Arte do baralho oficial " +
-          "\"Etmos Spells\", distribuído gratuitamente pela Editora Balde Galáctico.</p>",
+          "para sortear/combinar ao montar Frases Mágicas. Cartas geradas dos dados do SRD, " +
+          "sem a arte do baralho oficial.</p>",
         img: VERSO_CARTA,
         cards: baralhoParticulas()
       }
