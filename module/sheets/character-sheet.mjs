@@ -10,7 +10,8 @@ export class EtmosCharacterSheet extends EtmosBaseActorSheet {
       descansoCompleto: EtmosCharacterSheet.onDescansoCompleto,
       rollProeza: EtmosCharacterSheet.onRollProeza,
       conjurarViaFamiliar: EtmosCharacterSheet.onConjurarViaFamiliar,
-      editarLimites: EtmosCharacterSheet.onEditarLimites
+      editarLimites: EtmosCharacterSheet.onEditarLimites,
+      criarItemEncantado: EtmosCharacterSheet.onCriarItemEncantado
     }
   };
 
@@ -21,6 +22,7 @@ export class EtmosCharacterSheet extends EtmosBaseActorSheet {
     conceito: { template: "systems/etmos/templates/actors/parts/character-conceito.html", scrollable: [""] },
     grimorio: { template: "systems/etmos/templates/actors/parts/character-grimorio.html", scrollable: [""] },
     progressao: { template: "systems/etmos/templates/actors/parts/character-progressao.html", scrollable: [""] },
+    encantamento: { template: "systems/etmos/templates/actors/parts/character-encantamento.html", scrollable: [""] },
     configuracoes: { template: "systems/etmos/templates/actors/parts/character-configuracoes.html", scrollable: [""] },
     footer: { template: "systems/etmos/templates/actors/parts/actor-footer.html" }
   };
@@ -32,6 +34,7 @@ export class EtmosCharacterSheet extends EtmosBaseActorSheet {
         { id: "conceito", label: "ETMOS.TabConceito" },
         { id: "grimorio", label: "ETMOS.TabGrimorio" },
         { id: "progressao", label: "ETMOS.TabProgressao" },
+        { id: "encantamento", label: "ETMOS.TabEncantamento" },
         { id: "configuracoes", label: "ETMOS.TabConfiguracoes" }
       ],
       initial: "ficha"
@@ -112,6 +115,28 @@ export class EtmosCharacterSheet extends EtmosBaseActorSheet {
       nivel: i + 1,
       marcos: i < 5 ? [1, 2, 3] : []
     }));
+
+    // Aba Encantamento: calcula PP acumulados vs. requeridos (SRD)
+    const enc = sys.encantamento ?? {};
+    const grauSel = ETMOS.encantamento.graus.find(g => g.id === enc.grau) ?? ETMOS.encantamento.graus[0];
+    let ppAcumulado = 0;
+    const fatoresView = ETMOS.encantamento.fatores.map(f => {
+      const escolhido = enc[f.id] ?? f.padrao;
+      const opcoes = f.opcoes.map(o => ({ ...o, selected: o.id === escolhido }));
+      const opSel = f.opcoes.find(o => o.id === escolhido) ?? f.opcoes[0];
+      ppAcumulado += opSel?.pp ?? 0;
+      return { ...f, opcoes, ppAtual: opSel?.pp ?? 0 };
+    });
+    context.encantamentoView = {
+      dados: enc,
+      graus: ETMOS.encantamento.graus.map(g => ({ ...g, selected: g.id === grauSel.id })),
+      fatores: fatoresView,
+      ppRequerido: grauSel.pp,
+      ppAcumulado,
+      suficiente: ppAcumulado >= grauSel.pp,
+      sessoesLabel: (ETMOS.encantamento.fatores.find(f => f.id === "sessoes").opcoes
+        .find(o => o.id === (enc.sessoes ?? "s5")) ?? {}).nome ?? ""
+    };
 
     // Módulos e homebrews (aba Configurações; só o GM altera settings de mundo)
     context.isGM = game.user?.isGM ?? false;
@@ -221,6 +246,47 @@ export class EtmosCharacterSheet extends EtmosBaseActorSheet {
       "system.resources.ferimentos.ajuste": data.ajusteFerimentos,
       "system.resources.estresse.ajuste": data.ajusteEstresse
     });
+  }
+
+  /**
+   * Cria o Item Encantado (Equipamento) no inventário a partir do
+   * planejamento atual, se os Pontos de Preparo forem suficientes.
+   */
+  static async onCriarItemEncantado() {
+    const sys = this.actor.system;
+    const enc = sys.encantamento ?? {};
+    const grau = ETMOS.encantamento.graus.find(g => g.id === enc.grau) ?? ETMOS.encantamento.graus[0];
+    let pp = 0;
+    const linhas = [];
+    for (const f of ETMOS.encantamento.fatores) {
+      const op = f.opcoes.find(o => o.id === (enc[f.id] ?? f.padrao)) ?? f.opcoes[0];
+      pp += op.pp;
+      linhas.push(`${f.nome}: ${op.nome} (${op.pp >= 0 ? "+" : ""}${op.pp} PP)`);
+    }
+    if (pp < grau.pp) {
+      return ui.notifications.warn(
+        `Pontos de Preparo insuficientes: ${pp}/${grau.pp} PP para um Encantamento ${grau.nome}.`
+      );
+    }
+    const nome = enc.nome?.trim() || "Item Encantado";
+    const consumivel = enc.veiculo === "consumivel";
+    const descricao =
+      `<p><b>Encantamento ${grau.nome}</b> — ${pp}/${grau.pp} PP` +
+      (enc.fraseMagica ? ` · Frase: <i>${enc.fraseMagica}</i>` : "") + `</p>` +
+      `<ul>${linhas.map(l => `<li>${l}</li>`).join("")}</ul>`;
+
+    await this.actor.createEmbeddedDocuments("Item", [{
+      name: nome,
+      type: "equipamento",
+      system: {
+        quantidade: 1,
+        ehTotem: false,
+        rankTotem: 0,
+        consumivel,
+        description: descricao
+      }
+    }]);
+    ui.notifications.info(`"${nome}" criado no inventário (${pp}/${grau.pp} PP).`);
   }
 
   /** Módulo de Proezas: abre o diálogo do Teste de Proeza. */

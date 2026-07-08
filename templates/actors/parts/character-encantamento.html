@@ -1,0 +1,65 @@
+<div class="tab encantamento {{tab.cssClass}}" data-group="primary" data-tab="encantamento">
+  <header class="ficha-titulo secundario"><h1>Encantamento de Itens</h1></header>
+  <p class="dica">Um encantamento é uma frase mágica de Intenção fixa, gravada num objeto. Defina o Grau
+  e ajuste os fatores até acumular Pontos de Preparo (PP) suficientes. O processo leva 1 sessão de 3h por dia.</p>
+
+  <fieldset class="bloco-oficial encantamento-box">
+    <legend>Planejar Encantamento</legend>
+
+    <div class="conjuracao-linha">
+      <label>Nome do Item
+        <input type="text" name="system.encantamento.nome" value="{{encantamentoView.dados.nome}}" placeholder="Ex: Anel da Brasa" />
+      </label>
+    </div>
+    <div class="conjuracao-linha">
+      <label>Frase Mágica
+        <input type="text" name="system.encantamento.fraseMagica" value="{{encantamentoView.dados.fraseMagica}}" placeholder="Ex: Empi Ig (Empoderar Fogo)" />
+      </label>
+    </div>
+
+    <div class="encantamento-fatores">
+      <label class="fator-linha">
+        <span class="fator-nome">Grau de Sofisticação</span>
+        <select name="system.encantamento.grau">
+          {{#each encantamentoView.graus as |g|}}
+          <option value="{{g.id}}" {{#if g.selected}}selected{{/if}}>{{g.nome}} — requer {{g.pp}} PP ({{g.dica}})</option>
+          {{/each}}
+        </select>
+      </label>
+
+      {{#each encantamentoView.fatores as |f|}}
+      <label class="fator-linha">
+        <span class="fator-nome">{{f.nome}}</span>
+        <select name="system.encantamento.{{f.id}}">
+          {{#each f.opcoes as |o|}}
+          <option value="{{o.id}}" {{#if o.selected}}selected{{/if}}>{{o.nome}} ({{#if (gte o.pp 0)}}+{{/if}}{{o.pp}} PP)</option>
+          {{/each}}
+        </select>
+        <span class="fator-pp {{#if (gte f.ppAtual 0)}}pos{{else}}neg{{/if}}">{{#if (gte f.ppAtual 0)}}+{{/if}}{{f.ppAtual}}</span>
+      </label>
+      {{/each}}
+    </div>
+
+    <div class="encantamento-resultado {{#if encantamentoView.suficiente}}ok{{else}}falta{{/if}}">
+      <div class="pp-total">
+        <span class="pp-valor">{{encantamentoView.ppAcumulado}}</span>
+        <span class="pp-sep">/</span>
+        <span class="pp-req">{{encantamentoView.ppRequerido}} PP</span>
+      </div>
+      <div class="pp-estado">
+        {{#if encantamentoView.suficiente}}
+        ✅ PP suficientes — {{encantamentoView.sessoesLabel}} necessárias para concluir.
+        {{else}}
+        ❌ Faltam Pontos de Preparo. Ajuste os fatores acima.
+        {{/if}}
+      </div>
+      <button type="button" data-action="criarItemEncantado" {{#unless encantamentoView.suficiente}}disabled{{/unless}}>
+        ✨ Criar Item Encantado no inventário
+      </button>
+    </div>
+
+    <p class="dica">Regras do SRD: Sessões devem ocorrer a no máximo 24h de distância entre si (senão recomeça).
+    Mais de uma Sessão no mesmo dia acumula +3 Estresse por Sessão além da primeira. Veículo <b>Consumível</b>
+    encerra após o uso; <b>Persistente</b> perdura. A definição do efeito final cabe ao Narrador.</p>
+  </fieldset>
+</div>

@@ -36,6 +36,9 @@
 
     {{#if (eq item.type "equipamento")}}
     <label>Quantidade <input type="number" name="system.quantidade" value="{{system.quantidade}}" min="0" /></label>
+    <label class="checkbox">Consumível (uso único)?
+      <input type="checkbox" name="system.consumivel" {{#if system.consumivel}}checked{{/if}} />
+    </label>
     <label class="checkbox">É um Totem?
       <input type="checkbox" name="system.ehTotem" {{#if system.ehTotem}}checked{{/if}} />
     </label>

@@ -103,6 +103,7 @@ Hooks.once("init", async function () {
 
   // Helpers do Handlebars
   Handlebars.registerHelper("eq", (a, b) => a === b);
+  Handlebars.registerHelper("gte", (a, b) => Number(a) >= Number(b));
 
   await preloadHandlebarsTemplates();
 });

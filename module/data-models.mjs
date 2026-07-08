@@ -182,6 +182,18 @@ export class CharacterDataModel extends BaseActorModel {
       rudimentos: rudimentosSchema(),
       // Bônus de Progressão já escolhidos (aba Progressão)
       progressao: progressaoSchema(),
+      // Encantamento de Itens em planejamento (aba Encantamento)
+      encantamento: new SchemaField({
+        nome: new StringField({ required: true, blank: true }),
+        fraseMagica: new StringField({ required: true, blank: true }),
+        grau: new StringField({ required: true, blank: true, initial: "simples" }),
+        veiculo: new StringField({ required: true, blank: true, initial: "persistente" }),
+        qualidadeVeiculo: new StringField({ required: true, blank: true, initial: "mediana" }),
+        ferramentas: new StringField({ required: true, blank: true, initial: "medianas" }),
+        frase: new StringField({ required: true, blank: true, initial: "bastante" }),
+        artesao: new StringField({ required: true, blank: true, initial: "n0" }),
+        sessoes: new StringField({ required: true, blank: true, initial: "s5" })
+      }),
       // Módulo de Familiares: id do ator Familiar vinculado pelo Pacto
       familiar: new StringField({ required: true, blank: true })
     };
@@ -324,7 +336,9 @@ export class EquipamentoDataModel extends BaseItemModel {
       quantidade: new NumberField({ required: true, integer: true, min: 0, initial: 1 }),
       // Totens têm Rank 0-5: Estresse extra por magia não-trivial (SRD).
       ehTotem: new BooleanField({ required: true, initial: false }),
-      rankTotem: new NumberField({ required: true, integer: true, min: 0, max: 5, initial: 0 })
+      rankTotem: new NumberField({ required: true, integer: true, min: 0, max: 5, initial: 0 }),
+      // Item Encantado Consumível: encerra após o uso (SRD, Encantamento)
+      consumivel: new BooleanField({ required: true, initial: false })
     };
   }
 }

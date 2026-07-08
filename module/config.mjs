@@ -187,6 +187,80 @@ ETMOS.progressao = [
 ];
 
 /**
+ * Encantamento de Itens (SRD): Graus de Sofisticação (PP requeridos) e os
+ * fatores que somam/subtraem Pontos de Preparo. Cada fator tem opções com
+ * o respectivo delta de PP; o padrão marca a opção neutra/inicial.
+ */
+ETMOS.encantamento = {
+  graus: [
+    { id: "simples", nome: "Simples", pp: 5, dica: "Frase de Complexidade Trivial ou Regular" },
+    { id: "sofisticado", nome: "Sofisticado", pp: 10, dica: "Frase de Complexidade Difícil" },
+    { id: "primoroso", nome: "Primoroso", pp: 15, dica: "Frase de Complexidade Complexa ou Milagre" }
+  ],
+  fatores: [
+    {
+      id: "veiculo", nome: "Veículo", padrao: "persistente",
+      opcoes: [
+        { id: "consumivel", nome: "Consumível (uso único)", pp: 1 },
+        { id: "persistente", nome: "Persistente (perdura)", pp: -2 }
+      ]
+    },
+    {
+      id: "qualidadeVeiculo", nome: "Qualidade do Veículo", padrao: "mediana",
+      opcoes: [
+        { id: "inferior", nome: "Inferior", pp: -2 },
+        { id: "mediana", nome: "Mediana", pp: 0 },
+        { id: "alta", nome: "Alta", pp: 2 },
+        { id: "ideal", nome: "Ideal", pp: 3 }
+      ]
+    },
+    {
+      id: "ferramentas", nome: "Qualidade das Ferramentas", padrao: "medianas",
+      opcoes: [
+        { id: "ruins", nome: "Ruins", pp: -2 },
+        { id: "medianas", nome: "Medianas", pp: 0 },
+        { id: "boas", nome: "Boas", pp: 1 },
+        { id: "excelentes", nome: "Excelentes", pp: 3 }
+      ]
+    },
+    {
+      id: "frase", nome: "Frase faz sentido com a Intenção", padrao: "bastante",
+      opcoes: [
+        { id: "nada", nome: "Nada", pp: -15 },
+        { id: "pouco", nome: "Pouco", pp: -5 },
+        { id: "bastante", nome: "Bastante", pp: 2 },
+        { id: "completamente", nome: "Completamente", pp: 5 }
+      ]
+    },
+    {
+      id: "artesao", nome: "Habilidade Artesão", padrao: "n0",
+      opcoes: [
+        { id: "n0", nome: "Sem a Habilidade", pp: 0 },
+        { id: "n1", nome: "Nível 1", pp: 1 },
+        { id: "n2", nome: "Nível 2", pp: 2 },
+        { id: "n3", nome: "Nível 3", pp: 3 }
+      ]
+    },
+    {
+      id: "sessoes", nome: "Sessões (1/dia, 3h)", padrao: "s5",
+      opcoes: [
+        { id: "s1", nome: "1 sessão", pp: -15 },
+        { id: "s2", nome: "2 sessões", pp: -12 },
+        { id: "s3", nome: "3 sessões", pp: -7 },
+        { id: "s4", nome: "4 sessões", pp: -3 },
+        { id: "s5", nome: "5 sessões", pp: 0 },
+        { id: "s6", nome: "6 sessões", pp: 1 },
+        { id: "s7", nome: "7 sessões", pp: 2 },
+        { id: "s9", nome: "9 sessões", pp: 3 },
+        { id: "s12", nome: "12 sessões", pp: 4 },
+        { id: "s20", nome: "20 sessões", pp: 5 },
+        { id: "s30", nome: "30 sessões", pp: 6 }
+      ]
+    }
+  ]
+};
+
+/**
  * Lê um setting de módulo com segurança: durante o init (antes do registro)
  * ou em ambientes sem settings, responde false em vez de lançar erro.
  */

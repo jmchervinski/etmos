@@ -276,12 +276,52 @@
 .tabela-crescimento td {
   padding: 0.15rem 0.5rem;
   border-bottom: 1px dotted var(--etmos-lilas);
+  background: rgba(255, 255, 255, 0.4);
+  color: var(--etmos-tinta);
 }
 .tabela-crescimento .linha-nivel td {
-  background: rgba(83, 43, 102, 0.14);
+  background: var(--etmos-lilas);
   font-weight: bold;
   color: var(--etmos-roxo-profundo);
 }
+
+/* --- Aba Encantamento --- */
+.encantamento-fatores {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin: 0.5rem 0;
+}
+.encantamento-fatores .fator-linha {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr auto;
+  align-items: center;
+  gap: 0.5rem;
+}
+.encantamento-fatores .fator-nome { font-size: 0.85rem; color: var(--etmos-roxo-profundo); }
+.encantamento-fatores .fator-pp {
+  min-width: 2.4rem;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 3px;
+  padding: 0.05rem 0.3rem;
+}
+.encantamento-fatores .fator-pp.pos { color: #1f6b3a; background: rgba(31, 107, 58, 0.12); }
+.encantamento-fatores .fator-pp.neg { color: #8a2020; background: rgba(138, 32, 32, 0.12); }
+
+.encantamento-resultado {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid var(--etmos-roxo);
+  text-align: center;
+}
+.encantamento-resultado.ok { border-color: #1f6b3a; background: rgba(31, 107, 58, 0.08); }
+.encantamento-resultado.falta { border-color: #8a2020; background: rgba(138, 32, 32, 0.06); }
+.encantamento-resultado .pp-total { font-size: 1.4rem; font-weight: bold; color: var(--etmos-roxo-profundo); }
+.encantamento-resultado .pp-req { color: var(--etmos-roxo); }
+.encantamento-resultado .pp-estado { font-size: 0.85rem; margin: 0.2rem 0 0.4rem; }
+.encantamento-resultado button:disabled { opacity: 0.5; cursor: not-allowed; }
 
 .dica {
   font-size: 0.75rem;
