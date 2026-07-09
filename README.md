@@ -1,6 +1,6 @@
 # ETMOS para Foundry VTT (Sistema Não-Oficial)
 
-> ⚠️ **Este é um sistema NÃO-OFICIAL, feito por fã.**
+> ⚠️ **Sistema NÃO-OFICIAL, feito por fã.**
 >
 > **ETMOS** é um RPG de fantasia urbana sobre linguagem, engenhosidade e magia,
 > criado por **Rafa Reis** e publicado pela **Editora Balde Galáctico**.
@@ -12,15 +12,39 @@
 > - **Ilustração:** Vinícius Ferreira Barth
 >
 > Este projeto não é afiliado, endossado ou patrocinado pela Editora Balde Galáctico.
-> Conheça, baixe os materiais gratuitos (SRD, Baixe e Jogue, baralho de Partículas)
-> e **apoie o jogo oficial**: https://baldegalactico.com.br/jogo/etmos/
+> Conheça o jogo, baixe os materiais gratuitos (SRD, Baixe e Jogue, baralho de
+> Partículas) e **apoie a publicação oficial**: https://baldegalactico.com.br/jogo/etmos/
+
+Implementação para [Foundry Virtual Tabletop](https://foundryvtt.com/) das mecânicas
+descritas no **SRD ETMOS 1.1**, distribuído gratuitamente pela editora. Compatível
+com o Foundry **v13** e **v14**.
+
+## Recursos
+
+- **Fichas de Personagem, NPC/Criatura e Familiar**, com abas de Ficha, Conceito,
+  Grimório, Progressão, Encantamento e Configurações.
+- **Rolagens automatizadas**: Testes de Atributo (2d6 + bônus) com diálogo de bônus
+  situacional e Dados de Empenho, Teste de Conjuração e Conjuração de magias, que
+  aplica toda a cadeia do SRD (Complexidade Máxima, Fadiga, acúmulo de Estresse).
+- **Limites derivados** de Ferimentos e Estresse, com estados de Fadiga e de
+  consciência calculados automaticamente e ajustes vindos de Origens/Habilidades
+  (ex.: "Atleta" = +1 Ferimento) ou manuais (homebrews).
+- **Progressão**: Marcos de Crescimento, opções de Bônus de Progressão por nível,
+  tabela de referência e botão de **subir de nível** ao completar todas as categorias.
+- **Encantamento de Itens** com calculadora de Pontos de Preparo (Grau, Veículo,
+  Ferramentas, Frase, Habilidade Artesão e Sessões).
+- **Módulos opcionais** (ativáveis na aba Configurações): **Familiares** (ficha
+  própria, Força do Pacto e conjuração através do Familiar) e **Proezas**
+  (Rudimentos e Teste de Proeza; Limite de Estresse 6 + Alma).
+- **Compêndios do SRD**: Habilidades (Práticas e Teóricas), Origens (Mundanas e
+  Fantásticas), Aptidões de Antagonista e um **baralho de Partículas** (80 cartas).
 
 ## Mecânicas do SRD ETMOS 1.1 implementadas
 
 | Regra (SRD) | Implementação |
 |---|---|
 | Atributos Corpo/Mente/Alma (0–6) | Data Models com validação |
-| Testes: 2d6 + bônus vs Dificuldade (base 6) | Botões na ficha + `actor.rollTest()` |
+| Testes: 2d6 + bônus vs Dificuldade (base 6) | Diálogo de teste na ficha + `actor.rollTestDialog()` |
 | Teste de Conjuração: 2d6 + Alma | Botão "Teste de Conjuração" |
 | Limite de Ferimentos = 4 + 1 a cada 2 de Corpo | Derivado automaticamente (PJs) |
 | Limite de Estresse = 4 + Alma | Derivado automaticamente (PJs) |
@@ -36,81 +60,70 @@
 | Iniciativa = Teste de Corpo (2d6 + Corpo) | `CONFIG.Combat.initiative` |
 | Movimento padrão 10 m | Grid padrão do sistema (10 m) |
 | Descanso Parcial/Completo, Tratamento Médico, mundo de origem | `actor.descansar()` + botões |
-| Dados de Empenho | Campo rastreável na ficha |
-| Marcos de Crescimento (Físicos/Mentais/Emocionais, 5 cada) | Aba "Marcos" |
+| Dados de Empenho (re-rola d6, mantém o melhor) | Diálogo de teste na ficha |
+| Marcos de Crescimento e Bônus de Progressão; subir de nível | Aba "Progressão" |
+| Encantamento de Itens (Pontos de Preparo) | Aba "Encantamento" |
 | Criação: 6 pts de Atributo (máx 4), 2 Origens, 2+2 Habilidades, Grimório 2F/3O/4C | Lembretes nas abas da ficha |
 | Fichas Base de Antagonista com Limites manuais | Ficha de NPC (ex: Curupira, Corpo 3 / Limite 7) |
-| Partículas (Função/Objeto/Característica/Complemento) | Item "particula" |
-| Habilidades Práticas/Teóricas, Origens (± Exclusiva), Aptidões/Ataques | Itens dedicados |
+| Partículas (Função/Objeto/Característica/Complemento) | Item "particula" e baralho de Partículas |
+| Habilidades Práticas/Teóricas, Origens (± Exclusiva), Aptidões/Ataques | Itens dedicados + compêndios |
+| Módulos: Familiares (Pacto) e Proezas (Rudimentos) | Ativáveis na aba Configurações |
 
-Ainda não implementado (roadmap): construtor visual de Frase Mágica combinando as
-cartas do Grimório; compêndios populados com as Partículas do SRD; Encantamento de
-Itens (Pontos de Preparo); Segmentos de Jogo; Teste Contestado assistido.
+## Instalação
 
-## Instalação local (desenvolvimento)
+### Via manifesto (recomendado)
 
-1. Encontre a pasta de dados do Foundry (`Data/systems`).
-2. Clone este repositório lá dentro com o nome `etmos`:
-   ```bash
-   git clone https://github.com/jmchervinski/etmos.git etmos
-   ```
-3. Reinicie o Foundry e crie um mundo com o sistema **Etmos (Não-Oficial)**.
-
-## Instalação via manifesto (após publicar release)
+Em **Configuração → Sistemas de Jogo → Instalar Sistema**, cole a URL do manifesto:
 
 ```
 https://github.com/jmchervinski/etmos/releases/latest/download/system.json
 ```
 
-## Estrutura (conforme o guia oficial do Foundry)
+### Local (desenvolvimento)
+
+Clone o repositório dentro da pasta de dados do Foundry (`Data/systems`) com o nome
+`etmos`:
+
+```bash
+git clone https://github.com/jmchervinski/etmos.git etmos
+```
+
+Reinicie o Foundry e crie um mundo com o sistema **Etmos (Não-Oficial)**.
+
+## Compêndios
+
+Os compêndios ficam agrupados na pasta **ETMOS (SRD)** da barra lateral:
+
+- **Etmos: Habilidades (SRD)** — Práticas e Teóricas, com a subpasta Conhecimento.
+- **Etmos: Origens (SRD)** — Mundanas e Fantásticas.
+- **Etmos: Aptidões de Antagonista (SRD)** — para montar criaturas.
+- **Etmos: Baralho de Partículas (SRD)** — deck com as 80 Partículas.
+
+O conteúdo dos compêndios é gerado a partir de `tools/pack-data.mjs`; para reconstruir
+os bancos em `packs/`, rode `npm run build:packs`.
+
+## Estrutura
 
 ```
 etmos/
-├─ system.json            # manifesto (com documentTypes; compatível com v13/v14)
+├─ system.json            # manifesto do sistema
 ├─ module/
-│  ├─ etmos.mjs                    # entry point: registra Data Models, docs e sheets
-│  ├─ data-models.mjs              # TypeDataModels (padrão recomendado, sem template.json)
-│  ├─ documents/                   # EtmosActor (conjuração, fadiga, descanso) e EtmosItem
-│  └─ sheets/
-│     ├─ base-actor-sheet.mjs      # ApplicationV2: ações comuns (itens, teste de atributo)
-│     ├─ character-sheet.mjs       # ApplicationV2: ficha de Personagem (abas Ficha/Conceito/Grimório/Conjuração)
-│     ├─ npc-sheet.mjs             # ApplicationV2: ficha de NPC (abas Principal/Aptidões/Descrição)
-│     └─ item-sheet.mjs            # ApplicationV2: ficha única de Item (campos variam por tipo)
-├─ templates/
-│  ├─ actors/parts/                # cada aba é um "part" independente (HandlebarsApplicationMixin)
-│  └─ items/item-sheet.html        # template único, com blocos condicionais por tipo de item
+│  ├─ etmos.mjs           # entry point: registra Data Models, documentos e sheets
+│  ├─ config.mjs          # Partículas, Rudimentos, módulos e tabelas do SRD
+│  ├─ data-models.mjs     # TypeDataModels (Actors e Items)
+│  ├─ documents/          # EtmosActor (conjuração, fadiga, descanso) e EtmosItem
+│  └─ sheets/             # fichas de Personagem, NPC, Familiar e Item
+├─ templates/             # Handlebars das fichas (uma parte por aba)
 ├─ styles/etmos.css       # paleta visual de ETMOS (roxo, lavanda, lilás, dourado)
+├─ packs/                 # compêndios (LevelDB)
+├─ tools/                 # fonte e build dos compêndios
 └─ lang/                  # pt-BR e en
 ```
-
-> Os compêndios (`packs/`) ainda não existem neste repositório. Quando forem gerados
-> de fato (via Foundry, criando as pastas LevelDB em `packs/`), declare-os em `system.json`.
-
-### Sobre a modernização para ApplicationV2 (v13/v14)
-
-As fichas foram reescritas para a API `ApplicationV2` + `HandlebarsApplicationMixin`
-(o padrão atual do Foundry, usado por sistemas como o **dnd5e**), substituindo a API
-legada `ActorSheet`/`ItemSheet` (v1). Principais mudanças:
-
-- Cada aba da ficha agora é um **"part"** (arquivo de template) independente, carregado
-  via `static PARTS`, em vez de um único arquivo monolítico com `<div class="tab">`.
-- Cliques (editar/excluir/criar item, rolar teste, conjurar, descansar) usam o sistema
-  de **`actions`** (`data-action="..."` no HTML + método estático correspondente),
-  substituindo `activateListeners`/jQuery.
-- `getData()` virou `_prepareContext()` (agora assíncrono).
-- A navegação por abas usa o template genérico `templates/generic/tab-navigation.hbs`
-  do próprio Foundry, com `static TABS` definindo os IDs e rótulos.
-- `system.json` agora declara `"compatibility": {"minimum": "13", "verified": "14"}`.
-
-## Publicando uma release
-
-1. Atualize `version` no `system.json`.
-2. Zipe o **conteúdo** da pasta como `system.zip`.
-3. Crie uma Release no GitHub (tag `v0.2.0`) anexando `system.json` e `system.zip`.
 
 ## Licença e conteúdo
 
 O **código** deste repositório está sob licença MIT (ver `LICENSE`).
+
 Todo o **conteúdo de regras, textos, nomes, Partículas e identidade visual de ETMOS
 pertence a Rafa Reis e à Editora Balde Galáctico** ("Todo material apresentado neste
 site tem uso controlado"). Este repositório implementa apenas as mecânicas descritas

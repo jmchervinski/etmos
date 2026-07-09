@@ -15,14 +15,5 @@
   "ETMOS.SheetCharacter": "Character Sheet (Etmos)",
   "ETMOS.SheetNpc": "NPC Sheet (Etmos)",
   "ETMOS.SheetFamiliar": "Familiar Sheet (Etmos)",
-  "ETMOS.SheetItem": "Item (Etmos)",
-  "ETMOS.TabFicha": "Sheet",
-  "ETMOS.TabConceito": "Concept",
-  "ETMOS.TabGrimorio": "Grimoire",
-  "ETMOS.TabProgressao": "Progression",
-  "ETMOS.TabEncantamento": "Enchanting",
-  "ETMOS.TabConfiguracoes": "Settings",
-  "ETMOS.TabPrincipal": "Main",
-  "ETMOS.TabAptidoes": "Aptitudes & Attacks",
-  "ETMOS.TabBiografia": "Description"
+  "ETMOS.SheetItem": "Item (Etmos)"
 }

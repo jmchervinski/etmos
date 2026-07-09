@@ -17,9 +17,9 @@ export class EtmosNpcSheet extends EtmosBaseActorSheet {
   static TABS = {
     primary: {
       tabs: [
-        { id: "principal", label: "ETMOS.TabPrincipal" },
-        { id: "aptidoes", label: "ETMOS.TabAptidoes" },
-        { id: "biografia", label: "ETMOS.TabBiografia" }
+        { id: "principal", label: "Principal" },
+        { id: "aptidoes", label: "Aptidões & Ataques" },
+        { id: "biografia", label: "Descrição" }
       ],
       initial: "principal"
     }

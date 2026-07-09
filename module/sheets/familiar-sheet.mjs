@@ -23,9 +23,9 @@ export class EtmosFamiliarSheet extends EtmosBaseActorSheet {
   static TABS = {
     primary: {
       tabs: [
-        { id: "principal", label: "ETMOS.TabPrincipal" },
-        { id: "aptidoes", label: "ETMOS.TabAptidoes" },
-        { id: "biografia", label: "ETMOS.TabBiografia" }
+        { id: "principal", label: "Principal" },
+        { id: "aptidoes", label: "Aptidões de Familiar" },
+        { id: "biografia", label: "Descrição" }
       ],
       initial: "principal"
     }

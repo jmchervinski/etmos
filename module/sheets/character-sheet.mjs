@@ -31,12 +31,12 @@ export class EtmosCharacterSheet extends EtmosBaseActorSheet {
   static TABS = {
     primary: {
       tabs: [
-        { id: "ficha", label: "ETMOS.TabFicha" },
-        { id: "conceito", label: "ETMOS.TabConceito" },
-        { id: "grimorio", label: "ETMOS.TabGrimorio" },
-        { id: "progressao", label: "ETMOS.TabProgressao" },
-        { id: "encantamento", label: "ETMOS.TabEncantamento" },
-        { id: "configuracoes", label: "ETMOS.TabConfiguracoes" }
+        { id: "ficha", label: "Ficha" },
+        { id: "conceito", label: "Conceito" },
+        { id: "grimorio", label: "Grimório" },
+        { id: "progressao", label: "Progressão" },
+        { id: "encantamento", label: "Encantamento" },
+        { id: "configuracoes", label: "Configurações" }
       ],
       initial: "ficha"
     }
