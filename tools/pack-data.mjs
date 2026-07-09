@@ -527,7 +527,7 @@ function cartaParticula(part, categoria, idx, nivel) {
     drawn: false,
     sort: (idx + 1) * 1000,
     faces: [{ name: `${part.nome} - ${part.abrev}`, text: "", img: FACE(part.id) }],
-    back: { name: "Partícula", text: "", img: VERSO_CARTA },
+    back: { name: `${part.nome} - ${part.abrev}`, text: "", img: VERSO_CARTA },
     flags: {}
   };
 }

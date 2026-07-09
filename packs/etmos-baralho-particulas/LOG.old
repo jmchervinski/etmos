@@ -1,15 +1,15 @@
-2026/07/09-17:22:29.146 4b14 Recovering log #29
-2026/07/09-17:22:29.154 4b14 Delete type=0 #29
-2026/07/09-17:22:29.155 4b14 Delete type=3 #24
-2026/07/09-17:22:29.236 207c Level-0 table #32: started
-2026/07/09-17:22:29.240 207c Level-0 table #32: 9997 bytes OK
-2026/07/09-17:22:29.243 207c Delete type=0 #30
-2026/07/09-17:22:29.243 207c Manual compaction at level-0 from '!cards!etmosdeckparticl' @ 72057594037927935 : 1 .. '!cards.cards!etmosdeckparticl.etmoscard0000080' @ 0 : 0; will stop at (end)
-2026/07/09-17:22:29.243 207c Manual compaction at level-1 from '!cards!etmosdeckparticl' @ 72057594037927935 : 1 .. '!cards.cards!etmosdeckparticl.etmoscard0000080' @ 0 : 0; will stop at '!cards.cards!etmosdeckparticl.etmoscard0000080' @ 324 : 1
-2026/07/09-17:22:29.244 207c Compacting 1@1 + 1@2 files
-2026/07/09-17:22:29.249 207c Generated table #33@1: 81 keys, 9997 bytes
-2026/07/09-17:22:29.249 207c Compacted 1@1 + 1@2 files => 9997 bytes
-2026/07/09-17:22:29.250 207c compacted to: files[ 0 0 1 0 0 0 0 ]
-2026/07/09-17:22:29.250 207c Delete type=2 #23
-2026/07/09-17:22:29.251 207c Delete type=2 #32
-2026/07/09-17:22:29.252 207c Manual compaction at level-1 from '!cards.cards!etmosdeckparticl.etmoscard0000080' @ 324 : 1 .. '!cards.cards!etmosdeckparticl.etmoscard0000080' @ 0 : 0; will stop at (end)
+2026/07/09-17:51:08.017 52e8 Recovering log #35
+2026/07/09-17:51:08.024 52e8 Delete type=0 #35
+2026/07/09-17:51:08.024 52e8 Delete type=3 #34
+2026/07/09-17:51:08.038 467c Level-0 table #39: started
+2026/07/09-17:51:08.043 467c Level-0 table #39: 10262 bytes OK
+2026/07/09-17:51:08.044 467c Delete type=0 #37
+2026/07/09-17:51:08.045 467c Manual compaction at level-0 from '!cards!etmosdeckparticl' @ 72057594037927935 : 1 .. '!cards.cards!etmosdeckparticl.etmoscard0000080' @ 0 : 0; will stop at (end)
+2026/07/09-17:51:08.045 467c Manual compaction at level-1 from '!cards!etmosdeckparticl' @ 72057594037927935 : 1 .. '!cards.cards!etmosdeckparticl.etmoscard0000080' @ 0 : 0; will stop at '!cards.cards!etmosdeckparticl.etmoscard0000080' @ 405 : 1
+2026/07/09-17:51:08.046 467c Compacting 1@1 + 1@2 files
+2026/07/09-17:51:08.051 467c Generated table #40@1: 81 keys, 10262 bytes
+2026/07/09-17:51:08.051 467c Compacted 1@1 + 1@2 files => 10262 bytes
+2026/07/09-17:51:08.052 467c compacted to: files[ 0 0 1 0 0 0 0 ]
+2026/07/09-17:51:08.053 467c Delete type=2 #33
+2026/07/09-17:51:08.053 467c Delete type=2 #39
+2026/07/09-17:51:08.055 467c Manual compaction at level-1 from '!cards.cards!etmosdeckparticl.etmoscard0000080' @ 405 : 1 .. '!cards.cards!etmosdeckparticl.etmoscard0000080' @ 0 : 0; will stop at (end)
