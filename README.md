@@ -97,11 +97,17 @@ Os compêndios ficam agrupados na pasta **ETMOS (SRD)** da barra lateral:
 - **Etmos: Habilidades (SRD)** — Práticas e Teóricas, com a subpasta Conhecimento.
 - **Etmos: Origens (SRD)** — Mundanas e Fantásticas.
 - **Etmos: Aptidões de Antagonista (SRD)** — para montar criaturas.
-- **Etmos: Baralho de Partículas (SRD)** — deck com as 80 Partículas.
+- **Etmos: Baralho de Partículas (SRD)** — deck com as 80 Partículas, usando a arte
+  do baralho **"Etmos Spells"** distribuído gratuitamente pela Editora Balde Galáctico.
 - **Etmos: Macros** — macros úteis (ver Módulos recomendados abaixo).
 
 O conteúdo dos compêndios é gerado a partir de `tools/pack-data.mjs`; para reconstruir
 os bancos em `packs/`, rode `npm run build:packs`.
+
+> As cartas do **Baralho de Partículas** usam a arte do baralho **"Etmos Spells"**,
+> disponibilizado **gratuitamente** pela Editora Balde Galáctico na página oficial do
+> jogo. A arte pertence à editora e é reproduzida aqui apenas para uso à mesa; para
+> conhecer e apoiar o material oficial, visite https://baldegalactico.com.br/jogo/etmos/
 
 ## Módulos recomendados
 
@@ -156,7 +162,9 @@ O **código** deste repositório está sob licença MIT (ver `LICENSE`).
 
 Todo o **conteúdo de regras, textos, nomes, Partículas e identidade visual de ETMOS
 pertence a Rafa Reis e à Editora Balde Galáctico** ("Todo material apresentado neste
-site tem uso controlado"). Este repositório implementa apenas as mecânicas descritas
-no **SRD ETMOS 1.1**, distribuído gratuitamente pela editora. Não redistribua o livro,
-as ilustrações ou o baralho oficial junto com este sistema. Antes de publicar
-compêndios com textos do jogo, consulte a editora: https://baldegalactico.com.br/fale-conosco/
+site tem uso controlado"). Este repositório implementa as mecânicas descritas no
+**SRD ETMOS 1.1** e inclui a arte do **baralho "Etmos Spells"**, ambos distribuídos
+**gratuitamente** pela editora. A arte das cartas permanece propriedade da editora e é
+reproduzida aqui apenas para uso à mesa. Não redistribua o livro ou outros materiais
+não-gratuitos junto com este sistema. Em caso de dúvida sobre uso de conteúdo oficial,
+consulte a editora: https://baldegalactico.com.br/fale-conosco/
