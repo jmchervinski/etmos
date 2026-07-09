@@ -568,3 +568,24 @@ export const CARD_PACKS = {
     ]
   }
 };
+
+/* ------------------------------------------------------------------ */
+/* Macro Pack: etmos-macros                                            */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Macros úteis. O comando de cada macro é lido de um arquivo em macros/
+ * pelo build (tools/build-packs.mjs), mantendo o JS editável e limpo.
+ */
+export const MACRO_PACKS = {
+  "etmos-macros": {
+    macros: [
+      {
+        _id: "etmosmacroconjur",
+        name: "Conjurar Frase Mágica (Epic 3D Card Reveal)",
+        img: "icons/svg/book.svg",
+        file: "macros/conjurar-frase-magica.js"
+      }
+    ]
+  }
+};

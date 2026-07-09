@@ -6,7 +6,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { compilePack } from "@foundryvtt/foundryvtt-cli";
-import { PACKS, CARD_PACKS } from "./pack-data.mjs";
+import { PACKS, CARD_PACKS, MACRO_PACKS } from "./pack-data.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const SRC = path.join(ROOT, "packs-src");
@@ -97,6 +97,38 @@ for (const [packName, dados] of Object.entries(CARD_PACKS ?? {})) {
   await compilePack(dir, path.join(OUT, packName), { log: false });
   const total = dados.decks.reduce((n, d) => n + d.cards.length, 0);
   console.log(`OK ${packName}: ${dados.decks.length} deck(s), ${total} cartas`);
+}
+
+/* -------- Macro packs -------- */
+for (const [packName, dados] of Object.entries(MACRO_PACKS ?? {})) {
+  const dir = path.join(SRC, packName);
+  fs.mkdirSync(dir, { recursive: true });
+  const ids = new Set();
+
+  for (const m of dados.macros) {
+    if (!ID_RE.test(m._id) || ids.has(m._id)) throw new Error(`id de macro inválido/duplicado: ${m._id}`);
+    ids.add(m._id);
+    const command = m.command ?? fs.readFileSync(path.join(ROOT, m.file), "utf8");
+    const doc = {
+      _id: m._id,
+      _key: `!macros!${m._id}`,
+      name: m.name,
+      type: m.type ?? "script",
+      author: null,
+      img: m.img ?? "icons/svg/dice-target.svg",
+      scope: m.scope ?? "global",
+      command,
+      folder: null,
+      sort: 0,
+      ownership: { default: 0 },
+      flags: {},
+      _stats: {}
+    };
+    fs.writeFileSync(path.join(dir, `macro-${m._id}.json`), JSON.stringify(doc, null, 2));
+  }
+
+  await compilePack(dir, path.join(OUT, packName), { log: false });
+  console.log(`OK ${packName}: ${dados.macros.length} macro(s)`);
 }
 
 console.log("Compêndios gerados em packs/");

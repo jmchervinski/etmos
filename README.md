@@ -98,9 +98,38 @@ Os compêndios ficam agrupados na pasta **ETMOS (SRD)** da barra lateral:
 - **Etmos: Origens (SRD)** — Mundanas e Fantásticas.
 - **Etmos: Aptidões de Antagonista (SRD)** — para montar criaturas.
 - **Etmos: Baralho de Partículas (SRD)** — deck com as 80 Partículas.
+- **Etmos: Macros** — macros úteis (ver Módulos recomendados abaixo).
 
 O conteúdo dos compêndios é gerado a partir de `tools/pack-data.mjs`; para reconstruir
 os bancos em `packs/`, rode `npm run build:packs`.
+
+## Módulos recomendados
+
+- **[Epic 3D Card Reveal](https://github.com/brunocalado/epic-3d-card-reveal)** —
+  revela cartas em um leque 3D animado para a mesa toda. Combina muito bem com o
+  **Baralho de Partículas**: o jogador escolhe as Partículas da sua Frase Mágica e
+  elas são reveladas em sequência, com estilo.
+
+### Macro: Conjurar Frase Mágica
+
+O compêndio **Etmos: Macros** inclui a macro **"Conjurar Frase Mágica (Epic 3D Card
+Reveal)"**, que abre uma janela com todas as Partículas do baralho agrupadas por
+categoria; o jogador marca as Partículas **na ordem** em que quer revelar e, ao
+confirmar, elas aparecem em leque 3D para a mesa.
+
+> ⚠️ Esta macro **requer o módulo [Epic 3D Card Reveal](https://github.com/brunocalado/epic-3d-card-reveal)**
+> instalado e ativo. Sem ele, a macro apenas avisa que o módulo está faltando.
+
+Para usar (uma vez, como Narrador):
+
+1. Instale e ative o módulo **Epic 3D Card Reveal**.
+2. Importe o baralho **Etmos: Baralho de Partículas (SRD)** para o mundo (arraste da
+   aba Cards do compêndio para a Cards Directory, ou clique direito → Import).
+3. Importe a macro do compêndio **Etmos: Macros** para a hotbar.
+4. Dê aos jogadores permissão de **Observer** (no mínimo) no baralho importado
+   (botão direito no baralho → Configure Ownership).
+
+Se você renomear o baralho no mundo, ajuste a constante `DECK_NAME` no topo da macro.
 
 ## Estrutura
 
@@ -116,6 +145,7 @@ etmos/
 ├─ templates/             # Handlebars das fichas (uma parte por aba)
 ├─ styles/etmos.css       # paleta visual de ETMOS (roxo, lavanda, lilás, dourado)
 ├─ packs/                 # compêndios (LevelDB)
+├─ macros/                # macros incluídas nos compêndios
 ├─ tools/                 # fonte e build dos compêndios
 └─ lang/                  # pt-BR e en
 ```
