@@ -322,7 +322,7 @@ export class OrigemDataModel extends BaseItemModel {
       categoria: new StringField({
         required: true,
         initial: "Mundana",
-        choices: ["Mundana", "Fantástica"]
+        choices: ["Mundana", "Fantástica", "Ambos"]
       }),
       exclusiva: new BooleanField({ required: true, initial: false })
     };

@@ -95,7 +95,7 @@ Reinicie o Foundry e crie um mundo com o sistema **Etmos (Não-Oficial)**.
 Os compêndios ficam agrupados na pasta **ETMOS (SRD)** da barra lateral:
 
 - **Etmos: Habilidades (SRD)** — Práticas e Teóricas, com a subpasta Conhecimento.
-- **Etmos: Origens (SRD)** — Mundanas e Fantásticas.
+- **Etmos: Origens (SRD)** — Mundanas, Fantásticas e de ambos os mundos.
 - **Etmos: Aptidões de Antagonista (SRD)** — para montar criaturas.
 - **Etmos: Baralho de Partículas (SRD)** — deck com as 80 Partículas, usando a arte
   do baralho **"Etmos Spells"** distribuído gratuitamente pela Editora Balde Galáctico.

@@ -1,8 +1,7 @@
 /**
- * Conteúdo dos compêndios (SRD ETMOS 1.1 — "Exemplo de Habilidades",
- * "Exemplo de Origens" e "Exemplo de Aptidões" — e o guia de criação de
- * personagem da comunidade, documento por Decciuzz com artes de
- * Leonardo A. @leo_and).
+ * Conteúdo dos compêndios: Origens e Habilidades conforme o capítulo de
+ * Criação de Personagem do livro oficial de ETMOS, mais as Aptidões de
+ * Antagonista e o baralho de Partículas do SRD.
  * Fonte de verdade: edite aqui e rode `npm run build:packs`.
  *
  * ETMOS © Rafa Reis / Editora Balde Galáctico. Textos do SRD, distribuído
@@ -209,11 +208,11 @@ export const habilidades = {
       }
     },
     {
-      _id: "etmoshab00000024", name: "Conhecimento: Culinária (T)", folder: "etmosfolhabconh0",
+      _id: "etmoshab00000024", name: "Culinária (T)", folder: "etmosfolhabteor0",
       img: "icons/svg/tankard.svg",
       system: {
         categoria: "Teórica", bonus: 0,
-        description: p("Uma vez por dia, cada personagem que coma dos pratos que você preparar recupera 1 Ferimento a mais durante o próximo descanso.")
+        description: p("Você estudou e aprendeu a cozinhar de verdade. Uma vez por dia, cada personagem que coma dos pratos que você preparar recupera 1 Ferimento a mais durante o próximo descanso. Com ingredientes mágicos, você também pode conferir a quem partilhar da comida ou +1 ao Limite de Estresse, ou +1 ao Limite de Ferimentos.")
       }
     },
     {
@@ -229,15 +228,7 @@ export const habilidades = {
       img: "icons/svg/book.svg",
       system: {
         categoria: "Teórica", bonus: 0,
-        description: p("Ao entrar em contato com uma língua que não seja de seu conhecimento pela primeira vez no dia, faça um teste de Mente para definir se você já sabe falar aquela língua. Dificuldade 4 para línguas próximas às que você sabe, 6 para distantes, 8 para línguas antigas e 10 para línguas esquecidas.")
-      }
-    },
-    {
-      _id: "etmoshab00000027", name: "Memória Fotográfica (T)", folder: "etmosfolhabteor0",
-      img: "icons/svg/daze.svg",
-      system: {
-        categoria: "Teórica", bonus: 0,
-        description: p("Uma vez por dia, você pode recordar de um acontecimento que você tenha testemunhado mesmo que por poucos instantes. Você lembra dos mínimos detalhes e pode realizar um Teste de Mente com uma dificuldade à escolha do narrador para tentar identificar algo que deixou passar naquele exato momento.")
+        description: p("Você aprendeu 2 novos idiomas quaisquer. Você pode escolher essa habilidade mais de uma vez.")
       }
     },
     {
@@ -260,8 +251,8 @@ export const habilidades = {
       _id: "etmoshab00000030", name: "Fanático por Mundanos (T)", folder: "etmosfolhabteor0",
       img: "icons/svg/village.svg",
       system: {
-        categoria: "Teórica", bonus: 2,
-        description: p("Você recebe um bônus de +2 para qualquer Teste que faça que envolva seres Mundanos diferentes de você.")
+        categoria: "Teórica", bonus: 1,
+        description: p("Você ganha um bônus de +1 para qualquer Teste que faça que envolva seres Mundanos diferentes de você.")
       }
     },
     {
@@ -270,6 +261,118 @@ export const habilidades = {
       system: {
         categoria: "Teórica", bonus: 0,
         description: p("Você consegue distinguir intenções, ideias e emoções simples de qualquer criatura, independente de idioma. Você pode fazer um Teste de Alma Dificuldade 8, para entender e se fazer entendido por qualquer criatura, mesmo que não compartilhem um idioma em comum.")
+      }
+    },
+    {
+      _id: "etmoshab00000032", name: "Artista (P)", folder: "etmosfolhabprat0",
+      img: "icons/svg/sound.svg",
+      system: {
+        categoria: "Prática", bonus: 0,
+        description: p("A personagem pode realizar uma performance artística com duração de pelo menos 10 minutos. Todos que assistirem à apresentação recuperam 3 Pontos de Estresse. Uma pessoa só pode usufruir desse efeito uma vez por dia.")
+      }
+    },
+    {
+      _id: "etmoshab00000033", name: "Aperfeiçoamento Corporal (P)", folder: "etmosfolhabprat0",
+      img: "icons/svg/upgrade.svg",
+      system: {
+        categoria: "Prática", bonus: 0,
+        description: p("A personagem treinou seus músculos e aperfeiçoou seu corpo. Ao sofrer Ferimentos, você pode optar por reduzi-los em 1, até um mínimo de 1. Você pode usar essa Habilidade um número de vezes igual ao seu valor de Corpo −1, recuperando os usos ao final do próximo Descanso Completo.")
+      }
+    },
+    {
+      _id: "etmoshab00000034", name: "Artesão (P)", folder: "etmosfolhabprat0",
+      img: "icons/svg/anvil.svg",
+      system: {
+        categoria: "Prática", bonus: 0,
+        description: p("Você treinou para criar Encantamentos. Ao escolher essa Habilidade, escolha a Especialização de Artífice (Veículos Persistentes) ou Alquimista (Veículos Consumíveis) — cada escolha dá +1 no bônus de Preparo para o tipo de Veículo correspondente. Pode ser escolhida até 3 vezes; a cada vez, sobe a categoria de item mágico que pode criar (Simples, Sofisticado ou Primoroso).")
+      }
+    },
+    {
+      _id: "etmoshab00000035", name: "Direção e Montaria (P)", folder: "etmosfolhabprat0",
+      img: "icons/svg/direction.svg",
+      system: {
+        categoria: "Prática", bonus: 2,
+        description: p("Você aprendeu a dirigir veículos e cavalgar montarias terrestres. Ao escolher novamente, torna-se hábil também com veículos e montarias voadores e aquáticos. Some +2 nos Testes dessa Habilidade para cada vez em que foi escolhida.")
+      }
+    },
+    {
+      _id: "etmoshab00000036", name: "Expert à Distância (P)", folder: "etmosfolhabprat0",
+      img: "icons/svg/target.svg",
+      system: {
+        categoria: "Prática", bonus: 0,
+        description: p("Ataques de arma à Distância passam a causar 1 Ferimento extra. Você pode escolher essa habilidade mais de uma vez; a cada vez, aumente o Ferimento causado em +1.")
+      }
+    },
+    {
+      _id: "etmoshab00000037", name: "Expert Corpo-a-Corpo (P)", folder: "etmosfolhabprat0",
+      img: "icons/svg/combat.svg",
+      system: {
+        categoria: "Prática", bonus: 0,
+        description: p("Ataques corporais passam a causar 1 Ferimento extra. Você pode escolher essa habilidade até 2 vezes; a cada vez, aumente o Ferimento causado em +1.")
+      }
+    },
+    {
+      _id: "etmoshab00000038", name: "Protetor (P)", folder: "etmosfolhabprat0",
+      img: "icons/svg/mage-shield.svg",
+      system: {
+        categoria: "Prática", bonus: 1,
+        description: p("Você ganha um bônus de +1 em Testes que realize em decorrência de uma Reação feita para proteger uma criatura diferente de você.")
+      }
+    },
+    {
+      _id: "etmoshab00000039", name: "Reflexos Mágicos (P)", folder: "etmosfolhabprat0",
+      img: "icons/svg/lightning.svg",
+      system: {
+        categoria: "Prática", bonus: 0,
+        description: p("A personagem pode utilizar qualquer Complexidade de magia para uma Reação de Defesa contra ataques corpo a corpo ou à distância não mágicos, desde que tenha o valor de Mente necessário para essa Complexidade.")
+      }
+    },
+    {
+      _id: "etmoshab00000040", name: "Rituais de Adivinhação (P)", folder: "etmosfolhabprat0",
+      img: "icons/svg/eye.svg",
+      system: {
+        categoria: "Prática", bonus: 0,
+        description: p("A personagem executa um ritual para questionar as forças da natureza, espíritos ou ver o futuro. Faça um ritual de Alma Dificuldade 10; num sucesso, faça uma pergunta de Sim ou Não ao Narrador, que responde de forma simbólica, críptica ou direta. Acumula 4 Pontos de Estresse e só pode ser feito uma vez por sessão de jogo.")
+      }
+    },
+    {
+      _id: "etmoshab00000041", name: "Acuidade Mágica (T)", folder: "etmosfolhabteor0",
+      img: "icons/svg/daze.svg",
+      system: {
+        categoria: "Teórica", bonus: 0,
+        description: p("Sua personagem reconhece mais rápido magias conjuradas. Você ganha um bônus de +1 nos testes de Conjuração ao realizar magias como Reação a outra conjurada.")
+      }
+    },
+    {
+      _id: "etmoshab00000042", name: "Fanático por Fantásticos (T)", folder: "etmosfolhabteor0",
+      img: "icons/svg/pawprint.svg",
+      system: {
+        categoria: "Teórica", bonus: 1,
+        description: p("Escolha um tipo de Ficha Base de criatura. Você ganha um bônus de +1 para qualquer Teste que faça que envolva tal tipo de criatura.")
+      }
+    },
+    {
+      _id: "etmoshab00000043", name: "Magia Entre Nós (T)", folder: "etmosfolhabteor0",
+      img: "icons/svg/aura.svg",
+      system: {
+        categoria: "Teórica", bonus: 2,
+        description: p("A personagem aprendeu a encontrar magia no Mundano. Você pode escolher essa Habilidade mais de uma vez; a cada vez, some +2 nos Testes para localizar itens mágicos, santuários ou sinais de magia.")
+      }
+    },
+    {
+      _id: "etmoshab00000044", name: "Pesquisador (T)", folder: "etmosfolhabteor0",
+      img: "icons/svg/book.svg",
+      system: {
+        categoria: "Teórica", bonus: 1,
+        description: p("A personagem sabe as melhores formas de obter conhecimento e informações acadêmicas. Ganha um bônus de +1 em qualquer Teste de Habilidade ou de Atributo que envolva obtenção de informação.")
+      }
+    },
+    {
+      _id: "etmoshab00000045", name: "Técnicas de Apoio (T)", folder: "etmosfolhabteor0",
+      img: "icons/svg/regen.svg",
+      system: {
+        categoria: "Teórica", bonus: 0,
+        description: p("A personagem estudou as melhores formas de auxiliar outros magicamente. Ao conjurar uma magia em uma criatura voluntária, a magia acumula 1 ponto de Estresse a menos do que o normal, até um mínimo de 1.")
       }
     }
   ].map(i => ({ ...i, type: "habilidade" }))
@@ -282,7 +385,8 @@ export const habilidades = {
 export const origens = {
   folders: [
     { _id: "etmosfolorimund0", name: "Origens Mundanas", folder: null, sort: 100000 },
-    { _id: "etmosfolorifant0", name: "Origens Fantásticas", folder: null, sort: 200000 }
+    { _id: "etmosfolorifant0", name: "Origens Fantásticas", folder: null, sort: 200000 },
+    { _id: "etmosfoloriambos", name: "Origens (Mundano e Fantástico)", folder: null, sort: 300000 }
   ],
   items: [
     {
@@ -298,7 +402,7 @@ export const origens = {
       img: "icons/svg/daze.svg",
       system: {
         categoria: "Fantástica", exclusiva: false,
-        description: p("Desde cedo, sua personagem demonstrou aptidão para lidar com o Fantástico e o Etmos, sendo um verdadeiro prodígio. Você começa o jogo com uma Característica adicional.")
+        description: p("Desde cedo, sua personagem demonstrou aptidão para lidar com o Fantástico e o Etmos, sendo um verdadeiro prodígio. Você começa o jogo com uma Característica adicional em seu Grimório.")
       }
     },
     {
@@ -330,16 +434,8 @@ export const origens = {
       _id: "etmosori00000006", name: "Aluno Modelo", folder: "etmosfolorimund0",
       img: "icons/svg/book.svg",
       system: {
-        categoria: "Mundana", exclusiva: false,
-        description: p("Você sempre foi um bom aluno e aprendeu os melhores métodos para absorver informações e aprender. Você começa o jogo com uma Habilidade Teórica extra a sua escolha.")
-      }
-    },
-    {
-      _id: "etmosori00000007", name: "Artista", folder: "etmosfolorimund0",
-      img: "icons/svg/sound.svg",
-      system: {
-        categoria: "Mundana", exclusiva: false,
-        description: p("Uma vez por dia, você pode realizar uma apresentação de um ofício artístico para recuperar 03 de Estresse de todos os personagens que viram sua apresentação.")
+        categoria: "Mundana", exclusiva: true,
+        description: p("Durante sua educação formal, você sempre foi um bom aluno e aprendeu os melhores métodos para absorver informações e aprender. Você começa o jogo com a Habilidade \"Conhecimento em...\".")
       }
     },
     {
@@ -347,23 +443,24 @@ export const origens = {
       img: "icons/svg/village.svg",
       system: {
         categoria: "Mundana", exclusiva: false,
-        description: p("Você foi instruído nos meios Mundanos. Sempre que você fizer um teste de Habilidade para obter informações ou para interagir com o Mundo Mundano, ganhará um bônus de +1 no teste.")
+        description: p("Você foi instruído nos meios Mundanos. Sempre que fizer um teste de Habilidade para obter informações ou para interagir com o Mundo Mundano, ganhará um bônus de +1. Não se aplica para afetar seres Mundanos com magias.")
       }
     },
     {
-      _id: "etmosori00000009", name: "Viajado", folder: "etmosfolorimund0",
+      _id: "etmosori00000009", name: "Viajado", folder: "etmosfoloriambos",
       img: "icons/svg/direction.svg",
       system: {
-        categoria: "Mundana", exclusiva: false,
-        description: p("Pode começar o jogo com uma das seguintes Habilidades: Linguista, Sobrevivência ou Conhecimento Dominado: Culinária.")
+        categoria: "Ambos", exclusiva: false,
+        description: p("Você passou boa parte de sua criação e formação viajando. Você pode começar o jogo com uma das seguintes Habilidades:") +
+          "<ul><li>Linguista;</li><li>Sobrevivência;</li><li>Culinária.</li></ul>"
       }
     },
     {
-      _id: "etmosori00000010", name: "Criado em Dois Mundos", folder: "etmosfolorifant0",
+      _id: "etmosori00000010", name: "Criado em Dois Mundos", folder: "etmosfoloriambos",
       img: "icons/svg/temple.svg",
       system: {
-        categoria: "Fantástica", exclusiva: false,
-        description: p("Sempre que fizer um teste de Habilidade para obter informações ou para interagir com o Mundo Fantástico ou Mundano, ganhará um bônus de +1 no teste.")
+        categoria: "Ambos", exclusiva: false,
+        description: p("Desde sempre você sabia da existência de ambos os mundos, tendo sido criado nos dois. Você ganha um bônus de +1 em seus Testes que envolvem interagir socialmente com seres Mundanos que estejam no Fantástico, ou com seres Fantásticos que estejam no Mundano.")
       }
     },
     {
@@ -371,15 +468,15 @@ export const origens = {
       img: "icons/svg/eye.svg",
       system: {
         categoria: "Fantástica", exclusiva: false,
-        description: p("Sempre que fizer um teste de Habilidade para obter informações ou para interagir com o Mundo Fantástico, ganhará um bônus de +2 no teste.")
+        description: p("Você cresceu no Mundo Fantástico e tem mais facilidade para compreender como ele funciona. Sempre que fizer um teste de Habilidade para obter informações ou para interagir com o Mundo Fantástico, ganhará um bônus de +1. Não se aplica para afetar seres Fantásticos com magias.")
       }
     },
     {
       _id: "etmosori00000012", name: "Charme Fantástico", folder: "etmosfolorifant0",
       img: "icons/svg/angel.svg",
       system: {
-        categoria: "Fantástica", exclusiva: false,
-        description: p("Influenciar uma pessoa com quem esteja conversando cara a cara. O alvo realiza um teste de Mente, dificuldade 7; com uma falha, torna-se receptivo a você. Esse efeito cessa após 5 minutos, e o alvo não entende que foi afetado. Você acumula 1 ponto de Estresse.")
+        categoria: "Fantástica", exclusiva: true,
+        description: p("Há um encanto natural que te acompanha. Você pode tentar influenciar uma pessoa com quem esteja conversando cara a cara. O alvo realiza um teste de Mente, dificuldade 7; com uma falha, torna-se receptivo a você — não é compelido a seguir seus desejos, mas fica propenso a ajudar ou fornecer informações. O efeito cessa após 5 minutos, e o alvo não entende que foi afetado. Você acumula 1 ponto de Estresse ao usar essa Característica.")
       }
     },
     {
@@ -387,15 +484,88 @@ export const origens = {
       img: "icons/svg/aura.svg",
       system: {
         categoria: "Fantástica", exclusiva: false, ajusteEstresse: 2,
-        description: p("Você é extremamente centrado, o que permitiu a você ser muito mais resistente para usar magias que os outros a sua volta. Aumente seu limite de estresse em 02.")
+        description: p("Seja por ter treinado ou nascido dessa forma, você possui um espírito mais forte que o normal. Aumente seu Limite de Estresse em 2.")
       }
     },
     {
-      _id: "etmosori00000014", name: "Sorte Fantástica", folder: "etmosfolorifant0",
+      _id: "etmosori00000014", name: "Sortudo", folder: "etmosfolorifant0",
       img: "icons/svg/sun.svg",
       system: {
         categoria: "Fantástica", exclusiva: false,
-        description: p("Você possui uma sorte que só pode ser explicada pelo seu contato com o fantástico. Uma vez por dia, ao fazer qualquer Teste, jogue 4d6 em vez de 2 e use os dois melhores resultados.")
+        description: p("Dotado de uma sorte sobrenatural, sua personagem sempre pareceu favorecida pelo acaso. Uma vez por dia, você pode rerrolar 1d6 de um Teste que tenha feito e optar pelo melhor resultado.")
+      }
+    },
+    {
+      _id: "etmosori00000015", name: "Afinidade Natural", folder: "etmosfolorifant0",
+      img: "icons/svg/fire.svg",
+      system: {
+        categoria: "Fantástica", exclusiva: true,
+        description: p("A fisiologia de seu ser Fantástico lhe garante certa afinidade com um elemento da natureza (Fogo, Eletricidade, Água, Terra ou Venenoso). Sempre que sofrer Ferimentos provenientes desse elemento, reduza o Ferimento em 1, até um mínimo de 1.")
+      }
+    },
+    {
+      _id: "etmosori00000016", name: "Audição Sensível", folder: "etmosfolorifant0",
+      img: "icons/svg/sound.svg",
+      system: {
+        categoria: "Fantástica", exclusiva: false,
+        description: p("Você discerne ruídos e sussurros com clareza e ouve com perfeição sons de baixa frequência. Se estiver no Mundano ao usar essa Habilidade, acumula 1 ponto de Estresse a cada 10 minutos de uso.")
+      }
+    },
+    {
+      _id: "etmosori00000017", name: "Mão na Massa", folder: "etmosfolorifant0",
+      img: "icons/svg/anvil.svg",
+      system: {
+        categoria: "Fantástica", exclusiva: false,
+        description: p("Sua personagem teve contato muito cedo com formas de Encantamento. Você começa o jogo com a Habilidade \"Artesão\".")
+      }
+    },
+    {
+      _id: "etmosori00000018", name: "Meio Humano", folder: "etmosfolorifant0",
+      img: "icons/svg/portal.svg",
+      system: {
+        categoria: "Fantástica", exclusiva: true,
+        description: p("Apesar de ser considerada Fantástica, um dos pais da personagem é humano. Você pode cruzar Portais do Meio e existir no Mundano sem um Totem ou Santuário, por um número de horas igual ao seu valor de Corpo +1. Após esse tempo, desaparece do Mundano e retorna ao Fantástico, sofrendo Ferimentos e acumulando Estresse até ficar no limite de ambos. Você ainda precisa de um Totem ou Santuário para conjurar magias.")
+      }
+    },
+    {
+      _id: "etmosori00000019", name: "Memória Fotográfica", folder: "etmosfoloriambos",
+      img: "icons/svg/daze.svg",
+      system: {
+        categoria: "Ambos", exclusiva: false,
+        description: p("Você relembra imagens com muita precisão após vê-las uma única vez, ganhando um bônus de +2 em Testes para lembrar informações. Além disso, uma vez por sessão de jogo, você pode perguntar ao Narrador se lembra de alguma informação relevante sobre a história corrente; o Narrador pode solicitar um Teste de Mente com Dificuldade decidida por ele.")
+      }
+    },
+    {
+      _id: "etmosori00000020", name: "Metamorfo", folder: "etmosfolorifant0",
+      img: "icons/svg/pawprint.svg",
+      system: {
+        categoria: "Fantástica", exclusiva: true,
+        description: p("A fisiologia de seu ser Fantástico permite alterar sua aparência física. Cada transformação acumula 2 pontos de Estresse. Você deve manter sua anatomia geral e estatura. O efeito dura até 8 horas, ou até você decidir encerrá-lo para voltar à forma original.")
+      }
+    },
+    {
+      _id: "etmosori00000021", name: "Piloto", folder: "etmosfolorimund0",
+      img: "icons/svg/direction.svg",
+      system: {
+        categoria: "Mundana", exclusiva: true,
+        description: p("Em algum momento de sua vida, você aprendeu a pilotar veículos terrestres. Você começa o jogo com a Habilidade \"Direção e Montaria\".")
+      }
+    },
+    {
+      _id: "etmosori00000022", name: "Treinamento Formal em Combate", folder: "etmosfolorimund0",
+      img: "icons/svg/sword.svg",
+      system: {
+        categoria: "Mundana", exclusiva: true,
+        description: p("Você conhece técnicas de combate desarmado, com armas corporais ou à distância. Você começa o jogo com uma das seguintes Habilidades:") +
+          "<ul><li>Armas Brancas;</li><li>Armas de Longo Alcance.</li></ul>"
+      }
+    },
+    {
+      _id: "etmosori00000023", name: "Visão no Escuro", folder: "etmosfolorifant0",
+      img: "icons/svg/eye.svg",
+      system: {
+        categoria: "Fantástica", exclusiva: false,
+        description: p("Você enxerga em tons de cinza na escuridão completa, a até 30 m de distância, mas não distingue cores. Se estiver no Mundano ao usá-la, acumula 1 ponto de Estresse a cada 10 minutos de uso.")
       }
     }
   ].map(i => ({ ...i, type: "origem" }))

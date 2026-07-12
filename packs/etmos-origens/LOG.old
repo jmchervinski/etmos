@@ -1,15 +1,15 @@
-2026/07/07-17:03:59.190 fd4 Recovering log #12
-2026/07/07-17:03:59.197 fd4 Delete type=0 #12
-2026/07/07-17:03:59.198 fd4 Delete type=3 #11
-2026/07/07-17:03:59.217 2a6c Level-0 table #16: started
-2026/07/07-17:03:59.220 2a6c Level-0 table #16: 3547 bytes OK
-2026/07/07-17:03:59.223 2a6c Delete type=0 #14
-2026/07/07-17:03:59.224 2a6c Manual compaction at level-0 from '!folders!etmosfolorifant0' @ 72057594037927935 : 1 .. '!items!etmosori00000014' @ 0 : 0; will stop at (end)
-2026/07/07-17:03:59.224 2a6c Manual compaction at level-1 from '!folders!etmosfolorifant0' @ 72057594037927935 : 1 .. '!items!etmosori00000014' @ 0 : 0; will stop at '!items!etmosori00000014' @ 30 : 1
-2026/07/07-17:03:59.224 2a6c Compacting 1@1 + 1@2 files
-2026/07/07-17:03:59.228 2a6c Generated table #17@1: 16 keys, 3547 bytes
-2026/07/07-17:03:59.229 2a6c Compacted 1@1 + 1@2 files => 3547 bytes
-2026/07/07-17:03:59.230 2a6c compacted to: files[ 0 0 1 0 0 0 0 ]
-2026/07/07-17:03:59.231 2a6c Delete type=2 #10
-2026/07/07-17:03:59.231 2a6c Delete type=2 #16
-2026/07/07-17:03:59.232 2a6c Manual compaction at level-1 from '!items!etmosori00000014' @ 30 : 1 .. '!items!etmosori00000014' @ 0 : 0; will stop at (end)
+2026/07/12-14:35:35.469 4d70 Recovering log #42
+2026/07/12-14:35:35.477 4d70 Delete type=0 #42
+2026/07/12-14:35:35.478 4d70 Delete type=3 #18
+2026/07/12-14:35:35.547 4688 Level-0 table #45: started
+2026/07/12-14:35:35.551 4688 Level-0 table #45: 6248 bytes OK
+2026/07/12-14:35:35.553 4688 Delete type=0 #43
+2026/07/12-14:35:35.553 4688 Manual compaction at level-0 from '!folders!etmosfoloriambos' @ 72057594037927935 : 1 .. '!items!etmosori00000023' @ 0 : 0; will stop at (end)
+2026/07/12-14:35:35.553 4688 Manual compaction at level-1 from '!folders!etmosfoloriambos' @ 72057594037927935 : 1 .. '!items!etmosori00000023' @ 0 : 0; will stop at '!items!etmosori00000023' @ 55 : 1
+2026/07/12-14:35:35.554 4688 Compacting 1@1 + 1@2 files
+2026/07/12-14:35:35.558 4688 Generated table #46@1: 25 keys, 6232 bytes
+2026/07/12-14:35:35.558 4688 Compacted 1@1 + 1@2 files => 6232 bytes
+2026/07/12-14:35:35.560 4688 compacted to: files[ 0 0 1 0 0 0 0 ]
+2026/07/12-14:35:35.560 4688 Delete type=2 #17
+2026/07/12-14:35:35.561 4688 Delete type=2 #45
+2026/07/12-14:35:35.562 4688 Manual compaction at level-1 from '!items!etmosori00000023' @ 55 : 1 .. '!items!etmosori00000023' @ 0 : 0; will stop at (end)

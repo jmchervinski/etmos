@@ -2,7 +2,7 @@
   "id": "etmos",
   "title": "Etmos (Não-Oficial)",
   "description": "<p>Sistema NÃO-OFICIAL, feito por fã, para jogar <strong>ETMOS</strong> no Foundry VTT.</p><p>ETMOS é um RPG de fantasia urbana sobre linguagem, engenhosidade e magia, criado por <strong>Rafa Reis</strong> e publicado pela <strong>Editora Balde Galáctico</strong>. Direção: Lucas Basso Salgado; Edição: Rayana Fridlund e Vinícius Ferreira Barth; Projeto Gráfico: Iago Pacheco; Ilustração: Vinícius Ferreira Barth. Este sistema não é afiliado, endossado ou patrocinado pela Editora Balde Galáctico. Conheça e apoie o jogo oficial em <a href='https://baldegalactico.com.br/jogo/etmos/'>baldegalactico.com.br/jogo/etmos</a>.</p>",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "compatibility": {
     "minimum": "13",
     "verified": "14"
