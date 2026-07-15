@@ -111,31 +111,41 @@ os bancos em `packs/`, rode `npm run build:packs`.
 
 ## Módulos recomendados
 
+Ambos revelam cartas para a mesa toda e combinam muito bem com o **Baralho de
+Partículas**: o jogador escolhe as Partículas da sua Frase Mágica e elas são
+reveladas com estilo. A macro abaixo funciona com qualquer um dos dois.
+
 - **[Epic 3D Card Reveal](https://github.com/brunocalado/epic-3d-card-reveal)** —
-  revela cartas em um leque 3D animado para a mesa toda. Combina muito bem com o
-  **Baralho de Partículas**: o jogador escolhe as Partículas da sua Frase Mágica e
-  elas são reveladas em sequência, com estilo.
+  revela as cartas de uma vez, em um leque 3D animado.
+- **[Orcnog Card Viewer](https://github.com/orcnog/orcnog-card-viewer)** — revela as
+  cartas uma a uma, com um visualizador que permite virar a carta. Requer também o
+  módulo **socketlib**.
 
 ### Macro: Conjurar Frase Mágica
 
-O compêndio **Etmos: Macros** inclui a macro **"Conjurar Frase Mágica (Epic 3D Card
-Reveal)"**, que abre uma janela com todas as Partículas do baralho agrupadas por
+O compêndio **Etmos: Macros** inclui a macro **"Conjurar Frase Mágica (revelação de
+cartas)"**, que abre uma janela com todas as Partículas do baralho agrupadas por
 categoria; o jogador marca as Partículas **na ordem** em que quer revelar e, ao
-confirmar, elas aparecem em leque 3D para a mesa.
+confirmar, elas são reveladas para a mesa.
 
-> ⚠️ Esta macro **requer o módulo [Epic 3D Card Reveal](https://github.com/brunocalado/epic-3d-card-reveal)**
-> instalado e ativo. Sem ele, a macro apenas avisa que o módulo está faltando.
+> ⚠️ Esta macro **requer um** dos módulos acima —
+> [Epic 3D Card Reveal](https://github.com/brunocalado/epic-3d-card-reveal) **ou**
+> [Orcnog Card Viewer](https://github.com/orcnog/orcnog-card-viewer) — instalado e
+> ativo. Sem nenhum deles, a macro apenas avisa que falta o módulo. Se os dois
+> estiverem ativos, ela pergunta qual usar.
 
 Para usar (uma vez, como Narrador):
 
-1. Instale e ative o módulo **Epic 3D Card Reveal**.
+1. Instale e ative o **Epic 3D Card Reveal** ou o **Orcnog Card Viewer**.
 2. Importe o baralho **Etmos: Baralho de Partículas (SRD)** para o mundo (arraste da
    aba Cards do compêndio para a Cards Directory, ou clique direito → Import).
 3. Importe a macro do compêndio **Etmos: Macros** para a hotbar.
 4. Dê aos jogadores permissão de **Observer** (no mínimo) no baralho importado
    (botão direito no baralho → Configure Ownership).
 
-Se você renomear o baralho no mundo, ajuste a constante `DECK_NAME` no topo da macro.
+No topo da macro dá para ajustar: `DECK_NAME` (se renomear o baralho no mundo),
+`REVELADOR` (`"auto"`, `"epic"` ou `"orcnog"`, para fixar um módulo) e
+`PAUSA_ORCNOG_MS` (intervalo entre as cartas no Orcnog Card Viewer).
 
 ## Estrutura
 

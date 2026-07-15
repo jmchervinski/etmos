@@ -746,7 +746,7 @@ export const MACRO_PACKS = {
     macros: [
       {
         _id: "etmosmacroconjur",
-        name: "Conjurar Frase Mágica (Epic 3D Card Reveal)",
+        name: "Conjurar Frase Mágica (revelação de cartas)",
         img: "icons/svg/book.svg",
         file: "macros/conjurar-frase-magica.js"
       }

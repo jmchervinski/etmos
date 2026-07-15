@@ -6,11 +6,16 @@
  * categoria (Função / Objeto / Característica / Complemento). O
  * jogador marca as partículas NA ORDEM em que quer revelar — um
  * selo numerado aparece em cada uma conforme é marcada — e clica em
- * Revelar. As cartas aparecem em leque 3D, na ordem escolhida, pra
- * mesa toda, via o módulo Epic 3D Card Reveal.
+ * Revelar. As cartas são reveladas na ordem escolhida, pra mesa toda.
+ *
+ * Funciona com QUALQUER UM destes módulos de revelação:
+ *   • "Epic 3D Card Reveal" — revela todas de uma vez, em leque 3D.
+ *   • "Orcnog Card Viewer"  — revela uma carta por vez, em sequência
+ *                             (requer também o módulo "socketlib").
+ * Se os dois estiverem ativos, a macro pergunta qual usar.
  *
  * PRÉ-REQUISITOS (fazer uma vez, como Mestre):
- *   1. Instalar e ativar o módulo "Epic 3D Card Reveal".
+ *   1. Instalar e ativar UM dos módulos acima.
  *   2. Importar o compêndio "Etmos: Baralho de Partículas (SRD)"
  *      pra dentro do mundo (arraste da aba Cards da compendium
  *      pra Cards Directory, ou clique direito → Import).
@@ -24,10 +29,23 @@
 // ====================== CONFIGURAÇÃO ======================
 const DECK_NAME = "Baralho de Partículas (SRD)"; // ajuste se o nome no seu mundo for diferente
 const MIN_PARTICULAS = 2;                         // mínimo de partículas pra formar uma frase
+const REVELADOR = "auto";     // "auto" | "epic" | "orcnog" — força um módulo, se quiser
+const PAUSA_ORCNOG_MS = 900;  // intervalo entre cartas no Orcnog Card Viewer
 // ============================================================
 
-if (!game.modules.get("epic-3d-card-reveal")?.active) {
-  ui.notifications.error("O módulo Epic 3D Card Reveal não está ativo.");
+const temEpic = game.modules.get("epic-3d-card-reveal")?.active === true;
+const temOrcnog = game.modules.get("orcnog-card-viewer")?.active === true;
+
+if (!temEpic && !temOrcnog) {
+  ui.notifications.error("Nenhum módulo de revelação ativo. Ative o \"Epic 3D Card Reveal\" ou o \"Orcnog Card Viewer\".");
+  return;
+}
+if (REVELADOR === "epic" && !temEpic) {
+  ui.notifications.error("REVELADOR está fixado em \"epic\", mas o módulo Epic 3D Card Reveal não está ativo.");
+  return;
+}
+if (REVELADOR === "orcnog" && !temOrcnog) {
+  ui.notifications.error("REVELADOR está fixado em \"orcnog\", mas o módulo Orcnog Card Viewer não está ativo.");
   return;
 }
 
@@ -169,9 +187,42 @@ if (idsInvalidos.length) {
   return;
 }
 
-// Revela as partículas escolhidas pra mesa toda, em leque 3D, respeitando a ordem escolhida
+// Define qual módulo usar: o fixado em REVELADOR, o único ativo, ou pergunta.
+let usar = REVELADOR;
+if (usar === "auto") {
+  if (temEpic && temOrcnog) {
+    usar = await foundry.applications.api.DialogV2.wait({
+      window: { title: "Revelar com qual módulo?" },
+      content: "<p>Os dois módulos de revelação estão ativos. Qual usar para esta conjuração?</p>",
+      buttons: [
+        { action: "epic", label: "Epic 3D Card Reveal (leque)", default: true, callback: () => "epic" },
+        { action: "orcnog", label: "Orcnog Card Viewer (uma a uma)", callback: () => "orcnog" }
+      ],
+      rejectClose: false
+    });
+    if (!usar) return; // fechou o diálogo
+  } else {
+    usar = temEpic ? "epic" : "orcnog";
+  }
+}
+
+// Revela as partículas escolhidas pra mesa toda, respeitando a ordem escolhida
 try {
-  await EpicCards.Dealer({ deckName: DECK_NAME }).view(ordem, false, false, true);
+  if (usar === "epic") {
+    // Epic 3D Card Reveal: todas de uma vez, em leque 3D
+    await EpicCards.Dealer({ deckName: DECK_NAME }).view(ordem, false, false, true);
+  } else {
+    // Orcnog Card Viewer: uma carta por vez, em sequência
+    // api.view(deckName, card, faceDown, whisper, share)
+    const api = game.modules.get("orcnog-card-viewer")?.api;
+    if (!api?.view) throw new Error("API do Orcnog Card Viewer indisponível (o módulo está ativo e atualizado?).");
+    for (let i = 0; i < ordem.length; i++) {
+      await api.view(DECK_NAME, ordem[i], false, false, true);
+      if (i < ordem.length - 1 && PAUSA_ORCNOG_MS > 0) {
+        await new Promise(r => setTimeout(r, PAUSA_ORCNOG_MS));
+      }
+    }
+  }
 } catch (err) {
   console.error("ETMOS | Erro ao revelar:", err);
   ui.notifications.error(`Erro ao revelar: ${err.message}`);
