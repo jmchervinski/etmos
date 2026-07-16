@@ -121,12 +121,18 @@ reveladas com estilo. A macro abaixo funciona com qualquer um dos dois.
   cartas uma a uma, com um visualizador que permite virar a carta. Requer também o
   módulo **socketlib**.
 
-### Macro: Conjurar Frase Mágica
+### Macros: Conjurar Frase Mágica
 
-O compêndio **Etmos: Macros** inclui a macro **"Conjurar Frase Mágica (revelação de
-cartas)"**, que abre uma janela com todas as Partículas do baralho agrupadas por
-categoria; o jogador marca as Partículas **na ordem** em que quer revelar e, ao
-confirmar, elas são reveladas para a mesa.
+O compêndio **Etmos: Macros** inclui duas macros de conjuração — em ambas se marca
+as Partículas **na ordem** em que devem ser reveladas e, ao confirmar, elas são
+reveladas para a mesa:
+
+- **"Conjurar Frase Mágica (revelação de cartas)"** — para o Narrador: mostra
+  todas as Partículas do baralho, agrupadas por categoria.
+- **"Conjurar Frase Mágica — Meu Grimório (jogadores)"** — para os jogadores:
+  mostra **apenas as Partículas que o personagem possui em Meu Grimório** (as
+  marcadas na aba Grimório da ficha). Usa o token selecionado ou o Personagem
+  atribuído ao usuário.
 
 > ⚠️ Esta macro **requer um** dos módulos acima —
 > [Epic 3D Card Reveal](https://github.com/brunocalado/epic-3d-card-reveal) **ou**

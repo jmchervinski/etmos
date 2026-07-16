@@ -3,6 +3,9 @@ import { COMPLEXIDADES } from "../documents/actor.mjs";
 import { ETMOS, moduloAtivo } from "../config.mjs";
 
 export class EtmosCharacterSheet extends EtmosBaseActorSheet {
+  /** Estado aberto/fechado das seções colapsáveis, preservado entre re-renders. */
+  #colapsos = {};
+
   static DEFAULT_OPTIONS = {
     classes: ["etmos-sheet", "etmos-ficha-oficial"],
     actions: {
@@ -104,6 +107,20 @@ export class EtmosCharacterSheet extends EtmosBaseActorSheet {
         itens: marcar(ETMOS.particulas.complementos.filter(c => c.nivel === nivel))
       }))
     };
+
+    // Meu Grimório: somente as Partículas marcadas, agrupadas por categoria
+    const possui = lista => lista.filter(p => sys.grimorio?.[p.id] === true);
+    const meu = {
+      grupos: [
+        { nome: "Funções", itens: possui(ETMOS.particulas.funcoes) },
+        { nome: "Objetos", itens: possui(ETMOS.particulas.objetos) },
+        { nome: "Características", itens: possui(ETMOS.particulas.caracteristicas) },
+        { nome: "Complementos", itens: possui(ETMOS.particulas.complementos) }
+      ]
+    };
+    meu.grupos = meu.grupos.filter(g => g.itens.length);
+    meu.total = meu.grupos.reduce((n, g) => n + g.itens.length, 0);
+    context.meuGrimorio = meu;
 
     // Aba Progressão: opções de Bônus por transição de nível, com estado
     // marcado e destaque para a transição do nível atual.
@@ -366,9 +383,20 @@ export class EtmosCharacterSheet extends EtmosBaseActorSheet {
     await this.actor.conjurarMagia({ ...data, estresseExtra: 1, atravesDe: familiar.name });
   }
 
-  /** Liga os toggles de módulo (aba Configurações) aos game settings de mundo. */
+  /**
+   * Pós-render: reaplica o estado das seções colapsáveis (o re-render da
+   * ficha recria o DOM) e liga os toggles de módulo aos settings de mundo.
+   */
   _onRender(context, options) {
     super._onRender?.(context, options);
+
+    // Seções colapsáveis (<details data-colapso="...">): preserva aberto/fechado
+    for (const det of this.element.querySelectorAll("details[data-colapso]")) {
+      const chave = det.dataset.colapso;
+      if (chave in this.#colapsos) det.open = this.#colapsos[chave];
+      det.addEventListener("toggle", () => { this.#colapsos[chave] = det.open; });
+    }
+
     if (!game.user?.isGM) return;
     for (const el of this.element.querySelectorAll(".modulo-toggle")) {
       el.addEventListener("change", ev => {

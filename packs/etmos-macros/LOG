@@ -1,3 +1,15 @@
-2026/07/15-19:35:27.322 6168 Recovering log #23
-2026/07/15-19:35:27.329 6168 Delete type=0 #23
-2026/07/15-19:35:27.331 6168 Delete type=3 #21
+2026/07/16-10:31:49.521 57bc Recovering log #27
+2026/07/16-10:31:49.629 57bc Delete type=0 #27
+2026/07/16-10:31:49.629 57bc Delete type=3 #26
+2026/07/16-10:31:49.681 6b64 Level-0 table #31: started
+2026/07/16-10:31:49.686 6b64 Level-0 table #31: 11778 bytes OK
+2026/07/16-10:31:49.687 6b64 Delete type=0 #29
+2026/07/16-10:31:49.688 6b64 Manual compaction at level-0 from '!macros!etmosmacroconjur' @ 72057594037927935 : 1 .. '!macros!etmosmacromeugri' @ 0 : 0; will stop at (end)
+2026/07/16-10:31:49.688 6b64 Manual compaction at level-1 from '!macros!etmosmacroconjur' @ 72057594037927935 : 1 .. '!macros!etmosmacromeugri' @ 0 : 0; will stop at '!macros!etmosmacromeugri' @ 5 : 1
+2026/07/16-10:31:49.688 6b64 Compacting 1@1 + 1@2 files
+2026/07/16-10:31:49.693 6b64 Generated table #32@1: 2 keys, 11778 bytes
+2026/07/16-10:31:49.693 6b64 Compacted 1@1 + 1@2 files => 11778 bytes
+2026/07/16-10:31:49.694 6b64 compacted to: files[ 0 0 1 0 0 0 0 ]
+2026/07/16-10:31:49.695 6b64 Delete type=2 #25
+2026/07/16-10:31:49.695 6b64 Delete type=2 #31
+2026/07/16-10:31:49.696 6b64 Manual compaction at level-1 from '!macros!etmosmacromeugri' @ 5 : 1 .. '!macros!etmosmacromeugri' @ 0 : 0; will stop at (end)

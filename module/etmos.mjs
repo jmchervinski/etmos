@@ -24,7 +24,8 @@ import {
 Hooks.once("init", async function () {
   console.log("Etmos | Inicializando sistema não-oficial de ETMOS (créditos: Rafa Reis / Editora Balde Galáctico)");
 
-  game.etmos = { EtmosActor, EtmosItem };
+  // API do sistema para macros e módulos (config expõe Partículas etc.)
+  game.etmos = { EtmosActor, EtmosItem, config: ETMOS };
 
   // Documentos customizados
   CONFIG.Actor.documentClass = EtmosActor;

@@ -749,6 +749,12 @@ export const MACRO_PACKS = {
         name: "Conjurar Frase Mágica (revelação de cartas)",
         img: "icons/svg/book.svg",
         file: "macros/conjurar-frase-magica.js"
+      },
+      {
+        _id: "etmosmacromeugri",
+        name: "Conjurar Frase Mágica — Meu Grimório (jogadores)",
+        img: "icons/svg/daze.svg",
+        file: "macros/conjurar-meu-grimorio.js"
       }
     ]
   }

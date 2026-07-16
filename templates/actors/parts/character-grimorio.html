@@ -1,53 +1,78 @@
 <div class="tab grimorio {{tab.cssClass}}" data-group="primary" data-tab="grimorio">
   <header class="ficha-titulo secundario"><h1>Grimório</h1></header>
-  <p class="dica">Criação (SRD): marque 2 Funções, 3 Objetos e 4 Características.</p>
-  <div class="grimorio-colunas">
-    <div class="grimorio-coluna">
-      <h3>Funções</h3>
-      {{#each grimorio.funcoes as |p|}}
-      <label class="particula-check">
-        <input type="checkbox" name="system.grimorio.{{p.id}}" {{#if p.checked}}checked{{/if}} />
-        {{p.nome}} ({{p.abrev}})
-      </label>
+
+  {{!-- Meu Grimório: somente as Partículas marcadas --}}
+  <details class="grimorio-colapsavel meu-grimorio" data-colapso="meu-grimorio" open>
+    <summary>Meu Grimório ({{meuGrimorio.total}} Partícula{{#unless (eq meuGrimorio.total 1)}}s{{/unless}})</summary>
+    {{#if meuGrimorio.total}}
+    <div class="meu-grimorio-grupos">
+      {{#each meuGrimorio.grupos as |g|}}
+      <div class="meu-grimorio-grupo">
+        <h4>{{g.nome}}</h4>
+        {{#each g.itens as |p|}}
+        <span class="particula-pill" title="{{g.nome}}{{#if p.nivel}} · {{p.nivel}}º Nível{{/if}}">{{p.nome}} ({{p.abrev}})</span>
+        {{/each}}
+      </div>
       {{/each}}
     </div>
-    <div class="grimorio-coluna">
-      <h3>Objetos</h3>
-      {{#each grimorio.objetos as |p|}}
-      <label class="particula-check">
-        <input type="checkbox" name="system.grimorio.{{p.id}}" {{#if p.checked}}checked{{/if}} />
-        {{p.nome}} ({{p.abrev}})
-      </label>
-      {{/each}}
-    </div>
-    <div class="grimorio-coluna larga">
-      <h3>Características</h3>
-      <div class="caracteristicas-grid">
-        {{#each grimorio.caracteristicas as |p|}}
+    {{else}}
+    <p class="dica">Seu Grimório está vazio — marque Partículas na lista abaixo para preenchê-lo.</p>
+    {{/if}}
+  </details>
+
+  {{!-- Todas as Partículas: checklist completa --}}
+  <details class="grimorio-colapsavel" data-colapso="todas-particulas" open>
+    <summary>Todas as Partículas</summary>
+    <p class="dica">Criação (SRD): marque 2 Funções, 3 Objetos e 4 Características.</p>
+    <div class="grimorio-colunas">
+      <div class="grimorio-coluna">
+        <h3>Funções</h3>
+        {{#each grimorio.funcoes as |p|}}
         <label class="particula-check">
           <input type="checkbox" name="system.grimorio.{{p.id}}" {{#if p.checked}}checked{{/if}} />
           {{p.nome}} ({{p.abrev}})
         </label>
         {{/each}}
       </div>
-    </div>
-  </div>
-  <fieldset class="bloco-oficial complementos-oficial">
-    <legend>Complementos</legend>
-    <div class="complementos-niveis">
-      {{#each grimorio.complementosPorNivel as |grupo|}}
-      <div class="nivel-grupo">
-        <h4>{{grupo.nivel}}º Nível</h4>
-        {{#each grupo.itens as |p|}}
+      <div class="grimorio-coluna">
+        <h3>Objetos</h3>
+        {{#each grimorio.objetos as |p|}}
         <label class="particula-check">
           <input type="checkbox" name="system.grimorio.{{p.id}}" {{#if p.checked}}checked{{/if}} />
           {{p.nome}} ({{p.abrev}})
         </label>
         {{/each}}
       </div>
-      {{/each}}
+      <div class="grimorio-coluna larga">
+        <h3>Características</h3>
+        <div class="caracteristicas-grid">
+          {{#each grimorio.caracteristicas as |p|}}
+          <label class="particula-check">
+            <input type="checkbox" name="system.grimorio.{{p.id}}" {{#if p.checked}}checked{{/if}} />
+            {{p.nome}} ({{p.abrev}})
+          </label>
+          {{/each}}
+        </div>
+      </div>
     </div>
-  </fieldset>
+    <fieldset class="bloco-oficial complementos-oficial">
+      <legend>Complementos</legend>
+      <div class="complementos-niveis">
+        {{#each grimorio.complementosPorNivel as |grupo|}}
+        <div class="nivel-grupo">
+          <h4>{{grupo.nivel}}º Nível</h4>
+          {{#each grupo.itens as |p|}}
+          <label class="particula-check">
+            <input type="checkbox" name="system.grimorio.{{p.id}}" {{#if p.checked}}checked{{/if}} />
+            {{p.nome}} ({{p.abrev}})
+          </label>
+          {{/each}}
+        </div>
+        {{/each}}
+      </div>
+    </fieldset>
+  </details>
+
   <div class="quadro-oficial">
     {{> "systems/etmos/templates/actors/parts/actor-itens.html" titulo="Partículas personalizadas (Treinamento Mágico etc.)" tipo="particula" itens=itemsByType.particula}}
   </div>
